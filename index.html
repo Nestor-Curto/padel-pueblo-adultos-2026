@@ -4,117 +4,558 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f7f7f8;color:#111827}
-.wrap{max-width:760px;margin:auto;padding:18px 16px 40px}
-.hero{background:#111827;color:white;border-radius:0 0 28px 28px;padding:28px 22px 30px;margin:-18px -16px 22px}
-h1{font-size:30px;margin:0 0 6px}.sub{font-size:19px;color:#d1d5db}
-.times{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
-.box,.card{background:white;border:1px solid #e5e7eb;border-radius:22px;padding:20px;box-shadow:0 2px 10px #00000008}
-.box{text-align:center;font-size:18px}.box b{display:block;font-size:23px;margin-bottom:3px}
-.info{text-align:center;font-size:17px;margin:12px 0 18px}
-label{display:block;font-weight:700;margin:16px 0 8px;font-size:17px}
-input{width:100%;padding:16px;border:2px solid #d1d5db;border-radius:16px;font-size:18px;outline:none}
-input:focus{border-color:#111827}
-button{width:100%;border:0;border-radius:16px;padding:16px;font-size:18px;font-weight:700;background:#111827;color:#fff;margin-top:18px}
-button:disabled{opacity:.55}
-.count{display:flex;justify-content:space-between;align-items:center}.badge{background:#eef0f3;border-radius:999px;padding:8px 14px;font-weight:800;font-size:18px}
-.list{margin-top:14px}.pair{padding:13px 0;border-bottom:1px solid #eee;font-size:19px}.pair:last-child{border-bottom:0}
-.status{text-align:center;color:#6b7280;padding:16px}.ok{color:#166534}.error{color:#b91c1c}
-.admin{margin-top:24px;text-align:center}.admin a{color:#6b7280;text-decoration:none;font-weight:700}
-.adminpanel{display:none;margin-top:14px}.adminpanel button{background:#b91c1c}
-footer{text-align:center;color:#9ca3af;margin-top:30px}
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f7f7f8;
+  color:#111827
+}
+
+.wrap{
+  max-width:760px;
+  margin:auto;
+  padding:18px 16px 40px
+}
+
+.hero{
+  background:#111827;
+  color:white;
+  border-radius:0 0 28px 28px;
+  padding:28px 22px 30px;
+  margin:-18px -16px 22px
+}
+
+h1{
+  font-size:30px;
+  margin:0 0 6px
+}
+
+.sub{
+  font-size:19px;
+  color:#d1d5db
+}
+
+.times{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:14px 0
+}
+
+.box,.card{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 2px 10px #00000008
+}
+
+.box{
+  text-align:center;
+  font-size:18px
+}
+
+.box b{
+  display:block;
+  font-size:23px;
+  margin-bottom:3px
+}
+
+.info{
+  text-align:center;
+  font-size:17px;
+  margin:12px 0 18px
+}
+
+label{
+  display:block;
+  font-weight:700;
+  margin:16px 0 8px;
+  font-size:17px
+}
+
+input{
+  width:100%;
+  padding:16px;
+  border:2px solid #d1d5db;
+  border-radius:16px;
+  font-size:18px;
+  outline:none
+}
+
+input:focus{
+  border-color:#111827
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:16px;
+  font-size:18px;
+  font-weight:700;
+  background:#111827;
+  color:#fff;
+  margin-top:18px
+}
+
+button:disabled{
+  opacity:.55
+}
+
+.count{
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+
+.badge{
+  background:#eef0f3;
+  border-radius:999px;
+  padding:8px 14px;
+  font-weight:800;
+  font-size:18px
+}
+
+.list{
+  margin-top:14px
+}
+
+.pair{
+  padding:13px 0;
+  border-bottom:1px solid #eee;
+  font-size:19px
+}
+
+.pair:last-child{
+  border-bottom:0
+}
+
+.status{
+  text-align:center;
+  color:#6b7280;
+  padding:16px
+}
+
+.ok{
+  color:#166534
+}
+
+.error{
+  color:#b91c1c
+}
+
+.admin{
+  margin-top:24px;
+  text-align:center
+}
+
+.admin a{
+  color:#6b7280;
+  text-decoration:none;
+  font-weight:700
+}
+
+.adminpanel{
+  display:none;
+  margin-top:14px
+}
+
+.adminpanel button{
+  background:#b91c1c
+}
+
+footer{
+  text-align:center;
+  color:#9ca3af;
+  margin-top:30px
+}
 </style>
 </head>
+
 <body>
+
 <div class="wrap">
+
   <section class="hero">
     <h1>🎾 Torneo Pádel (Adultos)</h1>
     <div class="sub">Semana Cultural Jemenuño</div>
   </section>
 
   <div class="times">
-    <div class="box"><b>Jueves</b>11:00 h</div>
-    <div class="box"><b>Viernes</b>10:00 h</div>
+    <div class="box">
+      <b>Jueves</b>
+      11:00 h
+    </div>
+
+    <div class="box">
+      <b>Viernes</b>
+      10:00 h
+    </div>
   </div>
 
-  <div class="card info">🏆 Premios y sorteos · 💶 Inscripción: <b>5 € por persona</b></div>
+  <div class="card info">
+    🏆 Premios y sorteos · 💶 Inscripción:
+    <b>5 € por persona</b>
+  </div>
 
   <section class="card">
+
     <label for="jugador1">Nombre jugador/a 1</label>
-    <input id="jugador1" type="text" maxlength="40" placeholder="Nombre" autocomplete="name">
+    <input
+      id="jugador1"
+      type="text"
+      maxlength="40"
+      placeholder="Nombre"
+      autocomplete="name"
+    >
+
     <label for="jugador2">Nombre jugador/a 2</label>
-    <input id="jugador2" type="text" maxlength="40" placeholder="Nombre">
-    <button id="add">Apuntar pareja</button>
+    <input
+      id="jugador2"
+      type="text"
+      maxlength="40"
+      placeholder="Nombre"
+    >
+
+    <button id="add">
+      Apuntar pareja
+    </button>
+
     <div id="msg" class="status"></div>
+
   </section>
 
   <section class="card" style="margin-top:18px">
-    <div class="count"><h2 style="margin:0">Parejas apuntadas</h2><span id="count" class="badge">0</span></div>
-    <div id="list" class="list"><div class="status">Cargando parejas...</div></div>
+
+    <div class="count">
+      <h2 style="margin:0">
+        Parejas apuntadas
+      </h2>
+
+      <span id="count" class="badge">
+        0
+      </span>
+    </div>
+
+    <div id="list" class="list">
+      <div class="status">
+        Cargando parejas...
+      </div>
+    </div>
+
   </section>
 
-  <div class="admin"><a href="#" id="adminLink">Acceso administrador</a></div>
-  <div id="adminPanel" class="adminpanel card">
-    <b>Modo administrador</b>
-    <p style="color:#6b7280">La edición/borrado se configurará mediante acceso autenticado.</p>
+  <div class="admin">
+    <a href="#" id="adminLink">
+      Acceso administrador
+    </a>
   </div>
 
-  <footer>Semana Cultural Jemenuño</footer>
+  <div id="adminPanel" class="adminpanel card">
+    <b>Modo administrador</b>
+
+    <p style="color:#6b7280">
+      La edición/borrado se configurará mediante acceso autenticado.
+    </p>
+  </div>
+
+  <footer>
+    Semana Cultural Jemenuño
+  </footer>
+
 </div>
 
 <script>
-const SUPABASE_URL = "https://novinmgzbqtnpfjfzpqt.supabase.co";
-const SUPABASE_KEY = "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
-const TABLE = "Parejas";
 
-const countEl=document.getElementById("count");
-const listEl=document.getElementById("list");
-const msgEl=document.getElementById("msg");
-const addBtn=document.getElementById("add");
+const SUPABASE_URL =
+  "https://novinmgzbqtnpfjfzpqt.supabase.co";
 
-function headers(extra={}){
-  return {"apikey":SUPABASE_KEY,"Authorization":"Bearer "+SUPABASE_KEY,"Content-Type":"application/json",...extra};
+const SUPABASE_KEY =
+  "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
+
+const TABLE =
+  "Parejas";
+
+
+const countEl =
+  document.getElementById("count");
+
+const listEl =
+  document.getElementById("list");
+
+const msgEl =
+  document.getElementById("msg");
+
+const addBtn =
+  document.getElementById("add");
+
+
+function escapeHtml(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+
+    function(m){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m];
+
+    }
+  );
+
 }
+
+
+/* =========================
+   CARGAR PAREJAS
+   ========================= */
 
 async function loadPairs(){
+
   try{
-    const r=await fetch(`${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?select=Jugador1,Jugador2&order=creado_en.asc`,{headers:headers()});
-    if(!r.ok) throw new Error(await r.text());
-    const rows=await r.json();
-    countEl.textContent=rows.length;
-    if(!rows.length){listEl.innerHTML='<div class="status">Todavía no hay parejas apuntadas.</div>';return;}
-    listEl.innerHTML=rows.map(x=>`<div class="pair">${escapeHtml(x.Jugador1)} - ${escapeHtml(x.Jugador2)}</div>`).join("");
+
+    const url =
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?select=*`;
+
+    const r =
+      await fetch(
+        url,
+        {
+          method:"GET",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":"Bearer "+SUPABASE_KEY
+          }
+        }
+      );
+
+
+    const texto =
+      await r.text();
+
+
+    if(!r.ok){
+
+      throw new Error(texto);
+
+    }
+
+
+    const rows =
+      JSON.parse(texto);
+
+
+    countEl.textContent =
+      rows.length;
+
+
+    if(!rows.length){
+
+      listEl.innerHTML =
+        '<div class="status">Todavía no hay parejas apuntadas.</div>';
+
+      return;
+
+    }
+
+
+    listEl.innerHTML =
+      rows.map(
+        function(x){
+
+          return `
+            <div class="pair">
+              ${escapeHtml(x.Jugador1)}
+              -
+              ${escapeHtml(x.Jugador2)}
+            </div>
+          `;
+
+        }
+      ).join("");
+
+
   }catch(e){
-    console.error(e); listEl.innerHTML='<div class="status error">No se han podido cargar las parejas.</div>';
+
+    console.error(e);
+
+    listEl.innerHTML =
+      '<div class="status error">Error: '
+      + escapeHtml(e.message)
+      + '</div>';
+
   }
+
 }
+
+
+/* =========================
+   AÑADIR PAREJA
+   ========================= */
 
 async function addPair(){
-  const j1=document.getElementById("jugador1").value.trim();
-  const j2=document.getElementById("jugador2").value.trim();
-  msgEl.textContent="";
-  if(!j1||!j2){msgEl.className="status error";msgEl.textContent="Escribe los dos nombres.";return;}
-  addBtn.disabled=true; addBtn.textContent="Apuntando...";
+
+  const j1 =
+    document.getElementById("jugador1")
+      .value
+      .trim();
+
+  const j2 =
+    document.getElementById("jugador2")
+      .value
+      .trim();
+
+
+  msgEl.textContent = "";
+
+
+  if(!j1 || !j2){
+
+    msgEl.className =
+      "status error";
+
+    msgEl.textContent =
+      "Escribe los dos nombres.";
+
+    return;
+
+  }
+
+
+  addBtn.disabled =
+    true;
+
+  addBtn.textContent =
+    "Apuntando...";
+
+
   try{
-    const r=await fetch(`${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}`,{
-      method:"POST",headers:headers({"Prefer":"return=minimal"}),
-      body:JSON.stringify({Jugador1:j1,Jugador2:j2})
-    });
-    if(!r.ok) throw new Error(await r.text());
-    document.getElementById("jugador1").value="";
-    document.getElementById("jugador2").value="";
-    msgEl.className="status ok";msgEl.textContent="✅ Pareja apuntada correctamente.";
+
+    const r =
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}`,
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":"Bearer "+SUPABASE_KEY,
+            "Content-Type":"application/json",
+            "Prefer":"return=minimal"
+          },
+
+          body:JSON.stringify({
+            Jugador1:j1,
+            Jugador2:j2
+          })
+        }
+      );
+
+
+    const texto =
+      await r.text();
+
+
+    if(!r.ok){
+
+      throw new Error(texto);
+
+    }
+
+
+    document.getElementById("jugador1")
+      .value="";
+
+    document.getElementById("jugador2")
+      .value="";
+
+
+    msgEl.className =
+      "status ok";
+
+    msgEl.textContent =
+      "✅ Pareja apuntada correctamente.";
+
+
     await loadPairs();
+
+
   }catch(e){
-    console.error(e);msgEl.className="status error";msgEl.textContent="No se ha podido apuntar la pareja.";
-  }finally{addBtn.disabled=false;addBtn.textContent="Apuntar pareja";}
+
+    console.error(e);
+
+    msgEl.className =
+      "status error";
+
+    msgEl.textContent =
+      "No se ha podido apuntar la pareja.";
+
+  }finally{
+
+    addBtn.disabled =
+      false;
+
+    addBtn.textContent =
+      "Apuntar pareja";
+
+  }
+
 }
 
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
-addBtn.addEventListener("click",addPair);
-document.getElementById("adminLink").addEventListener("click",e=>{e.preventDefault();const p=document.getElementById("adminPanel");p.style.display=p.style.display==="block"?"none":"block";});
+
+/* =========================
+   BOTÓN AÑADIR
+   ========================= */
+
+addBtn.addEventListener(
+  "click",
+  addPair
+);
+
+
+/* =========================
+   ADMINISTRADOR
+   ========================= */
+
+document
+  .getElementById("adminLink")
+  .addEventListener(
+    "click",
+
+    function(e){
+
+      e.preventDefault();
+
+      const p =
+        document.getElementById("adminPanel");
+
+      p.style.display =
+        p.style.display === "block"
+        ? "none"
+        : "block";
+
+    }
+  );
+
+
+/* =========================
+   INICIO
+   ========================= */
+
 loadPairs();
+
 </script>
+
 </body>
 </html>
