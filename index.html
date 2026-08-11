@@ -473,10 +473,6 @@ footer{
 <div class="wrap">
 
 
-<!-- =====================================================
-     CABECERA
-===================================================== -->
-
 <section class="hero">
 
 <h1>
@@ -489,10 +485,6 @@ Semana Cultural Jemenuño
 
 </section>
 
-
-<!-- =====================================================
-     HORARIOS
-===================================================== -->
 
 <div class="times">
 
@@ -520,10 +512,6 @@ Viernes 21
 </div>
 
 
-<!-- =====================================================
-     INFORMACIÓN
-===================================================== -->
-
 <div class="card info">
 
 🏆 Premios y sorteos · 💶 Inscripción:
@@ -534,10 +522,6 @@ Viernes 21
 
 </div>
 
-
-<!-- =====================================================
-     FORMULARIO
-===================================================== -->
 
 <section class="card">
 
@@ -594,10 +578,6 @@ class="status"
 </section>
 
 
-<!-- =====================================================
-     LISTADO PÚBLICO
-===================================================== -->
-
 <section
 class="card"
 style="margin-top:18px"
@@ -636,10 +616,6 @@ Cargando parejas...
 </section>
 
 
-<!-- =====================================================
-     ACCESO ADMIN
-===================================================== -->
-
 <div class="admin">
 
 <a
@@ -652,17 +628,11 @@ id="adminLink"
 </div>
 
 
-<!-- =====================================================
-     PANEL ADMIN
-===================================================== -->
-
 <div
 id="adminPanel"
 class="adminpanel card"
 >
 
-
-<!-- LOGIN -->
 
 <div id="loginBox">
 
@@ -722,8 +692,6 @@ class="status"
 
 </div>
 
-
-<!-- ADMIN CONECTADO -->
 
 <div
 id="adminContent"
@@ -791,10 +759,6 @@ Semana Cultural Jemenuño
 </div>
 
 
-<!-- =====================================================
-     SUPABASE
-===================================================== -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -802,27 +766,23 @@ Semana Cultural Jemenuño
 
 
 /* =====================================================
-   CONFIGURACIÓN SUPABASE
+   SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
 "https://novinmgzbqtnpfjfzpqt.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
-
 
 const TABLE =
 "Parejas";
 
-
 const supabaseClient =
 window.supabase.createClient(
-SUPABASE_URL,
-SUPABASE_KEY
+  SUPABASE_URL,
+  SUPABASE_KEY
 );
-
 
 
 /* =====================================================
@@ -832,41 +792,31 @@ SUPABASE_KEY
 const countEl =
 document.getElementById("count");
 
-
 const listEl =
 document.getElementById("list");
-
 
 const msgEl =
 document.getElementById("msg");
 
-
 const addBtn =
 document.getElementById("add");
-
 
 const adminLink =
 document.getElementById("adminLink");
 
-
 const adminPanel =
 document.getElementById("adminPanel");
-
 
 const loginBox =
 document.getElementById("loginBox");
 
-
 const adminContent =
 document.getElementById("adminContent");
-
 
 const adminList =
 document.getElementById("adminList");
 
-
 let adminRows = [];
-
 
 
 /* =====================================================
@@ -875,97 +825,142 @@ let adminRows = [];
 
 function escapeHtml(value){
 
-return String(value ?? "").replace(
-/[&<>"']/g,
-function(m){
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    function(m){
 
-return {
+      return {
 
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
 
-}[m];
+      }[m];
+
+    }
+  );
 
 }
-);
+
+
+/* =====================================================
+   NORMALIZAR NOMBRE DE COLUMNA
+===================================================== */
+
+function normalizarNombreColumna(nombre){
+
+  return String(nombre || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"");
 
 }
 
+
+/* =====================================================
+   ENCONTRAR COLUMNA TELÉFONO
+=====================================================
+
+   No asumimos que Javascript reciba exactamente
+   "teléfono".
+
+   Buscamos:
+
+   teléfono
+   telefono
+   Teléfono
+   TELEFONO
+   etc.
+
+   Esto evita el problema que estamos viendo.
+===================================================== */
+
+function encontrarColumnaTelefono(row){
+
+  if(!row){
+    return null;
+  }
+
+  const keys =
+    Object.keys(row);
+
+  for(
+    const key of keys
+  ){
+
+    const normalizada =
+      normalizarNombreColumna(key);
+
+    if(
+      normalizada === "telefono"
+    ){
+
+      return key;
+
+    }
+
+  }
+
+  return null;
+
+}
 
 
 /* =====================================================
    OBTENER TELÉFONO
-=====================================================
-
-   IMPORTANTE:
-
-   La columna real de Supabase es:
-
-   teléfono
-
-   Se accede mediante:
-
-   row["teléfono"]
-
-   No usamos .select("teléfono")
-   para evitar el problema que estaba
-   generando PostgREST.
 ===================================================== */
 
 function getTelefono(row){
 
-if(
-row &&
-row["teléfono"] !== undefined &&
-row["teléfono"] !== null
-){
+  const columna =
+    encontrarColumnaTelefono(row);
 
-return String(row["teléfono"]);
+  if(
+    columna &&
+    row[columna] !== undefined &&
+    row[columna] !== null
+  ){
+
+    return String(row[columna]);
+
+  }
+
+  return "";
 
 }
-
-return "";
-
-}
-
 
 
 /* =====================================================
    ORDENAR
-
-   No dependemos de que exista "creado_en".
-   Si existe, lo usamos.
-   Si no existe, mantenemos el orden recibido.
 ===================================================== */
 
 function sortRows(rows){
 
-return [...rows].sort(
-function(a,b){
+  return [...rows].sort(
+    function(a,b){
 
-if(
-a.creado_en &&
-b.creado_en
-){
+      if(
+        a.creado_en &&
+        b.creado_en
+      ){
 
-return (
-new Date(a.creado_en).getTime()
--
-new Date(b.creado_en).getTime()
-);
+        return (
+          new Date(a.creado_en).getTime()
+          -
+          new Date(b.creado_en).getTime()
+        );
+
+      }
+
+      return 0;
+
+    }
+  );
 
 }
-
-return 0;
-
-}
-);
-
-}
-
 
 
 /* =====================================================
@@ -974,96 +969,90 @@ return 0;
 
 async function loadPairs(){
 
-try{
+  try{
 
-const {
-data,
-error
-} =
-await supabaseClient
-.from(TABLE)
-.select("*");
+    const {
+      data,
+      error
+    } =
+    await supabaseClient
+      .from(TABLE)
+      .select("*");
 
+    if(error){
 
-if(error){
+      throw error;
 
-throw error;
+    }
 
-}
+    const rows =
+      sortRows(data || []);
 
+    countEl.textContent =
+      rows.length;
 
-const rows =
-sortRows(data || []);
+    if(!rows.length){
 
+      listEl.innerHTML =
+        '<div class="status">' +
+        'Todavía no hay parejas apuntadas.' +
+        '</div>';
 
-countEl.textContent =
-rows.length;
+      return;
 
+    }
 
-if(!rows.length){
+    listEl.innerHTML =
+      rows.map(
+        function(row){
 
-listEl.innerHTML =
-'<div class="status">Todavía no hay parejas apuntadas.</div>';
+          return `
 
-return;
+            <div class="pair">
 
-}
+              ${escapeHtml(row.Jugador1)}
 
+              -
 
-listEl.innerHTML =
-rows.map(
-function(row){
+              ${escapeHtml(row.Jugador2)}
 
-return `
+            </div>
 
-<div class="pair">
+          `;
 
-${escapeHtml(row.Jugador1)}
-
--
-
-${escapeHtml(row.Jugador2)}
-
-</div>
-
-`;
-
-}
-).join("");
+        }
+      ).join("");
 
 
-}catch(error){
+  }catch(error){
 
-console.error(
-"Error cargando parejas:",
-error
-);
+    console.error(
+      "Error cargando parejas:",
+      error
+    );
 
+    countEl.textContent =
+      "0";
 
-countEl.textContent =
-"0";
+    listEl.innerHTML =
 
+      '<div class="status error">' +
 
-listEl.innerHTML =
+      'No se han podido cargar las parejas.' +
 
-'<div class="status error">' +
+      '<br><br>' +
 
-'No se han podido cargar las parejas.' +
+      '<small>' +
 
-'<br><br>' +
+      escapeHtml(error.message) +
 
-'<small>' +
+      '</small>' +
 
-escapeHtml(error.message) +
+      '</div>';
 
-'</small>' +
-
-'</div>';
+  }
 
 }
-
-}
-
 
 
 /* =====================================================
@@ -1072,166 +1061,121 @@ escapeHtml(error.message) +
 
 async function addPair(){
 
-const jugador1 =
-document
-.getElementById("jugador1")
-.value
-.trim();
+  const jugador1 =
+    document
+      .getElementById("jugador1")
+      .value
+      .trim();
 
+  const jugador2 =
+    document
+      .getElementById("jugador2")
+      .value
+      .trim();
 
-const jugador2 =
-document
-.getElementById("jugador2")
-.value
-.trim();
+  const telefono =
+    document
+      .getElementById("telefono")
+      .value
+      .trim();
 
+  msgEl.textContent =
+    "";
 
-const telefono =
-document
-.getElementById("telefono")
-.value
-.trim();
+  if(
+    !jugador1 ||
+    !jugador2 ||
+    !telefono
+  ){
 
+    msgEl.className =
+      "status error";
 
-msgEl.textContent =
-"";
+    msgEl.textContent =
+      "Escribe los dos nombres y el teléfono.";
 
+    return;
 
-if(
-!jugador1 ||
-!jugador2 ||
-!telefono
-){
+  }
 
-msgEl.className =
-"status error";
+  addBtn.disabled =
+    true;
 
+  addBtn.textContent =
+    "Apuntando...";
 
-msgEl.textContent =
-"Escribe los dos nombres y el teléfono.";
+  try{
 
-return;
+    const datos = {
 
-}
+      Jugador1:
+        jugador1,
 
+      Jugador2:
+        jugador2,
 
-addBtn.disabled =
-true;
+      "teléfono":
+        telefono
 
+    };
 
-addBtn.textContent =
-"Apuntando...";
+    const {
+      error
+    } =
+    await supabaseClient
+      .from(TABLE)
+      .insert(datos);
 
+    if(error){
 
-try{
+      throw error;
 
+    }
 
-/*
-   IMPORTANTE:
+    document
+      .getElementById("jugador1")
+      .value = "";
 
-   La columna se llama exactamente:
+    document
+      .getElementById("jugador2")
+      .value = "";
 
-   "teléfono"
+    document
+      .getElementById("telefono")
+      .value = "";
 
-   No intentamos descubrirla.
-*/
+    msgEl.className =
+      "status ok";
 
+    msgEl.textContent =
+      "✅ Pareja apuntada correctamente.";
 
-const datos = {
+    await loadPairs();
 
-"Jugador1":
-jugador1,
+  }catch(error){
 
-"Jugador2":
-jugador2,
+    console.error(
+      "Error añadiendo pareja:",
+      error
+    );
 
-"teléfono":
-telefono
+    msgEl.className =
+      "status error";
 
-};
+    msgEl.textContent =
+      "No se ha podido apuntar la pareja.";
 
+  }finally{
 
-const {
-data,
-error
-} =
-await supabaseClient
+    addBtn.disabled =
+      false;
 
-.from(TABLE)
+    addBtn.textContent =
+      "Apuntar pareja";
 
-.insert(datos)
-
-.select("*");
-
-
-if(error){
-
-throw error;
-
-}
-
-
-/*
-   Si Supabase no devuelve la fila,
-   hacemos igualmente una recarga.
-*/
-
-document
-.getElementById("jugador1")
-.value = "";
-
-
-document
-.getElementById("jugador2")
-.value = "";
-
-
-document
-.getElementById("telefono")
-.value = "";
-
-
-msgEl.className =
-"status ok";
-
-
-msgEl.textContent =
-"✅ Pareja apuntada correctamente.";
-
-
-await loadPairs();
-
-
-}catch(error){
-
-console.error(
-"Error añadiendo pareja:",
-error
-);
-
-
-msgEl.className =
-"status error";
-
-
-msgEl.textContent =
-"No se ha podido apuntar la pareja." +
-" " +
-error.message;
-
-}finally{
-
-addBtn.disabled =
-false;
-
-
-addBtn.textContent =
-"Apuntar pareja";
+  }
 
 }
-
-}
-
 
 
 /* =====================================================
@@ -1239,34 +1183,30 @@ addBtn.textContent =
 ===================================================== */
 
 adminLink.addEventListener(
-"click",
-async function(event){
+  "click",
+  async function(event){
 
-event.preventDefault();
+    event.preventDefault();
 
+    if(
+      adminPanel.style.display ===
+      "block"
+    ){
 
-if(
-adminPanel.style.display ===
-"block"
-){
+      adminPanel.style.display =
+        "none";
 
-adminPanel.style.display =
-"none";
+      return;
 
-return;
+    }
 
-}
+    adminPanel.style.display =
+      "block";
 
+    await checkSession();
 
-adminPanel.style.display =
-"block";
-
-
-await checkSession();
-
-}
+  }
 );
-
 
 
 /* =====================================================
@@ -1274,17 +1214,16 @@ await checkSession();
 ===================================================== */
 
 document
-.getElementById("cancelLogin")
-.addEventListener(
-"click",
-function(){
+  .getElementById("cancelLogin")
+  .addEventListener(
+    "click",
+    function(){
 
-adminPanel.style.display =
-"none";
+      adminPanel.style.display =
+        "none";
 
-}
-);
-
+    }
+  );
 
 
 /* =====================================================
@@ -1292,147 +1231,130 @@ adminPanel.style.display =
 ===================================================== */
 
 document
-.getElementById("loginBtn")
-.addEventListener(
-"click",
-login
-);
+  .getElementById("loginBtn")
+  .addEventListener(
+    "click",
+    login
+  );
 
 
 async function login(){
 
-const email =
-document
-.getElementById("email")
-.value
-.trim();
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
 
+  const password =
+    document
+      .getElementById("password")
+      .value;
 
-const password =
-document
-.getElementById("password")
-.value;
+  const loginMsg =
+    document
+      .getElementById("loginMsg");
 
+  loginMsg.className =
+    "status";
 
-const loginMsg =
-document
-.getElementById("loginMsg");
+  loginMsg.textContent =
+    "Entrando...";
 
+  if(
+    !email ||
+    !password
+  ){
 
-loginMsg.className =
-"status";
+    loginMsg.className =
+      "status error";
 
+    loginMsg.textContent =
+      "Introduce email y contraseña.";
 
-loginMsg.textContent =
-"Entrando...";
+    return;
 
+  }
 
-if(
-!email ||
-!password
-){
+  try{
 
-loginMsg.className =
-"status error";
+    const {
+      error
+    } =
+    await supabaseClient
+      .auth
+      .signInWithPassword({
 
+        email:
+          email,
 
-loginMsg.textContent =
-"Introduce email y contraseña.";
+        password:
+          password
 
-return;
+      });
 
-}
+    if(error){
 
+      throw error;
 
-try{
+    }
 
-const {
-error
-} =
-await supabaseClient
-.auth
-.signInWithPassword({
+    loginMsg.textContent =
+      "";
 
-email:
-email,
+    await showAdmin();
 
-password:
-password
+  }catch(error){
 
-});
+    console.error(
+      "Error login:",
+      error
+    );
 
+    loginMsg.className =
+      "status error";
 
-if(error){
+    loginMsg.textContent =
+      "Email o contraseña incorrectos.";
 
-throw error;
-
-}
-
-
-loginMsg.textContent =
-"";
-
-
-await showAdmin();
-
-
-}catch(error){
-
-console.error(
-"Error login:",
-error
-);
-
-
-loginMsg.className =
-"status error";
-
-
-loginMsg.textContent =
-"Email o contraseña incorrectos.";
+  }
 
 }
-
-}
-
 
 
 /* =====================================================
-   COMPROBAR SESIÓN
+   SESIÓN
 ===================================================== */
 
 async function checkSession(){
 
-const {
-data
-} =
-await supabaseClient
-.auth
-.getSession();
+  const {
+    data
+  } =
+  await supabaseClient
+    .auth
+    .getSession();
 
+  if(
+    data &&
+    data.session
+  ){
 
-if(
-data &&
-data.session
-){
+    await showAdmin();
 
-await showAdmin();
+  }else{
 
-}else{
+    loginBox.classList.remove(
+      "hidden"
+    );
 
-loginBox.classList.remove(
-"hidden"
-);
+    adminContent.classList.add(
+      "hidden"
+    );
 
-
-adminContent.classList.add(
-"hidden"
-);
-
-}
+  }
 
 }
-
 
 
 /* =====================================================
@@ -1441,245 +1363,220 @@ adminContent.classList.add(
 
 async function showAdmin(){
 
-loginBox.classList.add(
-"hidden"
-);
+  loginBox.classList.add(
+    "hidden"
+  );
 
+  adminContent.classList.remove(
+    "hidden"
+  );
 
-adminContent.classList.remove(
-"hidden"
-);
-
-
-await loadAdminPairs();
+  await loadAdminPairs();
 
 }
-
 
 
 /* =====================================================
    CARGAR ADMIN
-=====================================================
-
-   MUY IMPORTANTE:
-
-   Usamos .select("*")
-
-   No:
-
-   .select("teléfono")
-
-   No:
-
-   .select("identificación")
-
-   Así evitamos todos los errores
-   que hemos tenido.
 ===================================================== */
 
 async function loadAdminPairs(){
 
-adminList.innerHTML =
-'<div class="status">Cargando parejas...</div>';
+  adminList.innerHTML =
+    '<div class="status">Cargando parejas...</div>';
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+    await supabaseClient
+      .from(TABLE)
+      .select("*");
+
+    if(error){
+
+      throw error;
+
+    }
+
+    adminRows =
+      sortRows(data || []);
+
+    if(!adminRows.length){
+
+      adminList.innerHTML =
+        '<div class="status">' +
+        'No hay parejas inscritas.' +
+        '</div>';
+
+      return;
+
+    }
+
+    adminList.innerHTML =
+      adminRows.map(
+        function(row,index){
+
+          /*
+             AQUÍ recuperamos el teléfono
+             de forma robusta.
+          */
+
+          const telefono =
+            getTelefono(row);
+
+          return `
+
+            <div
+              class="adminpair"
+            >
+
+              <div class="adminnames">
+
+                ${escapeHtml(row.Jugador1)}
+
+                -
+
+                ${escapeHtml(row.Jugador2)}
+
+              </div>
 
 
-try{
+              <div class="adminphone">
 
-const {
-data,
-error
-} =
-await supabaseClient
+                📞
 
-.from(TABLE)
+                ${
+                  telefono
+                  ? escapeHtml(telefono)
+                  : "Sin teléfono"
+                }
 
-.select("*");
+              </div>
 
 
-if(error){
+              <div class="adminactions">
 
-throw error;
+                <button
+                  class="editbtn"
+                  onclick="editPair(${index})"
+                >
+
+                  ✏️ Corregir
+
+                </button>
+
+
+                <button
+                  class="deletebtn"
+                  onclick="deletePair(${index})"
+                >
+
+                  🗑️ Borrar
+
+                </button>
+
+              </div>
+
+
+              <div
+                id="edit-${index}"
+                class="editbox hidden"
+              >
+
+                <label>
+                  Jugador/a 1
+                </label>
+
+                <input
+                  id="edit-j1-${index}"
+                  type="text"
+                  maxlength="40"
+                  value="${escapeHtml(row.Jugador1)}"
+                >
+
+
+                <label>
+                  Jugador/a 2
+                </label>
+
+                <input
+                  id="edit-j2-${index}"
+                  type="text"
+                  maxlength="40"
+                  value="${escapeHtml(row.Jugador2)}"
+                >
+
+
+                <label>
+                  Teléfono
+                </label>
+
+                <input
+                  id="edit-tel-${index}"
+                  type="tel"
+                  maxlength="20"
+                  value="${escapeHtml(telefono)}"
+                >
+
+
+                <button
+                  class="savebtn"
+                  onclick="savePair(${index})"
+                >
+
+                  💾 Guardar cambios
+
+                </button>
+
+
+                <button
+                  class="editcancel"
+                  onclick="cancelEdit(${index})"
+                >
+
+                  Cancelar
+
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+
+  }catch(error){
+
+    console.error(
+      "Error cargando administración:",
+      error
+    );
+
+    adminList.innerHTML =
+
+      '<div class="status error">' +
+
+      'No se han podido cargar las parejas.' +
+
+      '<br><br>' +
+
+      '<small>' +
+
+      escapeHtml(error.message) +
+
+      '</small>' +
+
+      '</div>';
+
+  }
 
 }
-
-
-adminRows =
-sortRows(data || []);
-
-
-if(!adminRows.length){
-
-adminList.innerHTML =
-'<div class="status">No hay parejas inscritas.</div>';
-
-return;
-
-}
-
-
-adminList.innerHTML =
-adminRows.map(
-function(row,index){
-
-const telefono =
-getTelefono(row);
-
-
-return `
-
-<div
-class="adminpair"
->
-
-<div class="adminnames">
-
-${escapeHtml(row.Jugador1)}
-
--
-
-${escapeHtml(row.Jugador2)}
-
-</div>
-
-
-<div class="adminphone">
-
-📞
-
-${
-telefono
-? escapeHtml(telefono)
-: "Sin teléfono"
-}
-
-</div>
-
-
-<div class="adminactions">
-
-
-<button
-class="editbtn"
-onclick="editPair(${index})"
->
-
-✏️ Corregir
-
-</button>
-
-
-<button
-class="deletebtn"
-onclick="deletePair(${index})"
->
-
-🗑️ Borrar
-
-</button>
-
-
-</div>
-
-
-<div
-id="edit-${index}"
-class="editbox hidden"
->
-
-
-<label>
-Jugador/a 1
-</label>
-
-
-<input
-id="edit-j1-${index}"
-value="${escapeHtml(row.Jugador1)}"
->
-
-
-<label>
-Jugador/a 2
-</label>
-
-
-<input
-id="edit-j2-${index}"
-value="${escapeHtml(row.Jugador2)}"
->
-
-
-<label>
-Teléfono
-</label>
-
-
-<input
-id="edit-tel-${index}"
-type="tel"
-value="${escapeHtml(telefono)}"
->
-
-
-<button
-class="savebtn"
-onclick="savePair(${index})"
->
-
-💾 Guardar cambios
-
-</button>
-
-
-<button
-class="editcancel"
-onclick="cancelEdit(${index})"
->
-
-Cancelar
-
-</button>
-
-
-</div>
-
-
-</div>
-
-`;
-
-}
-).join("");
-
-
-}catch(error){
-
-console.error(
-"Error cargando administración:",
-error
-);
-
-
-adminList.innerHTML =
-
-'<div class="status error">' +
-
-'No se han podido cargar las parejas.' +
-
-'<br><br>' +
-
-'<small>' +
-
-escapeHtml(error.message) +
-
-'</small>' +
-
-'</div>';
-
-}
-
-}
-
 
 
 /* =====================================================
@@ -1689,22 +1586,20 @@ escapeHtml(error.message) +
 window.editPair =
 function(index){
 
-const box =
-document.getElementById(
-"edit-" + index
-);
+  const box =
+    document.getElementById(
+      "edit-" + index
+    );
 
+  if(box){
 
-if(box){
+    box.classList.remove(
+      "hidden"
+    );
 
-box.classList.remove(
-"hidden"
-);
-
-}
+  }
 
 };
-
 
 
 /* =====================================================
@@ -1714,205 +1609,210 @@ box.classList.remove(
 window.cancelEdit =
 function(index){
 
-const box =
-document.getElementById(
-"edit-" + index
-);
+  const box =
+    document.getElementById(
+      "edit-" + index
+    );
 
+  if(box){
 
-if(box){
+    box.classList.add(
+      "hidden"
+    );
 
-box.classList.add(
-"hidden"
-);
-
-}
+  }
 
 };
 
 
-
 /* =====================================================
    GUARDAR CAMBIOS
-=====================================================
-
-   Para encontrar la fila usamos los tres datos
-   originales:
-
-   Jugador1
-   Jugador2
-   teléfono
-
-   No utilizamos "identificación".
 ===================================================== */
 
 window.savePair =
 async function(index){
 
-const original =
-adminRows[index];
+  const original =
+    adminRows[index];
+
+  if(!original){
+
+    alert(
+      "No se ha encontrado la pareja."
+    );
+
+    return;
+
+  }
 
 
-if(!original){
-
-alert(
-"No se ha encontrado la pareja."
-);
-
-return;
-
-}
+  const jugador1 =
+    document
+      .getElementById(
+        "edit-j1-" + index
+      )
+      .value
+      .trim();
 
 
-const jugador1 =
-document
-.getElementById(
-"edit-j1-" + index
-)
-.value
-.trim();
+  const jugador2 =
+    document
+      .getElementById(
+        "edit-j2-" + index
+      )
+      .value
+      .trim();
 
 
-const jugador2 =
-document
-.getElementById(
-"edit-j2-" + index
-)
-.value
-.trim();
+  const telefono =
+    document
+      .getElementById(
+        "edit-tel-" + index
+      )
+      .value
+      .trim();
 
 
-const telefono =
-document
-.getElementById(
-"edit-tel-" + index
-)
-.value
-.trim();
+  if(
+    !jugador1 ||
+    !jugador2 ||
+    !telefono
+  ){
+
+    alert(
+      "Los tres campos son obligatorios."
+    );
+
+    return;
+
+  }
 
 
-if(
-!jugador1 ||
-!jugador2 ||
-!telefono
-){
+  /*
+     Detectamos el nombre REAL de la columna
+     teléfono en la fila original.
+  */
 
-alert(
-"Los tres campos son obligatorios."
-);
-
-return;
-
-}
+  const columnaTelefono =
+    encontrarColumnaTelefono(
+      original
+    );
 
 
-const telefonoOriginal =
-getTelefono(original);
+  if(!columnaTelefono){
+
+    alert(
+      "No se ha encontrado la columna del teléfono."
+    );
+
+    return;
+
+  }
 
 
-try{
+  try{
+
+    const cambios = {
+
+      Jugador1:
+        jugador1,
+
+      Jugador2:
+        jugador2
+
+    };
 
 
-/*
-   Datos nuevos
-*/
+    /*
+       Usamos exactamente la clave que
+       Supabase devolvió.
+    */
 
-const cambios = {
+    cambios[columnaTelefono] =
+      telefono;
 
-"Jugador1":
-jugador1,
 
-"Jugador2":
-jugador2,
+    /*
+       IMPORTANTE:
 
-"teléfono":
-telefono
+       No usamos identificación.
+
+       Buscamos la pareja por sus dos nombres
+       originales.
+
+       Esto evita el error anterior con
+       identificación.
+    */
+
+    let consulta =
+      supabaseClient
+        .from(TABLE)
+        .update(cambios)
+        .eq(
+          "Jugador1",
+          original.Jugador1
+        )
+        .eq(
+          "Jugador2",
+          original.Jugador2
+        );
+
+
+    const {
+      data,
+      error
+    } =
+    await consulta
+      .select("*");
+
+
+    if(error){
+
+      throw error;
+
+    }
+
+
+    if(
+      !data ||
+      !data.length
+    ){
+
+      throw new Error(
+        "Supabase no ha actualizado ninguna fila. " +
+        "La pareja puede no coincidir exactamente " +
+        "o la política UPDATE puede no permitirlo."
+      );
+
+    }
+
+
+    alert(
+      "✅ Pareja corregida correctamente."
+    );
+
+
+    await loadPairs();
+
+    await loadAdminPairs();
+
+
+  }catch(error){
+
+    console.error(
+      "Error actualizando:",
+      error
+    );
+
+
+    alert(
+      "No se ha podido corregir la pareja.\n\n" +
+      error.message
+    );
+
+  }
 
 };
-
-
-/*
-   Buscamos la fila por sus datos originales.
-
-   NO usamos identificación.
-   NO usamos creado_en.
-*/
-
-const {
-data,
-error
-} =
-await supabaseClient
-
-.from(TABLE)
-
-.update(cambios)
-
-.eq(
-"Jugador1",
-original.Jugador1
-)
-
-.eq(
-"Jugador2",
-original.Jugador2
-)
-
-.eq(
-"teléfono",
-telefonoOriginal
-)
-
-.select("*");
-
-
-if(error){
-
-throw error;
-
-}
-
-
-if(
-!data ||
-!data.length
-){
-
-throw new Error(
-"No se ha actualizado ninguna fila. " +
-"Comprueba las políticas UPDATE de Supabase."
-);
-
-}
-
-
-alert(
-"✅ Pareja corregida correctamente."
-);
-
-
-await loadPairs();
-
-await loadAdminPairs();
-
-
-}catch(error){
-
-console.error(
-"Error actualizando:",
-error
-);
-
-
-alert(
-"No se ha podido corregir la pareja.\n\n" +
-error.message
-);
-
-}
-
-};
-
 
 
 /* =====================================================
@@ -1922,124 +1822,114 @@ error.message
 window.deletePair =
 async function(index){
 
-const original =
-adminRows[index];
+  const original =
+    adminRows[index];
+
+  if(!original){
+
+    alert(
+      "No se ha encontrado la pareja."
+    );
+
+    return;
+
+  }
 
 
-if(!original){
+  const confirmar =
+    confirm(
 
-alert(
-"No se ha encontrado la pareja."
-);
+      "¿Seguro que quieres borrar esta pareja?\n\n" +
 
-return;
+      original.Jugador1 +
 
-}
+      " - " +
 
+      original.Jugador2
 
-const confirmar =
-confirm(
-
-"¿Seguro que quieres borrar esta pareja?\n\n" +
-
-original.Jugador1 +
-
-" - " +
-
-original.Jugador2
-
-);
+    );
 
 
-if(!confirmar){
+  if(!confirmar){
 
-return;
+    return;
 
-}
-
-
-const telefonoOriginal =
-getTelefono(original);
+  }
 
 
-try{
+  try{
+
+    /*
+       No usamos identificación.
+       No usamos teléfono para localizarla.
+
+       Usamos los dos nombres originales.
+    */
+
+    const {
+      data,
+      error
+    } =
+    await supabaseClient
+      .from(TABLE)
+      .delete()
+      .eq(
+        "Jugador1",
+        original.Jugador1
+      )
+      .eq(
+        "Jugador2",
+        original.Jugador2
+      )
+      .select("*");
 
 
-const {
-data,
-error
-} =
-await supabaseClient
+    if(error){
 
-.from(TABLE)
+      throw error;
 
-.delete()
-
-.eq(
-"Jugador1",
-original.Jugador1
-)
-
-.eq(
-"Jugador2",
-original.Jugador2
-)
-
-.eq(
-"teléfono",
-telefonoOriginal
-)
-
-.select("*");
+    }
 
 
-if(error){
+    if(
+      !data ||
+      !data.length
+    ){
 
-throw error;
+      throw new Error(
+        "No se ha borrado ninguna fila. " +
+        "Comprueba la política DELETE de Supabase."
+      );
 
-}
-
-
-if(
-!data ||
-!data.length
-){
-
-throw new Error(
-"No se ha borrado ninguna fila. " +
-"Comprueba las políticas DELETE de Supabase."
-);
-
-}
+    }
 
 
-alert(
-"✅ Pareja borrada correctamente."
-);
+    alert(
+      "✅ Pareja borrada correctamente."
+    );
 
 
-await loadPairs();
+    await loadPairs();
 
-await loadAdminPairs();
-
-
-}catch(error){
-
-console.error(
-"Error borrando:",
-error
-);
+    await loadAdminPairs();
 
 
-alert(
-"No se ha podido borrar la pareja.\n\n" +
-error.message
-);
+  }catch(error){
 
-}
+    console.error(
+      "Error borrando:",
+      error
+    );
+
+
+    alert(
+      "No se ha podido borrar la pareja.\n\n" +
+      error.message
+    );
+
+  }
 
 };
-
 
 
 /* =====================================================
@@ -2047,38 +1937,33 @@ error.message
 ===================================================== */
 
 document
-.getElementById("logoutBtn")
-.addEventListener(
-"click",
-async function(){
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    async function(){
 
-await supabaseClient
-.auth
-.signOut();
+      await supabaseClient
+        .auth
+        .signOut();
 
+      adminContent.classList.add(
+        "hidden"
+      );
 
-adminContent.classList.add(
-"hidden"
-);
+      loginBox.classList.remove(
+        "hidden"
+      );
 
+      document
+        .getElementById("email")
+        .value = "";
 
-loginBox.classList.remove(
-"hidden"
-);
+      document
+        .getElementById("password")
+        .value = "";
 
-
-document
-.getElementById("email")
-.value = "";
-
-
-document
-.getElementById("password")
-.value = "";
-
-}
-);
-
+    }
+  );
 
 
 /* =====================================================
@@ -2086,34 +1971,31 @@ document
 ===================================================== */
 
 addBtn.addEventListener(
-"click",
-addPair
+  "click",
+  addPair
 );
-
 
 
 /* =====================================================
-   ENTER EN TELÉFONO
+   ENTER
 ===================================================== */
 
 document
-.getElementById("telefono")
-.addEventListener(
-"keydown",
-function(event){
+  .getElementById("telefono")
+  .addEventListener(
+    "keydown",
+    function(event){
 
-if(
-event.key ===
-"Enter"
-){
+      if(
+        event.key === "Enter"
+      ){
 
-addPair();
+        addPair();
 
-}
+      }
 
-}
-);
-
+    }
+  );
 
 
 /* =====================================================
@@ -2121,7 +2003,6 @@ addPair();
 ===================================================== */
 
 loadPairs();
-
 
 </script>
 
