@@ -12,7 +12,6 @@
 
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
-
 <style>
 
 *{
@@ -35,7 +34,6 @@ body{
 
 }
 
-
 .wrap{
 
   max-width:760px;
@@ -45,7 +43,6 @@ body{
   padding:18px 16px 40px;
 
 }
-
 
 .hero{
 
@@ -64,7 +61,6 @@ body{
 
 }
 
-
 h1{
 
   font-size:30px;
@@ -74,7 +70,6 @@ h1{
 
 }
 
-
 .sub{
 
   font-size:19px;
@@ -82,7 +77,6 @@ h1{
   color:#d1d5db;
 
 }
-
 
 .times{
 
@@ -97,7 +91,6 @@ h1{
     14px 0;
 
 }
-
 
 .box,
 .card{
@@ -116,7 +109,6 @@ h1{
 
 }
 
-
 .box{
 
   text-align:center;
@@ -124,7 +116,6 @@ h1{
   font-size:18px;
 
 }
-
 
 .box b{
 
@@ -136,7 +127,6 @@ h1{
 
 }
 
-
 .info{
 
   text-align:center;
@@ -147,7 +137,6 @@ h1{
     12px 0 18px;
 
 }
-
 
 label{
 
@@ -161,7 +150,6 @@ label{
   font-size:17px;
 
 }
-
 
 input{
 
@@ -180,13 +168,11 @@ input{
 
 }
 
-
 input:focus{
 
   border-color:#111827;
 
 }
-
 
 button{
 
@@ -210,13 +196,11 @@ button{
 
 }
 
-
 button:disabled{
 
   opacity:.55;
 
 }
-
 
 .count{
 
@@ -227,7 +211,6 @@ button:disabled{
   align-items:center;
 
 }
-
 
 .badge{
 
@@ -244,13 +227,11 @@ button:disabled{
 
 }
 
-
 .list{
 
   margin-top:14px;
 
 }
-
 
 .pair{
 
@@ -264,13 +245,11 @@ button:disabled{
 
 }
 
-
 .pair:last-child{
 
   border-bottom:0;
 
 }
-
 
 .status{
 
@@ -282,20 +261,17 @@ button:disabled{
 
 }
 
-
 .ok{
 
   color:#166534;
 
 }
 
-
 .error{
 
   color:#b91c1c;
 
 }
-
 
 .admin{
 
@@ -304,7 +280,6 @@ button:disabled{
   text-align:center;
 
 }
-
 
 .admin a{
 
@@ -318,7 +293,6 @@ button:disabled{
 
 }
 
-
 .adminpanel{
 
   display:none;
@@ -326,7 +300,6 @@ button:disabled{
   margin-top:14px;
 
 }
-
 
 .adminpair{
 
@@ -338,13 +311,11 @@ button:disabled{
 
 }
 
-
 .adminpair:last-child{
 
   border-bottom:0;
 
 }
-
 
 .adminnames{
 
@@ -356,7 +327,6 @@ button:disabled{
 
 }
 
-
 .adminphone{
 
   color:#4b5563;
@@ -366,7 +336,6 @@ button:disabled{
   margin-bottom:12px;
 
 }
-
 
 .adminactions{
 
@@ -379,7 +348,6 @@ button:disabled{
 
 }
 
-
 .adminactions button{
 
   margin-top:0;
@@ -390,13 +358,11 @@ button:disabled{
 
 }
 
-
 .editbtn{
 
   background:#374151;
 
 }
-
 
 .deletebtn{
 
@@ -404,13 +370,11 @@ button:disabled{
 
 }
 
-
 .logout{
 
   background:#6b7280;
 
 }
-
 
 footer{
 
@@ -422,13 +386,11 @@ footer{
 
 }
 
-
 .hidden{
 
   display:none;
 
 }
-
 
 .admin-title{
 
@@ -439,7 +401,6 @@ footer{
 
 }
 
-
 .login-title{
 
   font-size:23px;
@@ -448,7 +409,6 @@ footer{
     0 0 5px;
 
 }
-
 
 .small{
 
@@ -460,7 +420,6 @@ footer{
 
 }
 
-
 .cancelbtn{
 
   background:#e5e7eb;
@@ -468,7 +427,6 @@ footer{
   color:#111827;
 
 }
-
 
 .editbox{
 
@@ -482,13 +440,11 @@ footer{
 
 }
 
-
 .editbox input{
 
   background:white;
 
 }
-
 
 .savebtn{
 
@@ -496,13 +452,11 @@ footer{
 
 }
 
-
 .editcancel{
 
   background:#6b7280;
 
 }
-
 
 @media(max-width:500px){
 
@@ -560,7 +514,7 @@ footer{
     <div class="box">
 
       <b>
-        Jueves
+        Jueves 19
       </b>
 
       11:00 h
@@ -571,7 +525,7 @@ footer{
     <div class="box">
 
       <b>
-        Viernes
+        Viernes 20
       </b>
 
       10:00 h
@@ -860,7 +814,6 @@ footer{
    CONFIGURACIÓN
    ========================================================= */
 
-
 const SUPABASE_URL =
   "https://novinmgzbqtnpfjfzpqt.supabase.co";
 
@@ -884,7 +837,6 @@ const supabaseClient =
 /* =========================================================
    ELEMENTOS
    ========================================================= */
-
 
 const countEl =
   document.getElementById("count");
@@ -927,7 +879,6 @@ const adminList =
    ESCAPAR HTML
    ========================================================= */
 
-
 function escapeHtml(value){
 
   return String(value ?? "").replace(
@@ -955,7 +906,6 @@ function escapeHtml(value){
    OBTENER TELÉFONO
    ========================================================= */
 
-
 function getTelefono(row){
 
   if(
@@ -964,9 +914,7 @@ function getTelefono(row){
     row["teléfono"] !== null
   ){
 
-    return String(
-      row["teléfono"]
-    );
+    return row["teléfono"];
 
   }
 
@@ -977,9 +925,7 @@ function getTelefono(row){
     row["telefono"] !== null
   ){
 
-    return String(
-      row["telefono"]
-    );
+    return row["telefono"];
 
   }
 
@@ -991,44 +937,8 @@ function getTelefono(row){
 
 
 /* =========================================================
-   OBTENER ID
-   ========================================================= */
-
-
-function getId(row){
-
-  if(
-    row &&
-    row["identificación"] !== undefined &&
-    row["identificación"] !== null
-  ){
-
-    return row["identificación"];
-
-  }
-
-
-  if(
-    row &&
-    row["id"] !== undefined &&
-    row["id"] !== null
-  ){
-
-    return row["id"];
-
-  }
-
-
-  return null;
-
-}
-
-
-
-/* =========================================================
    ORDENAR PAREJAS
    ========================================================= */
-
 
 function sortRows(rows){
 
@@ -1060,11 +970,9 @@ function sortRows(rows){
    CARGAR PAREJAS PÚBLICAS
    ========================================================= */
 
-
 async function loadPairs(){
 
   try{
-
 
     const {
       data,
@@ -1125,7 +1033,6 @@ async function loadPairs(){
 
   }catch(error){
 
-
     console.error(
       "Error cargando parejas:",
       error
@@ -1149,9 +1056,7 @@ async function loadPairs(){
    AÑADIR PAREJA
    ========================================================= */
 
-
 async function addPair(){
-
 
   const jugador1 =
     document
@@ -1206,7 +1111,6 @@ async function addPair(){
 
 
   try{
-
 
     const {
       error
@@ -1263,7 +1167,6 @@ async function addPair(){
 
   }catch(error){
 
-
     console.error(
       "Error añadiendo pareja:",
       error
@@ -1278,7 +1181,6 @@ async function addPair(){
       "No se ha podido apuntar la pareja.";
 
   }finally{
-
 
     addBtn.disabled =
       false;
@@ -1296,7 +1198,6 @@ async function addPair(){
 /* =========================================================
    ABRIR ADMIN
    ========================================================= */
-
 
 adminLink.addEventListener(
   "click",
@@ -1334,7 +1235,6 @@ adminLink.addEventListener(
    CANCELAR LOGIN
    ========================================================= */
 
-
 document
   .getElementById("cancelLogin")
   .addEventListener(
@@ -1353,7 +1253,6 @@ document
    LOGIN
    ========================================================= */
 
-
 document
   .getElementById("loginBtn")
   .addEventListener(
@@ -1363,7 +1262,6 @@ document
 
 
 async function login(){
-
 
   const email =
     document
@@ -1411,7 +1309,6 @@ async function login(){
 
   try{
 
-
     const {
       error
     } =
@@ -1444,7 +1341,6 @@ async function login(){
 
   }catch(error){
 
-
     console.error(
       "Error login:",
       error
@@ -1468,9 +1364,7 @@ async function login(){
    COMPROBAR SESIÓN
    ========================================================= */
 
-
 async function checkSession(){
-
 
   const {
     data
@@ -1488,7 +1382,6 @@ async function checkSession(){
     await showAdmin();
 
   }else{
-
 
     loginBox.classList.remove(
       "hidden"
@@ -1509,9 +1402,7 @@ async function checkSession(){
    MOSTRAR ADMIN
    ========================================================= */
 
-
 async function showAdmin(){
-
 
   loginBox.classList.add(
     "hidden"
@@ -1530,32 +1421,16 @@ async function showAdmin(){
 
 
 /* =========================================================
-   CARGAR PAREJAS ADMINISTRADOR
-   =========================================================
-
-   IMPORTANTE:
-   Usamos select("*") porque esta consulta
-   ya está comprobada en tu Supabase y devuelve:
-
-   identificación
-   creado_en
-   Jugador1
-   Jugador2
-   teléfono
-
-   No hacemos una selección específica de columnas.
+   CARGAR PAREJAS ADMIN
    ========================================================= */
 
-
 async function loadAdminPairs(){
-
 
   adminList.innerHTML =
     '<div class="status">Cargando parejas...</div>';
 
 
   try{
-
 
     const {
       data,
@@ -1592,9 +1467,10 @@ async function loadAdminPairs(){
       rows.map(
         function(row){
 
-
           const id =
-            getId(row);
+            row["identificación"] ??
+            row.identificacion ??
+            row.id;
 
 
           const telefono =
@@ -1732,7 +1608,6 @@ async function loadAdminPairs(){
 
   }catch(error){
 
-
     console.error(
       "Error cargando administración:",
       error
@@ -1749,13 +1624,11 @@ async function loadAdminPairs(){
 
 
 /* =========================================================
-   EDITAR
+   ABRIR EDICIÓN
    ========================================================= */
-
 
 window.editPair =
   function(id){
-
 
     const box =
       document.getElementById(
@@ -1779,10 +1652,8 @@ window.editPair =
    CANCELAR EDICIÓN
    ========================================================= */
 
-
 window.cancelEdit =
   function(id){
-
 
     const box =
       document.getElementById(
@@ -1804,12 +1675,21 @@ window.cancelEdit =
 
 /* =========================================================
    GUARDAR CAMBIOS
-   ========================================================= */
+   =========================================================
 
+   IMPORTANTE:
+
+   Ya NO hacemos UPDATE directo sobre "teléfono".
+
+   Utilizamos la función SQL:
+
+   actualizar_pareja
+
+   que hemos creado en Supabase.
+   ========================================================= */
 
 window.savePair =
   async function(id){
-
 
     const jugador1 =
       document
@@ -1848,7 +1728,6 @@ window.savePair =
         "Los tres campos son obligatorios."
       );
 
-
       return;
 
     }
@@ -1856,30 +1735,26 @@ window.savePair =
 
     try{
 
-
       const {
         error
       } =
         await supabaseClient
 
-          .from(TABLE)
+          .rpc(
+            "actualizar_pareja",
+            {
+              p_id:
+                Number(id),
 
-          .update({
+              p_jugador1:
+                jugador1,
 
-            Jugador1:
-              jugador1,
+              p_jugador2:
+                jugador2,
 
-            Jugador2:
-              jugador2,
-
-            "teléfono":
-              telefono
-
-          })
-
-          .eq(
-            "identificación",
-            id
+              p_telefono:
+                telefono
+            }
           );
 
 
@@ -1890,13 +1765,17 @@ window.savePair =
       }
 
 
+      alert(
+        "✅ Pareja corregida correctamente."
+      );
+
+
       await loadPairs();
 
       await loadAdminPairs();
 
 
     }catch(error){
-
 
       console.error(
         "Error actualizando:",
@@ -1916,13 +1795,11 @@ window.savePair =
 
 
 /* =========================================================
-   BORRAR
+   BORRAR PAREJA
    ========================================================= */
-
 
 window.deletePair =
   async function(id){
-
 
     const confirmar =
       confirm(
@@ -1938,7 +1815,6 @@ window.deletePair =
 
 
     try{
-
 
       const {
         error
@@ -1962,13 +1838,17 @@ window.deletePair =
       }
 
 
+      alert(
+        "✅ Pareja borrada correctamente."
+      );
+
+
       await loadPairs();
 
       await loadAdminPairs();
 
 
     }catch(error){
-
 
       console.error(
         "Error borrando:",
@@ -1991,13 +1871,11 @@ window.deletePair =
    CERRAR SESIÓN
    ========================================================= */
 
-
 document
   .getElementById("logoutBtn")
   .addEventListener(
     "click",
     async function(){
-
 
       await supabaseClient
         .auth
@@ -2032,7 +1910,6 @@ document
    BOTÓN APUNTAR
    ========================================================= */
 
-
 addBtn.addEventListener(
   "click",
   addPair
@@ -2041,9 +1918,8 @@ addBtn.addEventListener(
 
 
 /* =========================================================
-   ENTER EN FORMULARIO
+   ENTER EN TELÉFONO
    ========================================================= */
-
 
 document
   .getElementById("telefono")
@@ -2068,7 +1944,6 @@ document
 /* =========================================================
    CARGA INICIAL
    ========================================================= */
-
 
 loadPairs();
 
