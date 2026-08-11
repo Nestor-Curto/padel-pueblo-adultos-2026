@@ -7,9 +7,7 @@
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -49,8 +47,7 @@ h1{
   margin:14px 0;
 }
 
-.box,
-.card{
+.box,.card{
   background:white;
   border:1px solid #e5e7eb;
   border-radius:22px;
@@ -170,56 +167,48 @@ button:disabled{
   margin-top:14px;
 }
 
-.admin-row{
-  padding:15px 0;
+.adminpair{
   border-bottom:1px solid #e5e7eb;
+  padding:18px 0;
 }
 
-.admin-row:last-child{
+.adminpair:last-child{
   border-bottom:0;
 }
 
-.admin-names{
+.adminnames{
   font-size:19px;
   font-weight:700;
+  margin-bottom:6px;
 }
 
-.admin-phone{
-  margin-top:5px;
+.adminphone{
   color:#4b5563;
-  font-size:16px;
+  margin-bottom:12px;
 }
 
-.admin-actions{
-  display:flex;
+.adminactions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:10px;
-  margin-top:12px;
 }
 
-.admin-actions button{
+.adminactions button{
   margin-top:0;
-  padding:12px;
   font-size:16px;
+  padding:13px;
 }
 
-.edit-btn{
+.editbtn{
   background:#374151;
 }
 
-.delete-btn{
+.deletebtn{
   background:#b91c1c;
 }
 
-.save-btn{
-  background:#166534;
-}
-
-.cancel-btn{
+.logout{
   background:#6b7280;
-}
-
-.admin-login button{
-  margin-top:12px;
 }
 
 footer{
@@ -231,6 +220,60 @@ footer{
 .hidden{
   display:none;
 }
+
+.admin-title{
+  font-size:28px;
+  margin:0 0 16px;
+}
+
+.login-title{
+  font-size:23px;
+  margin:0 0 5px;
+}
+
+.small{
+  color:#6b7280;
+  font-size:15px;
+  margin-top:5px;
+}
+
+.cancelbtn{
+  background:#e5e7eb;
+  color:#111827;
+}
+
+.editbox{
+  margin-top:12px;
+  padding:16px;
+  background:#f9fafb;
+  border-radius:16px;
+}
+
+.editbox input{
+  background:white;
+}
+
+.savebtn{
+  background:#166534;
+}
+
+.editcancel{
+  background:#6b7280;
+}
+
+@media(max-width:500px){
+  h1{
+    font-size:27px;
+  }
+
+  .times{
+    gap:8px;
+  }
+
+  .box{
+    padding:17px 10px;
+  }
+}
 </style>
 </head>
 
@@ -238,10 +281,20 @@ footer{
 
 <div class="wrap">
 
+  <!-- CABECERA -->
+
   <section class="hero">
+
     <h1>🎾 Torneo Pádel (Adultos)</h1>
-    <div class="sub">Semana Cultural Jemenuño</div>
+
+    <div class="sub">
+      Semana Cultural Jemenuño
+    </div>
+
   </section>
+
+
+  <!-- HORARIOS -->
 
   <div class="times">
 
@@ -257,13 +310,18 @@ footer{
 
   </div>
 
+
+  <!-- INFORMACIÓN -->
+
   <div class="card info">
+
     🏆 Premios y sorteos · 💶 Inscripción:
     <b>5 € por persona</b>
+
   </div>
 
 
-  <!-- FORMULARIO DE INSCRIPCIÓN -->
+  <!-- FORMULARIO PÚBLICO -->
 
   <section class="card">
 
@@ -309,6 +367,7 @@ footer{
       Apuntar pareja
     </button>
 
+
     <div id="msg" class="status"></div>
 
   </section>
@@ -316,7 +375,10 @@ footer{
 
   <!-- LISTADO PÚBLICO -->
 
-  <section class="card" style="margin-top:18px">
+  <section
+    class="card"
+    style="margin-top:18px"
+  >
 
     <div class="count">
 
@@ -324,13 +386,20 @@ footer{
         Parejas apuntadas
       </h2>
 
-      <span id="count" class="badge">
+      <span
+        id="count"
+        class="badge"
+      >
         0
       </span>
 
     </div>
 
-    <div id="list" class="list">
+
+    <div
+      id="list"
+      class="list"
+    >
 
       <div class="status">
         Cargando parejas...
@@ -341,56 +410,58 @@ footer{
   </section>
 
 
-  <!-- ADMINISTRADOR -->
+  <!-- ACCESO ADMINISTRADOR -->
 
   <div class="admin">
 
-    <a href="#" id="adminLink">
+    <a
+      href="#"
+      id="adminLink"
+    >
       🔐 Acceso administrador
     </a>
 
   </div>
 
 
+  <!-- PANEL ADMINISTRADOR -->
+
   <div
     id="adminPanel"
     class="adminpanel card"
   >
 
-    <h2 style="margin-top:0">
-      🔐 Administración
-    </h2>
-
-
     <!-- LOGIN -->
 
-    <div
-      id="loginBox"
-      class="admin-login"
-    >
+    <div id="loginBox">
 
-      <div class="status">
-        Introduce tus datos de administrador.
+      <h2 class="login-title">
+        🔐 Administración
+      </h2>
+
+      <div class="small">
+        Acceso exclusivo del administrador
       </div>
 
-      <label for="adminEmail">
-        Correo electrónico
+
+      <label for="email">
+        Email
       </label>
 
       <input
-        id="adminEmail"
+        id="email"
         type="email"
-        placeholder="Correo electrónico"
+        placeholder="Email"
         autocomplete="username"
       >
 
 
-      <label for="adminPassword">
+      <label for="password">
         Contraseña
       </label>
 
       <input
-        id="adminPassword"
+        id="password"
         type="password"
         placeholder="Contraseña"
         autocomplete="current-password"
@@ -398,8 +469,17 @@ footer{
 
 
       <button id="loginBtn">
-        Acceder
+        Entrar
       </button>
+
+
+      <button
+        id="cancelLogin"
+        class="cancelbtn"
+      >
+        Cancelar
+      </button>
+
 
       <div
         id="loginMsg"
@@ -412,17 +492,22 @@ footer{
     <!-- ADMIN CONECTADO -->
 
     <div
-      id="adminConnected"
+      id="adminContent"
       class="hidden"
     >
+
+      <h2 class="admin-title">
+        🔐 Administración
+      </h2>
+
 
       <div
         style="
           background:#ecfdf5;
           color:#166534;
-          padding:14px;
+          padding:14px 16px;
           border-radius:16px;
-          font-weight:700;
+          font-weight:600;
           margin-bottom:18px;
         "
       >
@@ -430,23 +515,24 @@ footer{
       </div>
 
 
-      <h3>
+      <h2>
         Parejas inscritas
-      </h3>
+      </h2>
 
 
-      <div id="adminList">
-
+      <div
+        id="adminList"
+        class="list"
+      >
         <div class="status">
           Cargando parejas...
         </div>
-
       </div>
 
 
       <button
         id="logoutBtn"
-        style="background:#6b7280"
+        class="logout"
       >
         Cerrar sesión
       </button>
@@ -463,11 +549,12 @@ footer{
 </div>
 
 
-<script>
+<!-- SUPABASE -->
 
-/* =========================================================
-   CONFIGURACIÓN SUPABASE
-   ========================================================= */
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
 
 const SUPABASE_URL =
   "https://novinmgzbqtnpfjfzpqt.supabase.co";
@@ -475,12 +562,18 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
 
-const TABLE = "Parejas";
+const TABLE =
+  "Parejas";
 
 
-/* =========================================================
-   ELEMENTOS
-   ========================================================= */
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* ELEMENTOS */
 
 const countEl =
   document.getElementById("count");
@@ -494,150 +587,78 @@ const msgEl =
 const addBtn =
   document.getElementById("add");
 
+const adminLink =
+  document.getElementById("adminLink");
+
 const adminPanel =
   document.getElementById("adminPanel");
 
 const loginBox =
   document.getElementById("loginBox");
 
-const adminConnected =
-  document.getElementById("adminConnected");
+const adminContent =
+  document.getElementById("adminContent");
 
 const adminList =
   document.getElementById("adminList");
 
 
-/* =========================================================
-   CABECERAS
-   ========================================================= */
+/* ESCAPAR HTML */
 
-function publicHeaders(){
+function escapeHtml(value){
 
-  return {
-    "apikey": SUPABASE_KEY,
-    "Authorization":
-      "Bearer " + SUPABASE_KEY,
-    "Content-Type":
-      "application/json"
-  };
+  return String(value ?? "").replace(
+    /[&<>"']/g,
+    function(m){
 
-}
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m];
 
-
-async function authenticatedHeaders(){
-
-  const session =
-    await getSession();
-
-  if(!session){
-    throw new Error(
-      "No hay sesión de administrador."
-    );
-  }
-
-  return {
-    "apikey": SUPABASE_KEY,
-    "Authorization":
-      "Bearer " + session.access_token,
-    "Content-Type":
-      "application/json"
-  };
-
-}
-
-
-/* =========================================================
-   SESIÓN SUPABASE
-   ========================================================= */
-
-async function getSession(){
-
-  try{
-
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/auth/v1/session",
-        {
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY
-          }
-        }
-      );
-
-    if(!response.ok){
-      return null;
     }
-
-    const data =
-      await response.json();
-
-    if(!data.access_token){
-      return null;
-    }
-
-    return data;
-
-  }catch(error){
-
-    console.error(error);
-
-    return null;
-
-  }
+  );
 
 }
 
 
-/* =========================================================
-   CARGAR PAREJAS PÚBLICAS
-   ========================================================= */
+/* CARGAR PAREJAS PÚBLICAS */
 
 async function loadPairs(){
 
   try{
 
-    /*
-      IMPORTANTE:
-      Aquí NO pedimos identificación,
-      creado_en ni teléfono.
+    const {
+      data,
+      error
+    } = await supabaseClient
 
-      El público solo recibe los nombres.
-    */
+      .from(TABLE)
 
-    const url =
-      SUPABASE_URL +
-      "/rest/v1/" +
-      encodeURIComponent(TABLE) +
-      "?select=Jugador1,Jugador2&order=creado_en.asc";
+      .select(
+        "Jugador1,Jugador2"
+      )
 
-
-    const response =
-      await fetch(
-        url,
+      .order(
+        "created_at",
         {
-          headers:
-            publicHeaders()
+          ascending:true
         }
       );
 
 
-    if(!response.ok){
+    if(error){
 
-      const text =
-        await response.text();
-
-      throw new Error(text);
+      throw error;
 
     }
 
 
     const rows =
-      await response.json();
+      data || [];
 
 
     countEl.textContent =
@@ -647,9 +668,7 @@ async function loadPairs(){
     if(!rows.length){
 
       listEl.innerHTML =
-        '<div class="status">' +
-        'Todavía no hay parejas apuntadas.' +
-        '</div>';
+        '<div class="status">Todavía no hay parejas apuntadas.</div>';
 
       return;
 
@@ -657,19 +676,17 @@ async function loadPairs(){
 
 
     listEl.innerHTML =
-      rows
-        .map(row => {
+      rows.map(function(row){
 
-          return `
-            <div class="pair">
-              ${escapeHtml(row.Jugador1)}
-              -
-              ${escapeHtml(row.Jugador2)}
-            </div>
-          `;
+        return `
+          <div class="pair">
+            ${escapeHtml(row.Jugador1)}
+            -
+            ${escapeHtml(row.Jugador2)}
+          </div>
+        `;
 
-        })
-        .join("");
+      }).join("");
 
 
   }catch(error){
@@ -679,21 +696,15 @@ async function loadPairs(){
       error
     );
 
-    countEl.textContent = "0";
-
     listEl.innerHTML =
-      '<div class="status error">' +
-      'No se han podido cargar las parejas.' +
-      '</div>';
+      '<div class="status error">No se han podido cargar las parejas.</div>';
 
   }
 
 }
 
 
-/* =========================================================
-   AÑADIR PAREJA
-   ========================================================= */
+/* AÑADIR PAREJA */
 
 async function addPair(){
 
@@ -716,7 +727,8 @@ async function addPair(){
       .trim();
 
 
-  msgEl.textContent = "";
+  msgEl.textContent =
+    "";
 
 
   if(
@@ -736,7 +748,8 @@ async function addPair(){
   }
 
 
-  addBtn.disabled = true;
+  addBtn.disabled =
+    true;
 
   addBtn.textContent =
     "Apuntando...";
@@ -744,46 +757,29 @@ async function addPair(){
 
   try{
 
-    /*
-      NO enviamos identificación.
-      Supabase la genera automáticamente.
-    */
+    const {
+      error
+    } = await supabaseClient
 
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/" +
-        encodeURIComponent(TABLE),
-        {
-          method:"POST",
+      .from(TABLE)
 
-          headers:{
-            ...publicHeaders(),
-            "Prefer":
-              "return=minimal"
-          },
+      .insert({
 
-          body:
-            JSON.stringify({
-              Jugador1:
-                jugador1,
+        Jugador1:
+          jugador1,
 
-              Jugador2:
-                jugador2,
+        Jugador2:
+          jugador2,
 
-              teléfono:
-                telefono
-            })
-        }
-      );
+        "teléfono":
+          telefono
+
+      });
 
 
-    if(!response.ok){
+    if(error){
 
-      const text =
-        await response.text();
-
-      throw new Error(text);
+      throw error;
 
     }
 
@@ -808,18 +804,13 @@ async function addPair(){
       "✅ Pareja apuntada correctamente.";
 
 
-    /*
-      Esperamos un poco y volvemos
-      a cargar el listado.
-    */
-
     await loadPairs();
 
 
   }catch(error){
 
     console.error(
-      "Error insertando pareja:",
+      "Error añadiendo pareja:",
       error
     );
 
@@ -831,7 +822,8 @@ async function addPair(){
 
   }finally{
 
-    addBtn.disabled = false;
+    addBtn.disabled =
+      false;
 
     addBtn.textContent =
       "Apuntar pareja";
@@ -841,28 +833,71 @@ async function addPair(){
 }
 
 
-/* =========================================================
-   LOGIN ADMINISTRADOR
-   ========================================================= */
+/* ABRIR ADMIN */
 
-async function loginAdmin(){
+adminLink.addEventListener(
+  "click",
+  async function(event){
+
+    event.preventDefault();
+
+    if(
+      adminPanel.style.display ===
+      "block"
+    ){
+
+      adminPanel.style.display =
+        "none";
+
+      return;
+
+    }
+
+
+    adminPanel.style.display =
+      "block";
+
+
+    await checkSession();
+
+  }
+);
+
+
+/* LOGIN */
+
+document
+  .getElementById("loginBtn")
+  .addEventListener(
+    "click",
+    login
+  );
+
+
+async function login(){
 
   const email =
     document
-      .getElementById("adminEmail")
+      .getElementById("email")
       .value
       .trim();
 
   const password =
     document
-      .getElementById("adminPassword")
+      .getElementById("password")
       .value;
 
 
   const loginMsg =
-    document.getElementById(
-      "loginMsg"
-    );
+    document
+      .getElementById("loginMsg");
+
+
+  loginMsg.className =
+    "status";
+
+  loginMsg.textContent =
+    "Entrando...";
 
 
   if(!email || !password){
@@ -871,221 +906,94 @@ async function loginAdmin(){
       "status error";
 
     loginMsg.textContent =
-      "Introduce correo y contraseña.";
+      "Introduce email y contraseña.";
 
     return;
 
   }
 
 
-  const loginBtn =
-    document.getElementById(
-      "loginBtn"
+  const {
+    error
+  } = await supabaseClient.auth.signInWithPassword({
+
+    email:
+      email,
+
+    password:
+      password
+
+  });
+
+
+  if(error){
+
+    console.error(
+      "Error login:",
+      error
     );
-
-
-  loginBtn.disabled = true;
-
-  loginBtn.textContent =
-    "Accediendo...";
-
-
-  try{
-
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/auth/v1/token?grant_type=password",
-        {
-          method:"POST",
-
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-              email:
-                email,
-
-              password:
-                password
-            })
-        }
-      );
-
-
-    if(!response.ok){
-
-      const text =
-        await response.text();
-
-      throw new Error(text);
-
-    }
-
-
-    const session =
-      await response.json();
-
-
-    /*
-      Guardamos la sesión para poder
-      hacer UPDATE y DELETE.
-    */
-
-    localStorage.setItem(
-      "padel_admin_session",
-      JSON.stringify(session)
-    );
-
-
-    loginMsg.className =
-      "status ok";
-
-    loginMsg.textContent =
-      "✅ Acceso correcto.";
-
-
-    await showAdmin();
-
-
-  }catch(error){
-
-    console.error(error);
 
     loginMsg.className =
       "status error";
 
     loginMsg.textContent =
-      "No se ha podido iniciar sesión. Comprueba los datos.";
-
-  }finally{
-
-    loginBtn.disabled = false;
-
-    loginBtn.textContent =
-      "Acceder";
-
-  }
-
-}
-
-
-/* =========================================================
-   SESIÓN GUARDADA
-   ========================================================= */
-
-async function getStoredSession(){
-
-  try{
-
-    const stored =
-      localStorage.getItem(
-        "padel_admin_session"
-      );
-
-
-    if(!stored){
-      return null;
-    }
-
-
-    const session =
-      JSON.parse(stored);
-
-
-    if(
-      !session ||
-      !session.access_token
-    ){
-
-      return null;
-
-    }
-
-
-    /*
-      Comprobamos que el token sigue
-      funcionando.
-    */
-
-    const response =
-      await fetch(
-        SUPABASE_URL +
-        "/auth/v1/user",
-        {
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              session.access_token
-          }
-        }
-      );
-
-
-    if(!response.ok){
-
-      localStorage.removeItem(
-        "padel_admin_session"
-      );
-
-      return null;
-
-    }
-
-
-    return session;
-
-
-  }catch(error){
-
-    console.error(error);
-
-    return null;
-
-  }
-
-}
-
-
-/* =========================================================
-   MOSTRAR ADMIN
-   ========================================================= */
-
-async function showAdmin(){
-
-  const session =
-    await getStoredSession();
-
-
-  if(!session){
-
-    loginBox.classList.remove(
-      "hidden"
-    );
-
-    adminConnected.classList.add(
-      "hidden"
-    );
+      "Email o contraseña incorrectos.";
 
     return;
 
   }
 
 
+  loginMsg.textContent =
+    "";
+
+
+  await showAdmin();
+
+}
+
+
+/* COMPROBAR SESIÓN */
+
+async function checkSession(){
+
+  const {
+    data
+  } =
+    await supabaseClient.auth.getSession();
+
+
+  if(
+    data &&
+    data.session
+  ){
+
+    await showAdmin();
+
+  }else{
+
+    loginBox.classList.remove(
+      "hidden"
+    );
+
+    adminContent.classList.add(
+      "hidden"
+    );
+
+  }
+
+}
+
+
+/* MOSTRAR ADMIN */
+
+async function showAdmin(){
+
   loginBox.classList.add(
     "hidden"
   );
 
-  adminConnected.classList.remove(
+  adminContent.classList.remove(
     "hidden"
   );
 
@@ -1095,65 +1003,50 @@ async function showAdmin(){
 }
 
 
-/* =========================================================
-   CARGAR PAREJAS ADMIN
-   ========================================================= */
+/* CARGAR PAREJAS ADMIN */
 
 async function loadAdminPairs(){
 
   adminList.innerHTML =
-    '<div class="status">' +
-    'Cargando parejas...' +
-    '</div>';
+    '<div class="status">Cargando parejas...</div>';
 
 
   try{
 
-    const headers =
-      await authenticatedHeaders();
+    const {
+      data,
+      error
+    } = await supabaseClient
 
+      .from(TABLE)
 
-    /*
-      El administrador sí recibe
-      identificación y teléfono.
-    */
+      .select(
+        "id,created_at,Jugador1,Jugador2,teléfono"
+      )
 
-    const url =
-      SUPABASE_URL +
-      "/rest/v1/" +
-      encodeURIComponent(TABLE) +
-      "?select=identificación,creado_en,Jugador1,Jugador2,teléfono&order=creado_en.asc";
-
-
-    const response =
-      await fetch(
-        url,
+      .order(
+        "created_at",
         {
-          headers
+          ascending:true
         }
       );
 
 
-    if(!response.ok){
+    if(error){
 
-      const text =
-        await response.text();
-
-      throw new Error(text);
+      throw error;
 
     }
 
 
     const rows =
-      await response.json();
+      data || [];
 
 
     if(!rows.length){
 
       adminList.innerHTML =
-        '<div class="status">' +
-        'No hay parejas inscritas.' +
-        '</div>';
+        '<div class="status">No hay parejas inscritas.</div>';
 
       return;
 
@@ -1161,54 +1054,110 @@ async function loadAdminPairs(){
 
 
     adminList.innerHTML =
-      rows
-        .map(row => {
+      rows.map(function(row){
 
-          const id =
-            row["identificación"];
+        return `
 
-          return `
+          <div
+            class="adminpair"
+            data-id="${escapeHtml(row.id)}"
+          >
 
-            <div
-              class="admin-row"
-              id="admin-row-${id}"
-            >
+            <div class="adminnames">
 
-              <div class="admin-names">
-                ${escapeHtml(row.Jugador1)}
-                -
-                ${escapeHtml(row.Jugador2)}
-              </div>
-
-              <div class="admin-phone">
-                📱 ${escapeHtml(row["teléfono"] || "Sin teléfono")}
-              </div>
-
-
-              <div class="admin-actions">
-
-                <button
-                  class="edit-btn"
-                  onclick="editPair('${id}')"
-                >
-                  ✏️ Editar
-                </button>
-
-                <button
-                  class="delete-btn"
-                  onclick="deletePair('${id}')"
-                >
-                  🗑️ Borrar
-                </button>
-
-              </div>
+              ${escapeHtml(row.Jugador1)}
+              -
+              ${escapeHtml(row.Jugador2)}
 
             </div>
 
-          `;
 
-        })
-        .join("");
+            <div class="adminphone">
+
+              📞
+              ${escapeHtml(row["teléfono"])}
+
+            </div>
+
+
+            <div class="adminactions">
+
+              <button
+                class="editbtn"
+                onclick="editPair('${escapeHtml(row.id)}')"
+              >
+                ✏️ Corregir
+              </button>
+
+
+              <button
+                class="deletebtn"
+                onclick="deletePair('${escapeHtml(row.id)}')"
+              >
+                🗑️ Borrar
+              </button>
+
+            </div>
+
+
+            <div
+              id="edit-${escapeHtml(row.id)}"
+              class="editbox hidden"
+            >
+
+              <label>
+                Jugador/a 1
+              </label>
+
+              <input
+                id="edit-j1-${escapeHtml(row.id)}"
+                value="${escapeHtml(row.Jugador1)}"
+              >
+
+
+              <label>
+                Jugador/a 2
+              </label>
+
+              <input
+                id="edit-j2-${escapeHtml(row.id)}"
+                value="${escapeHtml(row.Jugador2)}"
+              >
+
+
+              <label>
+                Teléfono
+              </label>
+
+              <input
+                id="edit-tel-${escapeHtml(row.id)}"
+                type="tel"
+                value="${escapeHtml(row["teléfono"])}"
+              >
+
+
+              <button
+                class="savebtn"
+                onclick="savePair('${escapeHtml(row.id)}')"
+              >
+                💾 Guardar cambios
+              </button>
+
+
+              <button
+                class="editcancel"
+                onclick="cancelEdit('${escapeHtml(row.id)}')"
+              >
+                Cancelar
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
 
 
   }catch(error){
@@ -1219,114 +1168,91 @@ async function loadAdminPairs(){
     );
 
     adminList.innerHTML =
-      '<div class="status error">' +
-      'No se han podido cargar las parejas.' +
-      '</div>';
+      '<div class="status error">No se han podido cargar las parejas.</div>';
 
   }
 
 }
 
 
-/* =========================================================
-   EDITAR PAREJA
-   ========================================================= */
+/* EDITAR */
 
-async function editPair(id){
+window.editPair =
+  function(id){
 
-  try{
-
-    const headers =
-      await authenticatedHeaders();
-
-
-    const url =
-      SUPABASE_URL +
-      "/rest/v1/" +
-      encodeURIComponent(TABLE) +
-      "?identificación=eq." +
-      encodeURIComponent(id) +
-      "&select=identificación,Jugador1,Jugador2,teléfono";
-
-
-    const response =
-      await fetch(
-        url,
-        {
-          headers
-        }
+    const box =
+      document.getElementById(
+        "edit-" + id
       );
 
+    if(box){
 
-    if(!response.ok){
-
-      const text =
-        await response.text();
-
-      throw new Error(text);
+      box.classList.remove(
+        "hidden"
+      );
 
     }
 
-
-    const rows =
-      await response.json();
+  };
 
 
-    if(!rows.length){
+/* CANCELAR EDICIÓN */
 
-      alert(
-        "No se ha encontrado la pareja."
+window.cancelEdit =
+  function(id){
+
+    const box =
+      document.getElementById(
+        "edit-" + id
       );
 
-      return;
+    if(box){
+
+      box.classList.add(
+        "hidden"
+      );
 
     }
 
-
-    const row =
-      rows[0];
+  };
 
 
-    const nuevoJugador1 =
-      prompt(
-        "Nombre jugador/a 1:",
-        row.Jugador1
-      );
+/* GUARDAR CAMBIOS */
+
+window.savePair =
+  async function(id){
+
+    const jugador1 =
+      document
+        .getElementById(
+          "edit-j1-" + id
+        )
+        .value
+        .trim();
 
 
-    if(nuevoJugador1 === null){
-      return;
-    }
+    const jugador2 =
+      document
+        .getElementById(
+          "edit-j2-" + id
+        )
+        .value
+        .trim();
 
 
-    const nuevoJugador2 =
-      prompt(
-        "Nombre jugador/a 2:",
-        row.Jugador2
-      );
-
-
-    if(nuevoJugador2 === null){
-      return;
-    }
-
-
-    const nuevoTelefono =
-      prompt(
-        "Teléfono de contacto:",
-        row["teléfono"] || ""
-      );
-
-
-    if(nuevoTelefono === null){
-      return;
-    }
+    const telefono =
+      document
+        .getElementById(
+          "edit-tel-" + id
+        )
+        .value
+        .trim();
 
 
     if(
-      !nuevoJugador1.trim() ||
-      !nuevoJugador2.trim() ||
-      !nuevoTelefono.trim()
+      !jugador1 ||
+      !jugador2 ||
+      !telefono
     ){
 
       alert(
@@ -1338,247 +1264,140 @@ async function editPair(id){
     }
 
 
-    const updateUrl =
-      SUPABASE_URL +
-      "/rest/v1/" +
-      encodeURIComponent(TABLE) +
-      "?identificación=eq." +
-      encodeURIComponent(id);
+    const {
+      error
+    } = await supabaseClient
 
+      .from(TABLE)
 
-    const updateResponse =
-      await fetch(
-        updateUrl,
-        {
-          method:"PATCH",
+      .update({
 
-          headers:{
-            ...headers,
-            "Prefer":
-              "return=minimal"
-          },
+        Jugador1:
+          jugador1,
 
-          body:
-            JSON.stringify({
-              Jugador1:
-                nuevoJugador1.trim(),
+        Jugador2:
+          jugador2,
 
-              Jugador2:
-                nuevoJugador2.trim(),
+        "teléfono":
+          telefono
 
-              teléfono:
-                nuevoTelefono.trim()
-            })
-        }
+      })
+
+      .eq(
+        "id",
+        id
       );
 
 
-    if(!updateResponse.ok){
+    if(error){
 
-      const text =
-        await updateResponse.text();
+      console.error(
+        "Error actualizando:",
+        error
+      );
 
-      throw new Error(text);
+      alert(
+        "No se ha podido corregir la pareja."
+      );
+
+      return;
 
     }
 
-
-    alert(
-      "✅ Pareja modificada correctamente."
-    );
-
-
-    await loadAdminPairs();
 
     await loadPairs();
 
+    await loadAdminPairs();
 
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "No se ha podido modificar la pareja."
-    );
-
-  }
-
-}
+  };
 
 
-/* =========================================================
-   BORRAR PAREJA
-   ========================================================= */
+/* BORRAR */
 
-async function deletePair(id){
+window.deletePair =
+  async function(id){
 
-  const confirmar =
-    confirm(
-      "¿Seguro que quieres borrar esta pareja?\n\n" +
-      "Esta acción no se puede deshacer."
-    );
-
-
-  if(!confirmar){
-    return;
-  }
-
-
-  try{
-
-    const headers =
-      await authenticatedHeaders();
-
-
-    const url =
-      SUPABASE_URL +
-      "/rest/v1/" +
-      encodeURIComponent(TABLE) +
-      "?identificación=eq." +
-      encodeURIComponent(id);
-
-
-    const response =
-      await fetch(
-        url,
-        {
-          method:"DELETE",
-
-          headers:{
-            ...headers,
-            "Prefer":
-              "return=minimal"
-          }
-        }
+    const confirmar =
+      confirm(
+        "¿Seguro que quieres borrar esta pareja?"
       );
 
 
-    if(!response.ok){
+    if(!confirmar){
 
-      const text =
-        await response.text();
-
-      throw new Error(text);
+      return;
 
     }
 
 
-    alert(
-      "✅ Pareja borrada correctamente."
-    );
+    const {
+      error
+    } = await supabaseClient
+
+      .from(TABLE)
+
+      .delete()
+
+      .eq(
+        "id",
+        id
+      );
 
 
-    await loadAdminPairs();
+    if(error){
+
+      console.error(
+        "Error borrando:",
+        error
+      );
+
+      alert(
+        "No se ha podido borrar la pareja."
+      );
+
+      return;
+
+    }
+
 
     await loadPairs();
 
+    await loadAdminPairs();
 
-  }catch(error){
-
-    console.error(error);
-
-    alert(
-      "No se ha podido borrar la pareja."
-    );
-
-  }
-
-}
+  };
 
 
-/* =========================================================
-   CERRAR SESIÓN
-   ========================================================= */
+/* CERRAR SESIÓN */
 
-async function logout(){
+document
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    async function(){
 
-  try{
+      await supabaseClient.auth.signOut();
 
-    const session =
-      await getStoredSession();
-
-
-    if(session){
-
-      await fetch(
-        SUPABASE_URL +
-        "/auth/v1/logout",
-        {
-          method:"POST",
-
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              session.access_token
-          }
-        }
+      adminContent.classList.add(
+        "hidden"
       );
 
+      loginBox.classList.remove(
+        "hidden"
+      );
+
+      document
+        .getElementById("email")
+        .value = "";
+
+      document
+        .getElementById("password")
+        .value = "";
+
     }
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-
-  localStorage.removeItem(
-    "padel_admin_session"
   );
 
 
-  adminConnected.classList.add(
-    "hidden"
-  );
-
-  loginBox.classList.remove(
-    "hidden"
-  );
-
-
-  document
-    .getElementById("adminEmail")
-    .value = "";
-
-  document
-    .getElementById("adminPassword")
-    .value = "";
-
-}
-
-
-/* =========================================================
-   SEGURIDAD HTML
-   ========================================================= */
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(
-      /[&<>"']/g,
-      function(match){
-
-        return {
-          "&":"&amp;",
-          "<":"&lt;",
-          ">":"&gt;",
-          '"':"&quot;",
-          "'":"&#039;"
-        }[match];
-
-      }
-    );
-
-}
-
-
-/* =========================================================
-   EVENTOS
-   ========================================================= */
+/* BOTÓN APUNTAR */
 
 addBtn.addEventListener(
   "click",
@@ -1586,58 +1405,31 @@ addBtn.addEventListener(
 );
 
 
-document
-  .getElementById("loginBtn")
-  .addEventListener(
-    "click",
-    loginAdmin
-  );
-
+/* ENTER EN FORMULARIO */
 
 document
-  .getElementById("logoutBtn")
+  .getElementById("telefono")
   .addEventListener(
-    "click",
-    logout
-);
-
-
-document
-  .getElementById("adminLink")
-  .addEventListener(
-    "click",
-    async function(event){
-
-      event.preventDefault();
+    "keydown",
+    function(event){
 
       if(
-        adminPanel.style.display ===
-        "block"
+        event.key ===
+        "Enter"
       ){
 
-        adminPanel.style.display =
-          "none";
-
-        return;
+        addPair();
 
       }
-
-
-      adminPanel.style.display =
-        "block";
-
-
-      await showAdmin();
 
     }
   );
 
 
-/* =========================================================
-   INICIO
-   ========================================================= */
+/* CARGA INICIAL */
 
 loadPairs();
+
 
 </script>
 
