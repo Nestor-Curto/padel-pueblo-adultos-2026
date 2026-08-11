@@ -12,7 +12,6 @@
 
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
-
 <style>
 
 *{
@@ -20,444 +19,285 @@
 }
 
 body{
-
   margin:0;
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-
   background:#f7f7f8;
-
   color:#111827;
-
 }
 
 .wrap{
-
   max-width:760px;
-
   margin:auto;
-
   padding:18px 16px 40px;
-
 }
 
 .hero{
-
   background:#111827;
-
   color:white;
-
   border-radius:0 0 28px 28px;
-
   padding:28px 22px 30px;
-
   margin:-18px -16px 22px;
-
 }
 
 h1{
-
   font-size:30px;
-
   margin:0 0 6px;
-
 }
 
 .sub{
-
   font-size:19px;
-
   color:#d1d5db;
-
 }
 
 .times{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:12px;
-
   margin:14px 0;
-
 }
 
 .box,
 .card{
-
   background:white;
-
   border:1px solid #e5e7eb;
-
   border-radius:22px;
-
   padding:20px;
-
   box-shadow:0 2px 10px #00000008;
-
 }
 
 .box{
-
   text-align:center;
-
   font-size:18px;
-
 }
 
 .box b{
-
   display:block;
-
   font-size:23px;
-
   margin-bottom:3px;
-
 }
 
 .info{
-
   text-align:center;
-
   font-size:17px;
-
   margin:12px 0 18px;
-
 }
 
 label{
-
   display:block;
-
   font-weight:700;
-
   margin:16px 0 8px;
-
   font-size:17px;
-
 }
 
 input{
-
   width:100%;
-
   padding:16px;
-
   border:2px solid #d1d5db;
-
   border-radius:16px;
-
   font-size:18px;
-
   outline:none;
-
 }
 
 input:focus{
-
   border-color:#111827;
-
 }
 
 button{
-
   width:100%;
-
   border:0;
-
   border-radius:16px;
-
   padding:16px;
-
   font-size:18px;
-
   font-weight:700;
-
   background:#111827;
-
   color:#fff;
-
   margin-top:18px;
-
 }
 
 button:disabled{
-
   opacity:.55;
-
 }
 
 .count{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
 }
 
 .badge{
-
   background:#eef0f3;
-
   border-radius:999px;
-
   padding:8px 14px;
-
   font-weight:800;
-
   font-size:18px;
-
 }
 
 .list{
-
   margin-top:14px;
-
 }
 
 .pair{
-
   padding:13px 0;
-
   border-bottom:1px solid #eee;
-
   font-size:19px;
-
 }
 
 .pair:last-child{
-
   border-bottom:0;
-
 }
 
 .status{
-
   text-align:center;
-
   color:#6b7280;
-
   padding:16px;
-
 }
 
 .ok{
-
   color:#166534;
-
 }
 
 .error{
-
   color:#b91c1c;
+}
 
+.error-details{
+  font-size:13px;
+  text-align:left;
+  word-break:break-word;
+  background:#fef2f2;
+  padding:12px;
+  border-radius:12px;
+  margin-top:10px;
 }
 
 .admin{
-
   margin-top:24px;
-
   text-align:center;
-
 }
 
 .admin a{
-
   color:#6b7280;
-
   text-decoration:none;
-
   font-weight:700;
-
   font-size:18px;
-
 }
 
 .adminpanel{
-
   display:none;
-
   margin-top:14px;
-
 }
 
 .adminpair{
-
   border-bottom:1px solid #e5e7eb;
-
   padding:18px 0;
-
 }
 
 .adminpair:last-child{
-
   border-bottom:0;
-
 }
 
 .adminnames{
-
   font-size:19px;
-
   font-weight:700;
-
   margin-bottom:6px;
-
 }
 
 .adminphone{
-
   color:#4b5563;
-
   font-size:18px;
-
   margin-bottom:12px;
-
 }
 
 .adminactions{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:10px;
-
 }
 
 .adminactions button{
-
   margin-top:0;
-
   font-size:16px;
-
   padding:13px;
-
 }
 
 .editbtn{
-
   background:#374151;
-
 }
 
 .deletebtn{
-
   background:#b91c1c;
-
 }
 
 .logout{
-
   background:#6b7280;
-
 }
 
 footer{
-
   text-align:center;
-
   color:#9ca3af;
-
   margin-top:30px;
-
 }
 
 .hidden{
-
   display:none;
-
 }
 
 .admin-title{
-
   font-size:28px;
-
   margin:0 0 16px;
-
 }
 
 .login-title{
-
   font-size:23px;
-
   margin:0 0 5px;
-
 }
 
 .small{
-
   color:#6b7280;
-
   font-size:15px;
-
   margin-top:5px;
-
 }
 
 .cancelbtn{
-
   background:#e5e7eb;
-
   color:#111827;
-
 }
 
 .editbox{
-
   margin-top:12px;
-
   padding:16px;
-
   background:#f9fafb;
-
   border-radius:16px;
-
 }
 
 .editbox input{
-
   background:white;
-
 }
 
 .savebtn{
-
   background:#166534;
-
 }
 
 .editcancel{
-
   background:#6b7280;
-
 }
 
 @media(max-width:500px){
 
   h1{
-
     font-size:27px;
-
   }
 
   .times{
-
     gap:8px;
-
   }
 
   .box{
-
     padding:17px 10px;
-
   }
 
 }
@@ -473,7 +313,9 @@ footer{
 <div class="wrap">
 
 
-<!-- CABECERA -->
+<!-- =====================================================
+     CABECERA
+     ===================================================== -->
 
 <section class="hero">
 
@@ -488,7 +330,9 @@ Semana Cultural Jemenuño
 </section>
 
 
-<!-- HORARIOS -->
+<!-- =====================================================
+     HORARIOS
+     ===================================================== -->
 
 <div class="times">
 
@@ -516,7 +360,9 @@ Viernes 21
 </div>
 
 
-<!-- INFORMACIÓN -->
+<!-- =====================================================
+     INFORMACIÓN
+     ===================================================== -->
 
 <div class="card info">
 
@@ -529,7 +375,9 @@ Viernes 21
 </div>
 
 
-<!-- FORMULARIO -->
+<!-- =====================================================
+     FORMULARIO
+     ===================================================== -->
 
 <section class="card">
 
@@ -586,7 +434,9 @@ class="status"
 </section>
 
 
-<!-- LISTADO PÚBLICO -->
+<!-- =====================================================
+     LISTADO PÚBLICO
+     ===================================================== -->
 
 <section
 class="card"
@@ -626,7 +476,9 @@ Cargando parejas...
 </section>
 
 
-<!-- ACCESO ADMIN -->
+<!-- =====================================================
+     ACCESO ADMINISTRADOR
+     ===================================================== -->
 
 <div class="admin">
 
@@ -640,7 +492,9 @@ id="adminLink"
 </div>
 
 
-<!-- PANEL ADMIN -->
+<!-- =====================================================
+     PANEL ADMINISTRADOR
+     ===================================================== -->
 
 <div
 id="adminPanel"
@@ -777,7 +631,9 @@ Semana Cultural Jemenuño
 </div>
 
 
-<!-- SUPABASE -->
+<!-- =====================================================
+     SUPABASE
+     ===================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -786,9 +642,8 @@ Semana Cultural Jemenuño
 
 
 /* =====================================================
-   CONFIGURACIÓN SUPABASE
+   CONFIGURACIÓN
    ===================================================== */
-
 
 const SUPABASE_URL =
 "https://novinmgzbqtnpfjfzpqt.supabase.co";
@@ -813,7 +668,6 @@ SUPABASE_KEY
 /* =====================================================
    ELEMENTOS
    ===================================================== */
-
 
 const countEl =
 document.getElementById("count");
@@ -859,7 +713,6 @@ let adminRows = [];
    ESCAPAR HTML
    ===================================================== */
 
-
 function escapeHtml(value){
 
 return String(value ?? "").replace(
@@ -884,9 +737,8 @@ return {
 
 
 /* =====================================================
-   ORDENAR PAREJAS
+   ORDENAR
    ===================================================== */
-
 
 function sortRows(rows){
 
@@ -915,17 +767,56 @@ return dateA - dateB;
 
 
 /* =====================================================
-   CARGAR LISTADO PÚBLICO
-   =====================================================
-
-   IMPORTANTE:
-
-   Aquí NO solicitamos "telefono".
-
-   Por tanto el teléfono no se entrega
-   al navegador de los participantes.
+   MOSTRAR ERROR DETALLADO
    ===================================================== */
 
+function mostrarError(elemento,error){
+
+console.error(error);
+
+const mensaje =
+error?.message ||
+error?.details ||
+error?.hint ||
+"Error desconocido";
+
+
+elemento.className =
+"status error";
+
+
+elemento.innerHTML = `
+
+No se han podido cargar las parejas.
+
+<div class="error-details">
+
+${escapeHtml(mensaje)}
+
+</div>
+
+`;
+
+}
+
+
+
+/* =====================================================
+   CARGAR PAREJAS PÚBLICAS
+   =====================================================
+
+   MUY IMPORTANTE:
+
+   Aquí NO pedimos el teléfono.
+
+   El visitante solamente recibe:
+
+   Jugador1
+   Jugador2
+   creado_en
+
+   El teléfono permanece fuera de esta consulta.
+   ===================================================== */
 
 async function loadPairs(){
 
@@ -993,18 +884,13 @@ ${escapeHtml(row.Jugador2)}
 
 }catch(error){
 
-console.error(
-"Error cargando parejas:",
-error
-);
-
-
 countEl.textContent =
 "0";
 
-
-listEl.innerHTML =
-'<div class="status error">No se han podido cargar las parejas.</div>';
+mostrarError(
+listEl,
+error
+);
 
 }
 
@@ -1015,7 +901,6 @@ listEl.innerHTML =
 /* =====================================================
    AÑADIR PAREJA
    ===================================================== */
-
 
 async function addPair(){
 
@@ -1071,13 +956,6 @@ addBtn.textContent =
 
 
 try{
-
-/*
-   AQUÍ USAMOS DIRECTAMENTE
-   LA COLUMNA NUEVA:
-
-   telefono
-*/
 
 const {
 error
@@ -1145,14 +1023,21 @@ msgEl.className =
 "status error";
 
 
-/*
-   Mostramos el error real en consola,
-   pero mantenemos el mensaje limpio
-   para el usuario.
-*/
+msgEl.innerHTML = `
 
-msgEl.textContent =
-"No se ha podido apuntar la pareja.";
+No se ha podido apuntar la pareja.
+
+<div class="error-details">
+
+${escapeHtml(
+error?.message ||
+error?.details ||
+"Error desconocido"
+)}
+
+</div>
+
+`;
 
 }finally{
 
@@ -1172,7 +1057,6 @@ addBtn.textContent =
 /* =====================================================
    ABRIR ADMIN
    ===================================================== */
-
 
 adminLink.addEventListener(
 "click",
@@ -1209,7 +1093,6 @@ await checkSession();
    CANCELAR LOGIN
    ===================================================== */
 
-
 document
 .getElementById("cancelLogin")
 .addEventListener(
@@ -1227,7 +1110,6 @@ adminPanel.style.display =
 /* =====================================================
    LOGIN
    ===================================================== */
-
 
 document
 .getElementById("loginBtn")
@@ -1339,7 +1221,6 @@ loginMsg.textContent =
    COMPROBAR SESIÓN
    ===================================================== */
 
-
 async function checkSession(){
 
 const {
@@ -1378,7 +1259,6 @@ adminContent.classList.add(
    MOSTRAR ADMIN
    ===================================================== */
 
-
 async function showAdmin(){
 
 loginBox.classList.add(
@@ -1401,10 +1281,11 @@ await loadAdminPairs();
    CARGAR ADMINISTRACIÓN
    =====================================================
 
-   Aquí SÍ obtenemos telefono porque
-   el usuario ya está autenticado.
-   ===================================================== */
+   AQUÍ SÍ se obtiene el teléfono.
 
+   Esta función solamente se ejecuta
+   después de iniciar sesión.
+   ===================================================== */
 
 async function loadAdminPairs(){
 
@@ -1586,14 +1467,10 @@ Cancelar
 
 }catch(error){
 
-console.error(
-"Error cargando administración:",
+mostrarError(
+adminList,
 error
 );
-
-
-adminList.innerHTML =
-'<div class="status error">No se han podido cargar las parejas.</div>';
 
 }
 
@@ -1602,9 +1479,8 @@ adminList.innerHTML =
 
 
 /* =====================================================
-   ABRIR EDICIÓN
+   EDITAR
    ===================================================== */
-
 
 window.editPair =
 function(index){
@@ -1631,7 +1507,6 @@ box.classList.remove(
    CANCELAR EDICIÓN
    ===================================================== */
 
-
 window.cancelEdit =
 function(index){
 
@@ -1656,7 +1531,6 @@ box.classList.add(
 /* =====================================================
    GUARDAR CAMBIOS
    ===================================================== */
-
 
 window.savePair =
 async function(index){
@@ -1719,13 +1593,6 @@ return;
 
 
 try{
-
-/*
-   Usamos la identificación real
-   de la fila.
-
-   Ya NO buscamos por los nombres.
-*/
 
 const {
 data,
@@ -1798,7 +1665,11 @@ error
 
 alert(
 "No se ha podido corregir la pareja.\n\n" +
-error.message
+(
+error?.message ||
+error?.details ||
+"Error desconocido"
+)
 );
 
 }
@@ -1808,9 +1679,8 @@ error.message
 
 
 /* =====================================================
-   BORRAR PAREJA
+   BORRAR
    ===================================================== */
-
 
 window.deletePair =
 async function(index){
@@ -1853,11 +1723,6 @@ return;
 
 try{
 
-/*
-   Borramos por identificación,
-   nunca por nombres.
-*/
-
 const {
 data,
 error
@@ -1874,7 +1739,7 @@ original["identificación"]
 )
 
 .select(
-'identificación'
+"identificación"
 );
 
 
@@ -1918,7 +1783,11 @@ error
 
 alert(
 "No se ha podido borrar la pareja.\n\n" +
-error.message
+(
+error?.message ||
+error?.details ||
+"Error desconocido"
+)
 );
 
 }
@@ -1930,7 +1799,6 @@ error.message
 /* =====================================================
    CERRAR SESIÓN
    ===================================================== */
-
 
 document
 .getElementById("logoutBtn")
@@ -1971,7 +1839,6 @@ document
    BOTÓN APUNTAR
    ===================================================== */
 
-
 addBtn.addEventListener(
 "click",
 addPair
@@ -1982,7 +1849,6 @@ addPair
 /* =====================================================
    ENTER EN TELÉFONO
    ===================================================== */
-
 
 document
 .getElementById("telefono")
@@ -2007,7 +1873,6 @@ addPair();
 /* =====================================================
    CARGA INICIAL
    ===================================================== */
-
 
 loadPairs();
 
