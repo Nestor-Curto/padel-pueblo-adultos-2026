@@ -964,7 +964,9 @@ function getTelefono(row){
     row["teléfono"] !== null
   ){
 
-    return String(row["teléfono"]);
+    return String(
+      row["teléfono"]
+    );
 
   }
 
@@ -975,12 +977,49 @@ function getTelefono(row){
     row["telefono"] !== null
   ){
 
-    return String(row["telefono"]);
+    return String(
+      row["telefono"]
+    );
 
   }
 
 
   return "";
+
+}
+
+
+
+/* =========================================================
+   OBTENER ID
+   ========================================================= */
+
+
+function getId(row){
+
+  if(
+    row &&
+    row["identificación"] !== undefined &&
+    row["identificación"] !== null
+  ){
+
+    return row["identificación"];
+
+  }
+
+
+  if(
+    row &&
+    row["id"] !== undefined &&
+    row["id"] !== null
+  ){
+
+    return row["id"];
+
+  }
+
+
+  return null;
 
 }
 
@@ -1026,6 +1065,7 @@ async function loadPairs(){
 
   try{
 
+
     const {
       data,
       error
@@ -1033,9 +1073,7 @@ async function loadPairs(){
 
       .from(TABLE)
 
-      .select(
-        "Jugador1,Jugador2"
-      );
+      .select("*");
 
 
     if(error){
@@ -1086,6 +1124,7 @@ async function loadPairs(){
 
 
   }catch(error){
+
 
     console.error(
       "Error cargando parejas:",
@@ -1491,7 +1530,20 @@ async function showAdmin(){
 
 
 /* =========================================================
-   CARGAR PAREJAS ADMIN
+   CARGAR PAREJAS ADMINISTRADOR
+   =========================================================
+
+   IMPORTANTE:
+   Usamos select("*") porque esta consulta
+   ya está comprobada en tu Supabase y devuelve:
+
+   identificación
+   creado_en
+   Jugador1
+   Jugador2
+   teléfono
+
+   No hacemos una selección específica de columnas.
    ========================================================= */
 
 
@@ -1512,9 +1564,7 @@ async function loadAdminPairs(){
 
       .from(TABLE)
 
-      .select(
-        "Jugador1,Jugador2,teléfono"
-      );
+      .select("*");
 
 
     if(error){
@@ -1542,49 +1592,30 @@ async function loadAdminPairs(){
       rows.map(
         function(row){
 
-          const jugador1 =
-            String(
-              row.Jugador1 ?? ""
-            );
 
-
-          const jugador2 =
-            String(
-              row.Jugador2 ?? ""
-            );
+          const id =
+            getId(row);
 
 
           const telefono =
             getTelefono(row);
 
 
-          /*
-             IMPORTANTE:
-
-             Ya NO usamos "identificación".
-
-             Guardamos los nombres actuales
-             para utilizarlos como referencia
-             al editar o borrar.
-          */
-
-
           return `
 
             <div
               class="adminpair"
-              data-jugador1="${escapeHtml(jugador1)}"
-              data-jugador2="${escapeHtml(jugador2)}"
+              data-id="${escapeHtml(id)}"
             >
 
 
               <div class="adminnames">
 
-                ${escapeHtml(jugador1)}
+                ${escapeHtml(row.Jugador1)}
 
                 -
 
-                ${escapeHtml(jugador2)}
+                ${escapeHtml(row.Jugador2)}
 
               </div>
 
@@ -1607,7 +1638,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="editbtn"
-                  onclick="editPair(this)"
+                  onclick="editPair('${escapeHtml(id)}')"
                 >
 
                   ✏️ Corregir
@@ -1617,7 +1648,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="deletebtn"
-                  onclick="deletePair(this)"
+                  onclick="deletePair('${escapeHtml(id)}')"
                 >
 
                   🗑️ Borrar
@@ -1629,6 +1660,7 @@ async function loadAdminPairs(){
 
 
               <div
+                id="edit-${escapeHtml(id)}"
                 class="editbox hidden"
               >
 
@@ -1639,8 +1671,8 @@ async function loadAdminPairs(){
 
 
                 <input
-                  class="edit-j1"
-                  value="${escapeHtml(jugador1)}"
+                  id="edit-j1-${escapeHtml(id)}"
+                  value="${escapeHtml(row.Jugador1)}"
                 >
 
 
@@ -1650,8 +1682,8 @@ async function loadAdminPairs(){
 
 
                 <input
-                  class="edit-j2"
-                  value="${escapeHtml(jugador2)}"
+                  id="edit-j2-${escapeHtml(id)}"
+                  value="${escapeHtml(row.Jugador2)}"
                 >
 
 
@@ -1661,7 +1693,7 @@ async function loadAdminPairs(){
 
 
                 <input
-                  class="edit-tel"
+                  id="edit-tel-${escapeHtml(id)}"
                   type="tel"
                   value="${escapeHtml(telefono)}"
                 >
@@ -1669,7 +1701,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="savebtn"
-                  onclick="savePair(this)"
+                  onclick="savePair('${escapeHtml(id)}')"
                 >
 
                   💾 Guardar cambios
@@ -1679,7 +1711,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="editcancel"
-                  onclick="cancelEdit(this)"
+                  onclick="cancelEdit('${escapeHtml(id)}')"
                 >
 
                   Cancelar
@@ -1717,26 +1749,18 @@ async function loadAdminPairs(){
 
 
 /* =========================================================
-   ABRIR EDICIÓN
+   EDITAR
    ========================================================= */
 
 
 window.editPair =
-  function(button){
-
-    const adminPair =
-      button.closest(".adminpair");
-
-
-    if(!adminPair){
-
-      return;
-
-    }
+  function(id){
 
 
     const box =
-      adminPair.querySelector(".editbox");
+      document.getElementById(
+        "edit-" + id
+      );
 
 
     if(box){
@@ -1757,21 +1781,13 @@ window.editPair =
 
 
 window.cancelEdit =
-  function(button){
-
-    const adminPair =
-      button.closest(".adminpair");
-
-
-    if(!adminPair){
-
-      return;
-
-    }
+  function(id){
 
 
     const box =
-      adminPair.querySelector(".editbox");
+      document.getElementById(
+        "edit-" + id
+      );
 
 
     if(box){
@@ -1792,54 +1808,32 @@ window.cancelEdit =
 
 
 window.savePair =
-  async function(button){
-
-
-    const adminPair =
-      button.closest(".adminpair");
-
-
-    if(!adminPair){
-
-      return;
-
-    }
-
-
-    /*
-       Estos son los nombres ORIGINALES
-       de la pareja.
-
-       Son los que utilizaremos para
-       localizar exactamente el registro.
-    */
-
-
-    const oldJugador1 =
-      adminPair.dataset.jugador1;
-
-
-    const oldJugador2 =
-      adminPair.dataset.jugador2;
+  async function(id){
 
 
     const jugador1 =
-      adminPair
-        .querySelector(".edit-j1")
+      document
+        .getElementById(
+          "edit-j1-" + id
+        )
         .value
         .trim();
 
 
     const jugador2 =
-      adminPair
-        .querySelector(".edit-j2")
+      document
+        .getElementById(
+          "edit-j2-" + id
+        )
         .value
         .trim();
 
 
     const telefono =
-      adminPair
-        .querySelector(".edit-tel")
+      document
+        .getElementById(
+          "edit-tel-" + id
+        )
         .value
         .trim();
 
@@ -1860,26 +1854,10 @@ window.savePair =
     }
 
 
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "Guardando...";
-
-
     try{
 
 
-      /*
-         Buscamos por Jugador1 + Jugador2.
-
-         NO usamos identificación.
-      */
-
-
       const {
-        data,
         error
       } =
         await supabaseClient
@@ -1900,42 +1878,14 @@ window.savePair =
           })
 
           .eq(
-            "Jugador1",
-            oldJugador1
-          )
-
-          .eq(
-            "Jugador2",
-            oldJugador2
-          )
-
-          .select(
-            "Jugador1,Jugador2,teléfono"
+            "identificación",
+            id
           );
 
 
       if(error){
 
         throw error;
-
-      }
-
-
-      /*
-         Si Supabase no devuelve ninguna fila,
-         significa que no encontró la pareja
-         con esos nombres.
-      */
-
-
-      if(
-        !data ||
-        data.length === 0
-      ){
-
-        throw new Error(
-          "No se encontró la pareja que se quería corregir. Comprueba que los nombres originales no hayan cambiado."
-        );
 
       }
 
@@ -1949,7 +1899,7 @@ window.savePair =
 
 
       console.error(
-        "Error actualizando pareja:",
+        "Error actualizando:",
         error
       );
 
@@ -1958,14 +1908,6 @@ window.savePair =
         "No se ha podido corregir la pareja.\n\n" +
         error.message
       );
-
-
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "💾 Guardar cambios";
 
     }
 
@@ -1979,34 +1921,12 @@ window.savePair =
 
 
 window.deletePair =
-  async function(button){
-
-
-    const adminPair =
-      button.closest(".adminpair");
-
-
-    if(!adminPair){
-
-      return;
-
-    }
-
-
-    const jugador1 =
-      adminPair.dataset.jugador1;
-
-
-    const jugador2 =
-      adminPair.dataset.jugador2;
+  async function(id){
 
 
     const confirmar =
       confirm(
-        "¿Seguro que quieres borrar esta pareja?\n\n" +
-        jugador1 +
-        " - " +
-        jugador2
+        "¿Seguro que quieres borrar esta pareja?"
       );
 
 
@@ -2017,27 +1937,10 @@ window.deletePair =
     }
 
 
-    button.disabled =
-      true;
-
-
-    button.textContent =
-      "Borrando...";
-
-
     try{
 
 
-      /*
-         NO usamos identificación.
-
-         Borramos utilizando los dos nombres
-         originales de la pareja.
-      */
-
-
       const {
-        data,
         error
       } =
         await supabaseClient
@@ -2047,35 +1950,14 @@ window.deletePair =
           .delete()
 
           .eq(
-            "Jugador1",
-            jugador1
-          )
-
-          .eq(
-            "Jugador2",
-            jugador2
-          )
-
-          .select(
-            "Jugador1,Jugador2"
+            "identificación",
+            id
           );
 
 
       if(error){
 
         throw error;
-
-      }
-
-
-      if(
-        !data ||
-        data.length === 0
-      ){
-
-        throw new Error(
-          "No se encontró la pareja que se quería borrar."
-        );
 
       }
 
@@ -2089,7 +1971,7 @@ window.deletePair =
 
 
       console.error(
-        "Error borrando pareja:",
+        "Error borrando:",
         error
       );
 
@@ -2098,14 +1980,6 @@ window.deletePair =
         "No se ha podido borrar la pareja.\n\n" +
         error.message
       );
-
-
-      button.disabled =
-        false;
-
-
-      button.textContent =
-        "🗑️ Borrar";
 
     }
 
