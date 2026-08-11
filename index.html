@@ -12,7 +12,6 @@
 
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
-
 <style>
 
 *{
@@ -20,462 +19,305 @@
 }
 
 body{
-
   margin:0;
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-
   background:#f7f7f8;
-
   color:#111827;
-
 }
 
 .wrap{
-
   max-width:760px;
-
   margin:auto;
-
   padding:18px 16px 40px;
-
 }
 
 .hero{
-
   background:#111827;
-
   color:white;
-
   border-radius:0 0 28px 28px;
-
   padding:28px 22px 30px;
-
   margin:-18px -16px 22px;
-
 }
 
 h1{
-
   font-size:30px;
-
   margin:0 0 6px;
-
 }
 
 .sub{
-
   font-size:19px;
-
   color:#d1d5db;
-
 }
 
 .times{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:12px;
-
   margin:14px 0;
-
 }
 
 .box,
 .card{
-
   background:white;
-
   border:1px solid #e5e7eb;
-
   border-radius:22px;
-
   padding:20px;
-
   box-shadow:0 2px 10px #00000008;
-
 }
 
 .box{
-
   text-align:center;
-
   font-size:18px;
-
 }
 
 .box b{
-
   display:block;
-
   font-size:23px;
-
   margin-bottom:3px;
-
 }
 
 .info{
-
   text-align:center;
-
   font-size:17px;
-
   margin:12px 0 18px;
-
 }
 
 label{
-
   display:block;
-
   font-weight:700;
-
   margin:16px 0 8px;
-
   font-size:17px;
-
 }
 
 input{
-
   width:100%;
-
   padding:16px;
-
   border:2px solid #d1d5db;
-
   border-radius:16px;
-
   font-size:18px;
-
   outline:none;
-
 }
 
 input:focus{
-
   border-color:#111827;
-
 }
 
 button{
-
   width:100%;
-
   border:0;
-
   border-radius:16px;
-
   padding:16px;
-
   font-size:18px;
-
   font-weight:700;
-
   background:#111827;
-
   color:#fff;
-
   margin-top:18px;
-
 }
 
 button:disabled{
-
   opacity:.55;
-
 }
 
 .count{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
 }
 
 .badge{
-
   background:#eef0f3;
-
   border-radius:999px;
-
   padding:8px 14px;
-
   font-weight:800;
-
   font-size:18px;
-
 }
 
 .list{
-
   margin-top:14px;
-
 }
 
 .pair{
-
   padding:13px 0;
-
   border-bottom:1px solid #eee;
-
   font-size:19px;
-
 }
 
 .pair:last-child{
-
   border-bottom:0;
-
 }
 
 .status{
-
   text-align:center;
-
   color:#6b7280;
-
   padding:16px;
-
 }
 
 .ok{
-
   color:#166534;
-
 }
 
 .error{
-
   color:#b91c1c;
-
 }
 
 .admin{
-
   margin-top:24px;
-
   text-align:center;
-
 }
 
 .admin a{
-
   color:#6b7280;
-
   text-decoration:none;
-
   font-weight:700;
-
   font-size:18px;
-
 }
 
 .adminpanel{
-
   display:none;
-
   margin-top:14px;
-
 }
 
 .adminpair{
-
   border-bottom:1px solid #e5e7eb;
-
   padding:18px 0;
-
 }
 
 .adminpair:last-child{
-
   border-bottom:0;
-
 }
 
 .adminnames{
-
   font-size:19px;
-
   font-weight:700;
-
   margin-bottom:6px;
-
 }
 
 .adminphone{
-
   color:#4b5563;
-
   font-size:18px;
-
   margin-bottom:12px;
-
 }
 
 .adminactions{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:10px;
-
 }
 
 .adminactions button{
-
   margin-top:0;
-
   font-size:16px;
-
   padding:13px;
-
 }
 
 .editbtn{
-
   background:#374151;
-
 }
 
 .deletebtn{
-
   background:#b91c1c;
-
 }
 
 .logout{
-
   background:#6b7280;
+}
 
+.copylist{
+  background:#166534;
+  margin-bottom:8px;
+}
+
+.copylist:active{
+  opacity:.8;
+}
+
+.listado{
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:14px;
+  margin-top:12px;
+  white-space:pre-line;
+  font-size:17px;
+  line-height:1.7;
 }
 
 footer{
-
   text-align:center;
-
   color:#9ca3af;
-
   margin-top:30px;
-
 }
 
 .hidden{
-
   display:none;
-
 }
 
 .admin-title{
-
   font-size:28px;
-
   margin:0 0 16px;
-
 }
 
 .login-title{
-
   font-size:23px;
-
   margin:0 0 5px;
-
 }
 
 .small{
-
   color:#6b7280;
-
   font-size:15px;
-
   margin-top:5px;
-
 }
 
 .cancelbtn{
-
   background:#e5e7eb;
-
   color:#111827;
-
 }
 
 .editbox{
-
   margin-top:12px;
-
   padding:16px;
-
   background:#f9fafb;
-
   border-radius:16px;
-
 }
 
 .editbox input{
-
   background:white;
-
 }
 
 .savebtn{
-
   background:#166534;
-
 }
 
 .editcancel{
-
   background:#6b7280;
-
 }
 
 .error-detail{
-
   margin-top:8px;
-
   padding:12px;
-
   background:#fff1f2;
-
   border-radius:14px;
-
   color:#991b1b;
-
   font-size:15px;
-
   word-break:break-word;
-
 }
 
 @media(max-width:500px){
 
   h1{
-
     font-size:27px;
-
   }
 
   .times{
-
     gap:8px;
-
   }
 
   .box{
-
     padding:17px 10px;
-
   }
 
 }
@@ -743,6 +585,35 @@ Parejas inscritas
 </h2>
 
 
+<!-- NUEVO: LISTADO PARA COPIAR -->
+
+<button
+id="copyListBtn"
+class="copylist"
+>
+
+📋 Copiar listado de parejas
+
+</button>
+
+
+<div
+id="copyMsg"
+class="status"
+style="padding:5px 0 10px"
+></div>
+
+
+<div
+id="formattedList"
+class="listado"
+>
+
+Cargando listado...
+
+</div>
+
+
 <div
 id="adminList"
 class="list"
@@ -850,6 +721,15 @@ document.getElementById("adminContent");
 
 const adminList =
 document.getElementById("adminList");
+
+const formattedList =
+document.getElementById("formattedList");
+
+const copyListBtn =
+document.getElementById("copyListBtn");
+
+const copyMsg =
+document.getElementById("copyMsg");
 
 let adminRows = [];
 
@@ -1340,6 +1220,122 @@ await loadAdminPairs();
 
 
 /* =====================================================
+   GENERAR LISTADO FORMATEADO
+   ===================================================== */
+
+function generarListado(){
+
+if(!adminRows.length){
+
+formattedList.textContent =
+"No hay parejas inscritas.";
+
+return;
+
+}
+
+
+const texto =
+adminRows
+.map(
+function(row){
+
+const jugador1 =
+String(row[COL_J1] ?? "").trim();
+
+const jugador2 =
+String(row[COL_J2] ?? "").trim();
+
+const telefono =
+String(row[COL_TEL] ?? "").trim();
+
+
+return jugador1 +
+"/" +
+jugador2 +
+" " +
+telefono;
+
+}
+)
+.join("\n");
+
+
+formattedList.textContent =
+texto;
+
+return texto;
+
+}
+
+
+/* =====================================================
+   COPIAR LISTADO
+   ===================================================== */
+
+copyListBtn.addEventListener(
+"click",
+async function(){
+
+const texto =
+generarListado();
+
+
+if(
+!adminRows.length
+){
+
+return;
+
+}
+
+
+try{
+
+await navigator.clipboard.writeText(
+texto
+);
+
+
+copyMsg.className =
+"status ok";
+
+copyMsg.textContent =
+"✅ Listado copiado al portapapeles.";
+
+
+setTimeout(
+function(){
+
+copyMsg.textContent =
+"";
+
+},
+2500
+);
+
+
+}catch(error){
+
+console.error(
+"Error copiando listado:",
+error
+);
+
+
+copyMsg.className =
+"status error";
+
+copyMsg.textContent =
+"No se ha podido copiar el listado.";
+
+}
+
+}
+);
+
+
+/* =====================================================
    CARGAR ADMIN
    ===================================================== */
 
@@ -1347,6 +1343,9 @@ async function loadAdminPairs(){
 
 adminList.innerHTML =
 '<div class="status">Cargando parejas...</div>';
+
+formattedList.textContent =
+"Cargando listado...";
 
 
 try{
@@ -1369,6 +1368,9 @@ throw error;
 
 adminRows =
 data || [];
+
+
+generarListado();
 
 
 if(!adminRows.length){
@@ -1666,15 +1668,6 @@ telefono
 };
 
 
-/*
-   IMPORTANTE:
-   No utilizamos identificación.
-
-   Buscamos la pareja mediante los nombres
-   originales que ya sabemos que funcionan
-   correctamente en Supabase.
-*/
-
 const {
 error
 } =
@@ -1775,11 +1768,6 @@ return;
 
 try{
 
-
-/*
-   Para borrar usamos los nombres,
-   igual que para editar.
-*/
 
 const {
 error
