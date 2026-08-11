@@ -491,8 +491,6 @@ footer{
 <div class="wrap">
 
 
-<!-- CABECERA -->
-
 <section class="hero">
 
 <h1>
@@ -505,8 +503,6 @@ Semana Cultural Jemenuño
 
 </section>
 
-
-<!-- HORARIOS -->
 
 <div class="times">
 
@@ -534,8 +530,6 @@ Viernes 21
 </div>
 
 
-<!-- INFORMACIÓN -->
-
 <div class="card info">
 
 🏆 Premios y sorteos · 💶 Inscripción:
@@ -546,8 +540,6 @@ Viernes 21
 
 </div>
 
-
-<!-- FORMULARIO -->
 
 <section class="card">
 
@@ -604,8 +596,6 @@ class="status"
 </section>
 
 
-<!-- LISTADO PÚBLICO -->
-
 <section
 class="card"
 style="margin-top:18px"
@@ -644,8 +634,6 @@ Cargando parejas...
 </section>
 
 
-<!-- ACCESO ADMIN -->
-
 <div class="admin">
 
 <a
@@ -658,15 +646,11 @@ id="adminLink"
 </div>
 
 
-<!-- PANEL ADMIN -->
-
 <div
 id="adminPanel"
 class="adminpanel card"
 >
 
-
-<!-- LOGIN -->
 
 <div id="loginBox">
 
@@ -726,8 +710,6 @@ class="status"
 
 </div>
 
-
-<!-- ADMIN CONECTADO -->
 
 <div
 id="adminContent"
@@ -825,11 +807,8 @@ SUPABASE_KEY
 
 
 /* =====================================================
-   COLUMNAS REALES DE SUPABASE
+   COLUMNAS REALES
    ===================================================== */
-
-const COL_ID =
-"identificación";
 
 const COL_J1 =
 "Jugador1";
@@ -920,7 +899,7 @@ escapeHtml(texto) +
 
 
 /* =====================================================
-   CARGAR PAREJAS PÚBLICAS
+   CARGAR PAREJAS
    ===================================================== */
 
 async function loadPairs(){
@@ -1094,8 +1073,6 @@ throw error;
 }
 
 
-/* Limpiar formulario */
-
 document.getElementById(
 "jugador1"
 ).value = "";
@@ -1117,8 +1094,6 @@ msgEl.className =
 msgEl.textContent =
 "✅ Pareja apuntada correctamente.";
 
-
-/* Actualizar listado */
 
 await loadPairs();
 
@@ -1309,7 +1284,7 @@ loginMsg.textContent =
 
 
 /* =====================================================
-   COMPROBAR SESIÓN
+   SESIÓN
    ===================================================== */
 
 async function checkSession(){
@@ -1365,7 +1340,7 @@ await loadAdminPairs();
 
 
 /* =====================================================
-   CARGAR PAREJAS ADMIN
+   CARGAR ADMIN
    ===================================================== */
 
 async function loadAdminPairs(){
@@ -1563,7 +1538,7 @@ error.message || String(error)
 
 
 /* =====================================================
-   ABRIR EDICIÓN
+   EDITAR
    ===================================================== */
 
 window.editPair =
@@ -1692,8 +1667,12 @@ telefono
 
 
 /*
-   Usamos el identificador real de la fila.
-   Así no dependemos de que los nombres sean únicos.
+   IMPORTANTE:
+   No utilizamos identificación.
+
+   Buscamos la pareja mediante los nombres
+   originales que ya sabemos que funcionan
+   correctamente en Supabase.
 */
 
 const {
@@ -1706,8 +1685,13 @@ await supabaseClient
 .update(cambios)
 
 .eq(
-COL_ID,
-original[COL_ID]
+COL_J1,
+original[COL_J1]
+)
+
+.eq(
+COL_J2,
+original[COL_J2]
 );
 
 
@@ -1747,7 +1731,7 @@ alert(
 
 
 /* =====================================================
-   BORRAR PAREJA
+   BORRAR
    ===================================================== */
 
 window.deletePair =
@@ -1793,7 +1777,8 @@ try{
 
 
 /*
-   Usamos el identificador real de la fila.
+   Para borrar usamos los nombres,
+   igual que para editar.
 */
 
 const {
@@ -1806,8 +1791,13 @@ await supabaseClient
 .delete()
 
 .eq(
-COL_ID,
-original[COL_ID]
+COL_J1,
+original[COL_J1]
+)
+
+.eq(
+COL_J2,
+original[COL_J2]
 );
 
 
@@ -1895,7 +1885,7 @@ addPair
 
 
 /* =====================================================
-   ENTER EN TELÉFONO
+   ENTER
    ===================================================== */
 
 document
