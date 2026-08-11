@@ -953,17 +953,6 @@ function escapeHtml(value){
 
 /* =========================================================
    OBTENER TELÉFONO
-   =========================================================
-
-   La base de datos utiliza actualmente:
-
-   teléfono
-
-   Pero dejamos compatibilidad con:
-
-   telefono
-
-   por si en algún momento se modifica.
    ========================================================= */
 
 
@@ -975,7 +964,7 @@ function getTelefono(row){
     row["teléfono"] !== null
   ){
 
-    return row["teléfono"];
+    return String(row["teléfono"]);
 
   }
 
@@ -986,7 +975,7 @@ function getTelefono(row){
     row["telefono"] !== null
   ){
 
-    return row["telefono"];
+    return String(row["telefono"]);
 
   }
 
@@ -999,9 +988,6 @@ function getTelefono(row){
 
 /* =========================================================
    ORDENAR PAREJAS
-   =========================================================
-
-   Tu tabla utiliza creado_en, no created_at.
    ========================================================= */
 
 
@@ -1040,7 +1026,6 @@ async function loadPairs(){
 
   try{
 
-
     const {
       data,
       error
@@ -1048,7 +1033,9 @@ async function loadPairs(){
 
       .from(TABLE)
 
-      .select("*");
+      .select(
+        "Jugador1,Jugador2"
+      );
 
 
     if(error){
@@ -1099,7 +1086,6 @@ async function loadPairs(){
 
 
   }catch(error){
-
 
     console.error(
       "Error cargando parejas:",
@@ -1526,7 +1512,9 @@ async function loadAdminPairs(){
 
       .from(TABLE)
 
-      .select("*");
+      .select(
+        "Jugador1,Jugador2,teléfono"
+      );
 
 
     if(error){
@@ -1554,31 +1542,49 @@ async function loadAdminPairs(){
       rows.map(
         function(row){
 
+          const jugador1 =
+            String(
+              row.Jugador1 ?? ""
+            );
 
-          const id =
-            row.identificación ??
-            row.id;
+
+          const jugador2 =
+            String(
+              row.Jugador2 ?? ""
+            );
 
 
           const telefono =
             getTelefono(row);
 
 
+          /*
+             IMPORTANTE:
+
+             Ya NO usamos "identificación".
+
+             Guardamos los nombres actuales
+             para utilizarlos como referencia
+             al editar o borrar.
+          */
+
+
           return `
 
             <div
               class="adminpair"
-              data-id="${escapeHtml(id)}"
+              data-jugador1="${escapeHtml(jugador1)}"
+              data-jugador2="${escapeHtml(jugador2)}"
             >
 
 
               <div class="adminnames">
 
-                ${escapeHtml(row.Jugador1)}
+                ${escapeHtml(jugador1)}
 
                 -
 
-                ${escapeHtml(row.Jugador2)}
+                ${escapeHtml(jugador2)}
 
               </div>
 
@@ -1601,7 +1607,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="editbtn"
-                  onclick="editPair('${escapeHtml(id)}')"
+                  onclick="editPair(this)"
                 >
 
                   ✏️ Corregir
@@ -1611,7 +1617,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="deletebtn"
-                  onclick="deletePair('${escapeHtml(id)}')"
+                  onclick="deletePair(this)"
                 >
 
                   🗑️ Borrar
@@ -1623,7 +1629,6 @@ async function loadAdminPairs(){
 
 
               <div
-                id="edit-${escapeHtml(id)}"
                 class="editbox hidden"
               >
 
@@ -1634,8 +1639,8 @@ async function loadAdminPairs(){
 
 
                 <input
-                  id="edit-j1-${escapeHtml(id)}"
-                  value="${escapeHtml(row.Jugador1)}"
+                  class="edit-j1"
+                  value="${escapeHtml(jugador1)}"
                 >
 
 
@@ -1645,8 +1650,8 @@ async function loadAdminPairs(){
 
 
                 <input
-                  id="edit-j2-${escapeHtml(id)}"
-                  value="${escapeHtml(row.Jugador2)}"
+                  class="edit-j2"
+                  value="${escapeHtml(jugador2)}"
                 >
 
 
@@ -1656,7 +1661,7 @@ async function loadAdminPairs(){
 
 
                 <input
-                  id="edit-tel-${escapeHtml(id)}"
+                  class="edit-tel"
                   type="tel"
                   value="${escapeHtml(telefono)}"
                 >
@@ -1664,7 +1669,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="savebtn"
-                  onclick="savePair('${escapeHtml(id)}')"
+                  onclick="savePair(this)"
                 >
 
                   💾 Guardar cambios
@@ -1674,7 +1679,7 @@ async function loadAdminPairs(){
 
                 <button
                   class="editcancel"
-                  onclick="cancelEdit('${escapeHtml(id)}')"
+                  onclick="cancelEdit(this)"
                 >
 
                   Cancelar
@@ -1712,18 +1717,26 @@ async function loadAdminPairs(){
 
 
 /* =========================================================
-   EDITAR
+   ABRIR EDICIÓN
    ========================================================= */
 
 
 window.editPair =
-  function(id){
+  function(button){
+
+    const adminPair =
+      button.closest(".adminpair");
+
+
+    if(!adminPair){
+
+      return;
+
+    }
 
 
     const box =
-      document.getElementById(
-        "edit-" + id
-      );
+      adminPair.querySelector(".editbox");
 
 
     if(box){
@@ -1744,13 +1757,21 @@ window.editPair =
 
 
 window.cancelEdit =
-  function(id){
+  function(button){
+
+    const adminPair =
+      button.closest(".adminpair");
+
+
+    if(!adminPair){
+
+      return;
+
+    }
 
 
     const box =
-      document.getElementById(
-        "edit-" + id
-      );
+      adminPair.querySelector(".editbox");
 
 
     if(box){
@@ -1771,32 +1792,54 @@ window.cancelEdit =
 
 
 window.savePair =
-  async function(id){
+  async function(button){
+
+
+    const adminPair =
+      button.closest(".adminpair");
+
+
+    if(!adminPair){
+
+      return;
+
+    }
+
+
+    /*
+       Estos son los nombres ORIGINALES
+       de la pareja.
+
+       Son los que utilizaremos para
+       localizar exactamente el registro.
+    */
+
+
+    const oldJugador1 =
+      adminPair.dataset.jugador1;
+
+
+    const oldJugador2 =
+      adminPair.dataset.jugador2;
 
 
     const jugador1 =
-      document
-        .getElementById(
-          "edit-j1-" + id
-        )
+      adminPair
+        .querySelector(".edit-j1")
         .value
         .trim();
 
 
     const jugador2 =
-      document
-        .getElementById(
-          "edit-j2-" + id
-        )
+      adminPair
+        .querySelector(".edit-j2")
         .value
         .trim();
 
 
     const telefono =
-      document
-        .getElementById(
-          "edit-tel-" + id
-        )
+      adminPair
+        .querySelector(".edit-tel")
         .value
         .trim();
 
@@ -1817,10 +1860,26 @@ window.savePair =
     }
 
 
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Guardando...";
+
+
     try{
 
 
+      /*
+         Buscamos por Jugador1 + Jugador2.
+
+         NO usamos identificación.
+      */
+
+
       const {
+        data,
         error
       } =
         await supabaseClient
@@ -1841,14 +1900,42 @@ window.savePair =
           })
 
           .eq(
-            "identificación",
-            id
+            "Jugador1",
+            oldJugador1
+          )
+
+          .eq(
+            "Jugador2",
+            oldJugador2
+          )
+
+          .select(
+            "Jugador1,Jugador2,teléfono"
           );
 
 
       if(error){
 
         throw error;
+
+      }
+
+
+      /*
+         Si Supabase no devuelve ninguna fila,
+         significa que no encontró la pareja
+         con esos nombres.
+      */
+
+
+      if(
+        !data ||
+        data.length === 0
+      ){
+
+        throw new Error(
+          "No se encontró la pareja que se quería corregir. Comprueba que los nombres originales no hayan cambiado."
+        );
 
       }
 
@@ -1862,7 +1949,7 @@ window.savePair =
 
 
       console.error(
-        "Error actualizando:",
+        "Error actualizando pareja:",
         error
       );
 
@@ -1871,6 +1958,14 @@ window.savePair =
         "No se ha podido corregir la pareja.\n\n" +
         error.message
       );
+
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "💾 Guardar cambios";
 
     }
 
@@ -1884,12 +1979,34 @@ window.savePair =
 
 
 window.deletePair =
-  async function(id){
+  async function(button){
+
+
+    const adminPair =
+      button.closest(".adminpair");
+
+
+    if(!adminPair){
+
+      return;
+
+    }
+
+
+    const jugador1 =
+      adminPair.dataset.jugador1;
+
+
+    const jugador2 =
+      adminPair.dataset.jugador2;
 
 
     const confirmar =
       confirm(
-        "¿Seguro que quieres borrar esta pareja?"
+        "¿Seguro que quieres borrar esta pareja?\n\n" +
+        jugador1 +
+        " - " +
+        jugador2
       );
 
 
@@ -1900,10 +2017,27 @@ window.deletePair =
     }
 
 
+    button.disabled =
+      true;
+
+
+    button.textContent =
+      "Borrando...";
+
+
     try{
 
 
+      /*
+         NO usamos identificación.
+
+         Borramos utilizando los dos nombres
+         originales de la pareja.
+      */
+
+
       const {
+        data,
         error
       } =
         await supabaseClient
@@ -1913,14 +2047,35 @@ window.deletePair =
           .delete()
 
           .eq(
-            "identificación",
-            id
+            "Jugador1",
+            jugador1
+          )
+
+          .eq(
+            "Jugador2",
+            jugador2
+          )
+
+          .select(
+            "Jugador1,Jugador2"
           );
 
 
       if(error){
 
         throw error;
+
+      }
+
+
+      if(
+        !data ||
+        data.length === 0
+      ){
+
+        throw new Error(
+          "No se encontró la pareja que se quería borrar."
+        );
 
       }
 
@@ -1934,7 +2089,7 @@ window.deletePair =
 
 
       console.error(
-        "Error borrando:",
+        "Error borrando pareja:",
         error
       );
 
@@ -1943,6 +2098,14 @@ window.deletePair =
         "No se ha podido borrar la pareja.\n\n" +
         error.message
       );
+
+
+      button.disabled =
+        false;
+
+
+      button.textContent =
+        "🗑️ Borrar";
 
     }
 
