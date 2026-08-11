@@ -19,7 +19,6 @@
   box-sizing:border-box;
 }
 
-
 body{
   margin:0;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
@@ -27,13 +26,11 @@ body{
   color:#111827;
 }
 
-
 .wrap{
   max-width:760px;
   margin:auto;
   padding:18px 16px 40px;
 }
-
 
 .hero{
   background:#111827;
@@ -43,18 +40,15 @@ body{
   margin:-18px -16px 22px;
 }
 
-
 h1{
   font-size:30px;
   margin:0 0 6px;
 }
 
-
 .sub{
   font-size:19px;
   color:#d1d5db;
 }
-
 
 .times{
   display:grid;
@@ -62,7 +56,6 @@ h1{
   gap:12px;
   margin:14px 0;
 }
-
 
 .box,
 .card{
@@ -73,12 +66,10 @@ h1{
   box-shadow:0 2px 10px #00000008;
 }
 
-
 .box{
   text-align:center;
   font-size:18px;
 }
-
 
 .box b{
   display:block;
@@ -86,13 +77,11 @@ h1{
   margin-bottom:3px;
 }
 
-
 .info{
   text-align:center;
   font-size:17px;
   margin:12px 0 18px;
 }
-
 
 label{
   display:block;
@@ -100,7 +89,6 @@ label{
   margin:16px 0 8px;
   font-size:17px;
 }
-
 
 input{
   width:100%;
@@ -111,11 +99,9 @@ input{
   outline:none;
 }
 
-
 input:focus{
   border-color:#111827;
 }
-
 
 button{
   width:100%;
@@ -125,23 +111,19 @@ button{
   font-size:18px;
   font-weight:700;
   background:#111827;
-  color:#fff;
+  color:white;
   margin-top:18px;
-  cursor:pointer;
 }
-
 
 button:disabled{
   opacity:.55;
 }
-
 
 .count{
   display:flex;
   justify-content:space-between;
   align-items:center;
 }
-
 
 .badge{
   background:#eef0f3;
@@ -151,11 +133,9 @@ button:disabled{
   font-size:18px;
 }
 
-
 .list{
   margin-top:14px;
 }
-
 
 .pair{
   padding:13px 0;
@@ -163,11 +143,9 @@ button:disabled{
   font-size:19px;
 }
 
-
 .pair:last-child{
   border-bottom:0;
 }
-
 
 .status{
   text-align:center;
@@ -175,22 +153,18 @@ button:disabled{
   padding:16px;
 }
 
-
 .ok{
   color:#166534;
 }
-
 
 .error{
   color:#b91c1c;
 }
 
-
 .admin{
   margin-top:24px;
   text-align:center;
 }
-
 
 .admin a{
   color:#6b7280;
@@ -199,89 +173,20 @@ button:disabled{
   font-size:18px;
 }
 
-
 .adminpanel{
   display:none;
   margin-top:14px;
 }
-
-
-.adminpair{
-  border-bottom:1px solid #e5e7eb;
-  padding:18px 0;
-}
-
-
-.adminpair:last-child{
-  border-bottom:0;
-}
-
-
-.adminnames{
-  font-size:19px;
-  font-weight:700;
-  margin-bottom:6px;
-}
-
-
-.adminphone{
-  color:#4b5563;
-  margin-bottom:12px;
-}
-
-
-.adminactions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-
-.adminactions button{
-  margin-top:0;
-  font-size:16px;
-  padding:13px;
-}
-
-
-.editbtn{
-  background:#374151;
-}
-
-
-.deletebtn{
-  background:#b91c1c;
-}
-
-
-.logout{
-  background:#6b7280;
-}
-
-
-footer{
-  text-align:center;
-  color:#9ca3af;
-  margin-top:30px;
-}
-
-
-.hidden{
-  display:none;
-}
-
 
 .admin-title{
   font-size:28px;
   margin:0 0 16px;
 }
 
-
 .login-title{
   font-size:23px;
   margin:0 0 5px;
 }
-
 
 .small{
   color:#6b7280;
@@ -289,12 +194,54 @@ footer{
   margin-top:5px;
 }
 
+.adminpair{
+  border-bottom:1px solid #e5e7eb;
+  padding:18px 0;
+}
+
+.adminpair:last-child{
+  border-bottom:0;
+}
+
+.adminnames{
+  font-size:19px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.adminphone{
+  color:#4b5563;
+  margin-bottom:12px;
+}
+
+.adminactions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.adminactions button{
+  margin-top:0;
+  font-size:16px;
+  padding:13px;
+}
+
+.editbtn{
+  background:#374151;
+}
+
+.deletebtn{
+  background:#b91c1c;
+}
+
+.logout{
+  background:#6b7280;
+}
 
 .cancelbtn{
   background:#e5e7eb;
   color:#111827;
 }
-
 
 .editbox{
   margin-top:12px;
@@ -303,28 +250,27 @@ footer{
   border-radius:16px;
 }
 
-
 .editbox input{
   background:white;
 }
-
 
 .savebtn{
   background:#166534;
 }
 
-
 .editcancel{
   background:#6b7280;
 }
 
-
-.debug-error{
-  font-size:13px;
-  margin-top:8px;
-  word-break:break-word;
+.hidden{
+  display:none !important;
 }
 
+footer{
+  text-align:center;
+  color:#9ca3af;
+  margin-top:30px;
+}
 
 @media(max-width:500px){
 
@@ -353,126 +299,248 @@ footer{
 <div class="wrap">
 
 
-  <!-- CABECERA -->
+<!-- CABECERA -->
 
-  <section class="hero">
+<section class="hero">
 
-    <h1>🎾 Torneo Pádel (Adultos)</h1>
+  <h1>🎾 Torneo Pádel (Adultos)</h1>
 
-    <div class="sub">
-      Semana Cultural Jemenuño
-    </div>
+  <div class="sub">
+    Semana Cultural Jemenuño
+  </div>
 
-  </section>
+</section>
 
 
-  <!-- HORARIOS -->
+<!-- HORARIOS -->
 
-  <div class="times">
+<div class="times">
 
-    <div class="box">
-      <b>Jueves</b>
-      11:00 h
-    </div>
+  <div class="box">
+    <b>Jueves</b>
+    11:00 h
+  </div>
 
-    <div class="box">
-      <b>Viernes</b>
-      10:00 h
-    </div>
+  <div class="box">
+    <b>Viernes</b>
+    10:00 h
+  </div>
+
+</div>
+
+
+<!-- INFORMACIÓN -->
+
+<div class="card info">
+
+  🏆 Premios y sorteos · 💶 Inscripción:
+  <b>5 € por persona</b>
+
+</div>
+
+
+<!-- FORMULARIO PÚBLICO -->
+
+<section class="card">
+
+  <label for="jugador1">
+    Nombre jugador/a 1
+  </label>
+
+  <input
+    id="jugador1"
+    type="text"
+    maxlength="40"
+    placeholder="Nombre"
+    autocomplete="name"
+  >
+
+
+  <label for="jugador2">
+    Nombre jugador/a 2
+  </label>
+
+  <input
+    id="jugador2"
+    type="text"
+    maxlength="40"
+    placeholder="Nombre"
+  >
+
+
+  <label for="telefono">
+    Teléfono de contacto
+  </label>
+
+  <input
+    id="telefono"
+    type="tel"
+    maxlength="20"
+    placeholder="Teléfono"
+    autocomplete="tel"
+  >
+
+
+  <button id="add">
+    Apuntar pareja
+  </button>
+
+
+  <div id="msg" class="status"></div>
+
+</section>
+
+
+<!-- LISTADO PÚBLICO -->
+
+<section
+  class="card"
+  style="margin-top:18px"
+>
+
+  <div class="count">
+
+    <h2 style="margin:0">
+      Parejas apuntadas
+    </h2>
+
+    <span
+      id="count"
+      class="badge"
+    >
+      0
+    </span>
 
   </div>
 
 
-  <!-- INFORMACIÓN -->
+  <div
+    id="list"
+    class="list"
+  >
 
-  <div class="card info">
-
-    🏆 Premios y sorteos · 💶 Inscripción:
-    <b>5 € por persona</b>
+    <div class="status">
+      Cargando parejas...
+    </div>
 
   </div>
 
+</section>
 
-  <!-- FORMULARIO PÚBLICO -->
 
-  <section class="card">
+<!-- ACCESO ADMINISTRADOR -->
 
-    <label for="jugador1">
-      Nombre jugador/a 1
+<div class="admin">
+
+  <a
+    href="#"
+    id="adminLink"
+  >
+    🔐 Acceso administrador
+  </a>
+
+</div>
+
+
+<!-- PANEL ADMINISTRADOR -->
+
+<div
+  id="adminPanel"
+  class="adminpanel card"
+>
+
+
+  <!-- LOGIN -->
+
+  <div id="loginBox">
+
+    <h2 class="login-title">
+      🔐 Administración
+    </h2>
+
+    <div class="small">
+      Acceso exclusivo del administrador
+    </div>
+
+
+    <label for="email">
+      Email
     </label>
 
     <input
-      id="jugador1"
-      type="text"
-      maxlength="40"
-      placeholder="Nombre"
-      autocomplete="name"
+      id="email"
+      type="email"
+      placeholder="Email"
+      autocomplete="username"
     >
 
 
-    <label for="jugador2">
-      Nombre jugador/a 2
+    <label for="password">
+      Contraseña
     </label>
 
     <input
-      id="jugador2"
-      type="text"
-      maxlength="40"
-      placeholder="Nombre"
+      id="password"
+      type="password"
+      placeholder="Contraseña"
+      autocomplete="current-password"
     >
 
 
-    <label for="telefono">
-      Teléfono de contacto
-    </label>
+    <button id="loginBtn">
+      Entrar
+    </button>
 
-    <input
-      id="telefono"
-      type="tel"
-      maxlength="20"
-      placeholder="Teléfono"
-      autocomplete="tel"
+
+    <button
+      id="cancelLogin"
+      class="cancelbtn"
     >
-
-
-    <button id="add">
-      Apuntar pareja
+      Cancelar
     </button>
 
 
     <div
-      id="msg"
+      id="loginMsg"
       class="status"
     ></div>
 
-  </section>
+  </div>
 
 
-  <!-- LISTADO PÚBLICO -->
+  <!-- ADMINISTRADOR CONECTADO -->
 
-  <section
-    class="card"
-    style="margin-top:18px"
+  <div
+    id="adminContent"
+    class="hidden"
   >
 
-    <div class="count">
-
-      <h2 style="margin:0">
-        Parejas apuntadas
-      </h2>
-
-      <span
-        id="count"
-        class="badge"
-      >
-        0
-      </span>
-
-    </div>
+    <h2 class="admin-title">
+      🔐 Administración
+    </h2>
 
 
     <div
-      id="list"
+      style="
+        background:#ecfdf5;
+        color:#166534;
+        padding:14px 16px;
+        border-radius:16px;
+        font-weight:600;
+        margin-bottom:18px;
+      "
+    >
+      ✅ Administrador conectado
+    </div>
+
+
+    <h2>
+      Parejas inscritas
+    </h2>
+
+
+    <div
+      id="adminList"
       class="list"
     >
 
@@ -482,149 +550,22 @@ footer{
 
     </div>
 
-  </section>
 
-
-  <!-- ACCESO ADMINISTRADOR -->
-
-  <div class="admin">
-
-    <a
-      href="#"
-      id="adminLink"
+    <button
+      id="logoutBtn"
+      class="logout"
     >
-      🔐 Acceso administrador
-    </a>
+      Cerrar sesión
+    </button>
 
   </div>
 
-
-  <!-- PANEL ADMINISTRADOR -->
-
-  <div
-    id="adminPanel"
-    class="adminpanel card"
-  >
+</div>
 
 
-    <!-- LOGIN -->
-
-    <div id="loginBox">
-
-      <h2 class="login-title">
-        🔐 Administración
-      </h2>
-
-      <div class="small">
-        Acceso exclusivo del administrador
-      </div>
-
-
-      <label for="email">
-        Email
-      </label>
-
-      <input
-        id="email"
-        type="email"
-        placeholder="Email"
-        autocomplete="username"
-      >
-
-
-      <label for="password">
-        Contraseña
-      </label>
-
-      <input
-        id="password"
-        type="password"
-        placeholder="Contraseña"
-        autocomplete="current-password"
-      >
-
-
-      <button id="loginBtn">
-        Entrar
-      </button>
-
-
-      <button
-        id="cancelLogin"
-        class="cancelbtn"
-      >
-        Cancelar
-      </button>
-
-
-      <div
-        id="loginMsg"
-        class="status"
-      ></div>
-
-    </div>
-
-
-    <!-- ADMIN CONECTADO -->
-
-    <div
-      id="adminContent"
-      class="hidden"
-    >
-
-      <h2 class="admin-title">
-        🔐 Administración
-      </h2>
-
-
-      <div
-        style="
-          background:#ecfdf5;
-          color:#166534;
-          padding:14px 16px;
-          border-radius:16px;
-          font-weight:600;
-          margin-bottom:18px;
-        "
-      >
-
-        ✅ Administrador conectado
-
-      </div>
-
-
-      <h2>
-        Parejas inscritas
-      </h2>
-
-
-      <div
-        id="adminList"
-        class="list"
-      >
-
-        <div class="status">
-          Cargando parejas...
-        </div>
-
-      </div>
-
-
-      <button
-        id="logoutBtn"
-        class="logout"
-      >
-        Cerrar sesión
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <footer>
-    Semana Cultural Jemenuño
-  </footer>
+<footer>
+  Semana Cultural Jemenuño
+</footer>
 
 
 </div>
@@ -638,18 +579,15 @@ footer{
 <script>
 
 
-/* =========================================
+/* =====================================================
    CONFIGURACIÓN
-========================================= */
-
+===================================================== */
 
 const SUPABASE_URL =
   "https://novinmgzbqtnpfjfzpqt.supabase.co";
 
-
 const SUPABASE_KEY =
   "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
-
 
 const TABLE =
   "Parejas";
@@ -662,51 +600,41 @@ const supabaseClient =
   );
 
 
-/* =========================================
+/* =====================================================
    ELEMENTOS
-========================================= */
-
+===================================================== */
 
 const countEl =
   document.getElementById("count");
 
-
 const listEl =
   document.getElementById("list");
-
 
 const msgEl =
   document.getElementById("msg");
 
-
 const addBtn =
   document.getElementById("add");
-
 
 const adminLink =
   document.getElementById("adminLink");
 
-
 const adminPanel =
   document.getElementById("adminPanel");
-
 
 const loginBox =
   document.getElementById("loginBox");
 
-
 const adminContent =
   document.getElementById("adminContent");
-
 
 const adminList =
   document.getElementById("adminList");
 
 
-/* =========================================
+/* =====================================================
    ESCAPAR HTML
-========================================= */
-
+===================================================== */
 
 function escapeHtml(value){
 
@@ -728,106 +656,36 @@ function escapeHtml(value){
 }
 
 
-/* =========================================
-   OBTENER IDENTIFICADOR DE UNA PAREJA
-========================================= */
-
-
-function getRowId(row){
-
-  /*
-   * Hemos visto que la tabla ha tenido
-   * problemas con el nombre del identificador.
-   *
-   * Primero probamos "id".
-   * Si no existe, probamos "identificación".
-   */
-
-  if(
-    row &&
-    row.id !== undefined &&
-    row.id !== null
-  ){
-
-    return row.id;
-
-  }
-
-
-  if(
-    row &&
-    row["identificación"] !== undefined &&
-    row["identificación"] !== null
-  ){
-
-    return row["identificación"];
-
-  }
-
-
-  return null;
-
-}
-
-
-/* =========================================
-   OBTENER NOMBRE DE LA COLUMNA ID
-========================================= */
-
-
-function getIdColumn(row){
-
-  if(
-    row &&
-    row.id !== undefined
-  ){
-
-    return "id";
-
-  }
-
-
-  if(
-    row &&
-    row["identificación"] !== undefined
-  ){
-
-    return "identificación";
-
-  }
-
-
-  return null;
-
-}
-
-
-/* =========================================
+/* =====================================================
    CARGAR PAREJAS PÚBLICAS
-========================================= */
-
+===================================================== */
 
 async function loadPairs(){
 
   try{
 
-    const {
-      data,
-      error
-    } = await supabaseClient
+    const result =
+      await supabaseClient
 
-      .from(TABLE)
+        .from(TABLE)
 
-      .select(
-        "Jugador1,Jugador2"
-      )
+        .select(
+          'Jugador1,Jugador2,"teléfono",creado_en'
+        )
 
-      .order(
-        "created_at",
-        {
-          ascending:true
-        }
-      );
+        .order(
+          "creado_en",
+          {
+            ascending:true
+          }
+        );
+
+
+    const data =
+      result.data;
+
+    const error =
+      result.error;
 
 
     if(error){
@@ -880,29 +738,17 @@ async function loadPairs(){
       error
     );
 
-
     listEl.innerHTML =
-      `
-      <div class="status error">
-
-        No se han podido cargar las parejas.
-
-        <div class="debug-error">
-          ${escapeHtml(error.message || error)}
-        </div>
-
-      </div>
-      `;
+      '<div class="status error">No se han podido cargar las parejas.</div>';
 
   }
 
 }
 
 
-/* =========================================
+/* =====================================================
    AÑADIR PAREJA
-========================================= */
-
+===================================================== */
 
 async function addPair(){
 
@@ -951,36 +797,34 @@ async function addPair(){
   addBtn.disabled =
     true;
 
-
   addBtn.textContent =
     "Apuntando...";
 
 
   try{
 
-    const {
-      error
-    } = await supabaseClient
+    const result =
+      await supabaseClient
 
-      .from(TABLE)
+        .from(TABLE)
 
-      .insert({
+        .insert({
 
-        Jugador1:
-          jugador1,
+          Jugador1:
+            jugador1,
 
-        Jugador2:
-          jugador2,
+          Jugador2:
+            jugador2,
 
-        "teléfono":
-          telefono
+          "teléfono":
+            telefono
 
-      });
+        });
 
 
-    if(error){
+    if(result.error){
 
-      throw error;
+      throw result.error;
 
     }
 
@@ -1003,12 +847,20 @@ async function addPair(){
     msgEl.className =
       "status ok";
 
-
     msgEl.textContent =
       "✅ Pareja apuntada correctamente.";
 
 
     await loadPairs();
+
+
+    if(
+      adminContent.classList.contains("hidden") === false
+    ){
+
+      await loadAdminPairs();
+
+    }
 
 
   }catch(error){
@@ -1018,25 +870,16 @@ async function addPair(){
       error
     );
 
-
     msgEl.className =
       "status error";
 
-
     msgEl.textContent =
       "No se ha podido apuntar la pareja.";
-
-
-    console.error(
-      "Mensaje Supabase:",
-      error.message || error
-    );
 
   }finally{
 
     addBtn.disabled =
       false;
-
 
     addBtn.textContent =
       "Apuntar pareja";
@@ -1046,10 +889,9 @@ async function addPair(){
 }
 
 
-/* =========================================
-   ABRIR ADMIN
-========================================= */
-
+/* =====================================================
+   ABRIR ADMINISTRACIÓN
+===================================================== */
 
 adminLink.addEventListener(
   "click",
@@ -1059,8 +901,7 @@ adminLink.addEventListener(
 
 
     if(
-      adminPanel.style.display ===
-      "block"
+      adminPanel.style.display === "block"
     ){
 
       adminPanel.style.display =
@@ -1081,10 +922,9 @@ adminLink.addEventListener(
 );
 
 
-/* =========================================
+/* =====================================================
    CANCELAR LOGIN
-========================================= */
-
+===================================================== */
 
 document
   .getElementById("cancelLogin")
@@ -1099,10 +939,9 @@ document
   );
 
 
-/* =========================================
+/* =====================================================
    LOGIN
-========================================= */
-
+===================================================== */
 
 document
   .getElementById("loginBtn")
@@ -1135,7 +974,6 @@ async function login(){
   loginMsg.className =
     "status";
 
-
   loginMsg.textContent =
     "Entrando...";
 
@@ -1148,75 +986,93 @@ async function login(){
     loginMsg.className =
       "status error";
 
-
     loginMsg.textContent =
       "Introduce email y contraseña.";
-
 
     return;
 
   }
 
 
-  const {
-    error
-  } =
-    await supabaseClient.auth.signInWithPassword({
+  try{
 
-      email:
-        email,
+    const result =
+      await supabaseClient.auth.signInWithPassword({
 
-      password:
-        password
+        email:
+          email,
 
-    });
+        password:
+          password
+
+      });
 
 
-  if(error){
+    if(result.error){
+
+      throw result.error;
+
+    }
+
+
+    loginMsg.textContent =
+      "";
+
+
+    await showAdmin();
+
+
+  }catch(error){
 
     console.error(
-      "Error login:",
+      "Error de login:",
       error
     );
-
 
     loginMsg.className =
       "status error";
 
-
     loginMsg.textContent =
       "Email o contraseña incorrectos.";
 
-
-    return;
-
   }
-
-
-  loginMsg.textContent =
-    "";
-
-
-  await showAdmin();
 
 }
 
 
-/* =========================================
+/* =====================================================
    COMPROBAR SESIÓN
-========================================= */
-
+===================================================== */
 
 async function checkSession(){
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient.auth.getSession();
+  try{
+
+    const result =
+      await supabaseClient.auth.getSession();
 
 
-  if(error){
+    const session =
+      result.data?.session;
+
+
+    if(session){
+
+      await showAdmin();
+
+    }else{
+
+      loginBox.classList.remove(
+        "hidden"
+      );
+
+      adminContent.classList.add(
+        "hidden"
+      );
+
+    }
+
+  }catch(error){
 
     console.error(
       "Error comprobando sesión:",
@@ -1225,41 +1081,18 @@ async function checkSession(){
 
   }
 
-
-  if(
-    data &&
-    data.session
-  ){
-
-    await showAdmin();
-
-  }else{
-
-    loginBox.classList.remove(
-      "hidden"
-    );
-
-
-    adminContent.classList.add(
-      "hidden"
-    );
-
-  }
-
 }
 
 
-/* =========================================
+/* =====================================================
    MOSTRAR ADMIN
-========================================= */
-
+===================================================== */
 
 async function showAdmin(){
 
   loginBox.classList.add(
     "hidden"
   );
-
 
   adminContent.classList.remove(
     "hidden"
@@ -1271,10 +1104,9 @@ async function showAdmin(){
 }
 
 
-/* =========================================
-   CARGAR PAREJAS ADMIN
-========================================= */
-
+/* =====================================================
+   CARGAR PAREJAS EN ADMIN
+===================================================== */
 
 async function loadAdminPairs(){
 
@@ -1284,31 +1116,31 @@ async function loadAdminPairs(){
 
   try{
 
-    /*
-     * IMPORTANTE:
-     *
-     * Aquí usamos select("*").
-     *
-     * Así NO suponemos que la columna
-     * identificadora se llame "id".
-     */
+    const result =
+      await supabaseClient
 
-    const {
-      data,
-      error
-    } = await supabaseClient
+        .from(TABLE)
 
-      .from(TABLE)
+        .select(
+          'identificacion,creado_en,Jugador1,Jugador2,"teléfono"'
+        )
 
-      .select("*");
+        .order(
+          "creado_en",
+          {
+            ascending:true
+          }
+        );
+
+
+    const data =
+      result.data;
+
+    const error =
+      result.error;
 
 
     if(error){
-
-      console.error(
-        "ERROR REAL ADMIN:",
-        error
-      );
 
       throw error;
 
@@ -1317,12 +1149,6 @@ async function loadAdminPairs(){
 
     const rows =
       data || [];
-
-
-    console.log(
-      "PAREJAS ADMIN:",
-      rows
-    );
 
 
     if(!rows.length){
@@ -1338,63 +1164,16 @@ async function loadAdminPairs(){
     adminList.innerHTML =
       rows.map(function(row){
 
-        const rowId =
-          getRowId(row);
-
-
-        /*
-         * Si no encontramos identificador,
-         * mostramos la pareja pero avisamos.
-         */
-
-        if(rowId === null){
-
-          return `
-
-            <div class="adminpair">
-
-              <div class="adminnames">
-
-                ${escapeHtml(row.Jugador1)}
-                -
-                ${escapeHtml(row.Jugador2)}
-
-              </div>
-
-
-              <div class="adminphone">
-
-                📞
-                ${escapeHtml(row["teléfono"])}
-
-              </div>
-
-
-              <div class="status error">
-
-                No se ha encontrado el identificador
-                de esta pareja.
-
-              </div>
-
-            </div>
-
-          `;
-
-        }
-
-
-        const safeId =
-          escapeHtml(rowId);
+        const id =
+          row.identificacion;
 
 
         return `
 
           <div
             class="adminpair"
-            data-id="${safeId}"
+            data-id="${escapeHtml(id)}"
           >
-
 
             <div class="adminnames">
 
@@ -1415,43 +1194,35 @@ async function loadAdminPairs(){
 
             <div class="adminactions">
 
-
               <button
                 class="editbtn"
-                onclick="editPair('${safeId}')"
+                onclick="editPair(${id})"
               >
-
                 ✏️ Corregir
-
               </button>
 
 
               <button
                 class="deletebtn"
-                onclick="deletePair('${safeId}')"
+                onclick="deletePair(${id})"
               >
-
                 🗑️ Borrar
-
               </button>
-
 
             </div>
 
 
             <div
-              id="edit-${safeId}"
+              id="edit-${id}"
               class="editbox hidden"
             >
-
 
               <label>
                 Jugador/a 1
               </label>
 
-
               <input
-                id="edit-j1-${safeId}"
+                id="edit-j1-${id}"
                 value="${escapeHtml(row.Jugador1)}"
               >
 
@@ -1460,9 +1231,8 @@ async function loadAdminPairs(){
                 Jugador/a 2
               </label>
 
-
               <input
-                id="edit-j2-${safeId}"
+                id="edit-j2-${id}"
                 value="${escapeHtml(row.Jugador2)}"
               >
 
@@ -1471,9 +1241,8 @@ async function loadAdminPairs(){
                 Teléfono
               </label>
 
-
               <input
-                id="edit-tel-${safeId}"
+                id="edit-tel-${id}"
                 type="tel"
                 value="${escapeHtml(row["teléfono"])}"
               >
@@ -1481,26 +1250,20 @@ async function loadAdminPairs(){
 
               <button
                 class="savebtn"
-                onclick="savePair('${safeId}')"
+                onclick="savePair(${id})"
               >
-
                 💾 Guardar cambios
-
               </button>
 
 
               <button
                 class="editcancel"
-                onclick="cancelEdit('${safeId}')"
+                onclick="cancelEdit(${id})"
               >
-
                 Cancelar
-
               </button>
 
-
             </div>
-
 
           </div>
 
@@ -1516,34 +1279,17 @@ async function loadAdminPairs(){
       error
     );
 
-
     adminList.innerHTML =
-      `
-
-      <div class="status error">
-
-        No se han podido cargar las parejas.
-
-        <div class="debug-error">
-
-          Error de Supabase:
-          ${escapeHtml(error.message || error)}
-
-        </div>
-
-      </div>
-
-      `;
+      '<div class="status error">No se han podido cargar las parejas.</div>';
 
   }
 
 }
 
 
-/* =========================================
-   EDITAR PAREJA
-========================================= */
-
+/* =====================================================
+   ABRIR EDICIÓN
+===================================================== */
 
 window.editPair =
   function(id){
@@ -1565,10 +1311,9 @@ window.editPair =
   };
 
 
-/* =========================================
+/* =====================================================
    CANCELAR EDICIÓN
-========================================= */
-
+===================================================== */
 
 window.cancelEdit =
   function(id){
@@ -1590,39 +1335,56 @@ window.cancelEdit =
   };
 
 
-/* =========================================
+/* =====================================================
    GUARDAR CAMBIOS
-========================================= */
-
+===================================================== */
 
 window.savePair =
   async function(id){
 
+    const jugador1El =
+      document.getElementById(
+        "edit-j1-" + id
+      );
+
+
+    const jugador2El =
+      document.getElementById(
+        "edit-j2-" + id
+      );
+
+
+    const telefonoEl =
+      document.getElementById(
+        "edit-tel-" + id
+      );
+
+
+    if(
+      !jugador1El ||
+      !jugador2El ||
+      !telefonoEl
+    ){
+
+      alert(
+        "No se han encontrado los campos de edición."
+      );
+
+      return;
+
+    }
+
+
     const jugador1 =
-      document
-        .getElementById(
-          "edit-j1-" + id
-        )
-        .value
-        .trim();
+      jugador1El.value.trim();
 
 
     const jugador2 =
-      document
-        .getElementById(
-          "edit-j2-" + id
-        )
-        .value
-        .trim();
+      jugador2El.value.trim();
 
 
     const telefono =
-      document
-        .getElementById(
-          "edit-tel-" + id
-        )
-        .value
-        .trim();
+      telefonoEl.value.trim();
 
 
     if(
@@ -1635,143 +1397,74 @@ window.savePair =
         "Los tres campos son obligatorios."
       );
 
-
       return;
 
     }
 
 
-    /*
-     * Buscamos de nuevo la pareja para saber
-     * cómo se llama realmente su columna ID.
-     */
+    try{
 
-    const {
-      data,
-      error: findError
-    } = await supabaseClient
+      const result =
+        await supabaseClient
 
-      .from(TABLE)
+          .from(TABLE)
 
-      .select("*");
+          .update({
+
+            Jugador1:
+              jugador1,
+
+            Jugador2:
+              jugador2,
+
+            "teléfono":
+              telefono
+
+          })
+
+          .eq(
+            "identificacion",
+            id
+          );
 
 
-    if(findError){
+      if(result.error){
+
+        throw result.error;
+
+      }
+
+
+      alert(
+        "Pareja corregida correctamente."
+      );
+
+
+      await loadPairs();
+
+      await loadAdminPairs();
+
+
+    }catch(error){
 
       console.error(
-        "Error buscando pareja:",
-        findError
-      );
-
-
-      alert(
-        "No se ha podido localizar la pareja."
-      );
-
-
-      return;
-
-    }
-
-
-    const row =
-      (data || []).find(
-        function(item){
-
-          return String(
-            getRowId(item)
-          ) === String(id);
-
-        }
-      );
-
-
-    if(!row){
-
-      alert(
-        "No se ha encontrado la pareja."
-      );
-
-
-      return;
-
-    }
-
-
-    const idColumn =
-      getIdColumn(row);
-
-
-    if(!idColumn){
-
-      alert(
-        "No se ha podido identificar la pareja."
-      );
-
-
-      return;
-
-    }
-
-
-    const updateData = {
-
-      Jugador1:
-        jugador1,
-
-      Jugador2:
-        jugador2,
-
-      "teléfono":
-        telefono
-
-    };
-
-
-    const {
-      error
-    } = await supabaseClient
-
-      .from(TABLE)
-
-      .update(updateData)
-
-      .eq(
-        idColumn,
-        id
-      );
-
-
-    if(error){
-
-      console.error(
-        "Error actualizando:",
+        "Error actualizando pareja:",
         error
       );
 
-
       alert(
         "No se ha podido corregir la pareja.\n\n" +
-        (error.message || "")
+        error.message
       );
 
-
-      return;
-
     }
-
-
-    await loadPairs();
-
-    await loadAdminPairs();
 
   };
 
 
-/* =========================================
+/* =====================================================
    BORRAR PAREJA
-========================================= */
-
+===================================================== */
 
 window.deletePair =
   async function(id){
@@ -1789,124 +1482,58 @@ window.deletePair =
     }
 
 
-    /*
-     * Igual que al corregir:
-     * buscamos el registro para saber
-     * cuál es realmente su columna identificadora.
-     */
+    try{
 
-    const {
-      data,
-      error: findError
-    } = await supabaseClient
+      const result =
+        await supabaseClient
 
-      .from(TABLE)
+          .from(TABLE)
 
-      .select("*");
+          .delete()
+
+          .eq(
+            "identificacion",
+            id
+          );
 
 
-    if(findError){
+      if(result.error){
+
+        throw result.error;
+
+      }
+
+
+      alert(
+        "Pareja borrada correctamente."
+      );
+
+
+      await loadPairs();
+
+      await loadAdminPairs();
+
+
+    }catch(error){
 
       console.error(
-        "Error buscando pareja:",
-        findError
-      );
-
-
-      alert(
-        "No se ha podido localizar la pareja."
-      );
-
-
-      return;
-
-    }
-
-
-    const row =
-      (data || []).find(
-        function(item){
-
-          return String(
-            getRowId(item)
-          ) === String(id);
-
-        }
-      );
-
-
-    if(!row){
-
-      alert(
-        "No se ha encontrado la pareja."
-      );
-
-
-      return;
-
-    }
-
-
-    const idColumn =
-      getIdColumn(row);
-
-
-    if(!idColumn){
-
-      alert(
-        "No se ha podido identificar la pareja."
-      );
-
-
-      return;
-
-    }
-
-
-    const {
-      error
-    } = await supabaseClient
-
-      .from(TABLE)
-
-      .delete()
-
-      .eq(
-        idColumn,
-        id
-      );
-
-
-    if(error){
-
-      console.error(
-        "Error borrando:",
+        "Error borrando pareja:",
         error
       );
 
-
       alert(
         "No se ha podido borrar la pareja.\n\n" +
-        (error.message || "")
+        error.message
       );
 
-
-      return;
-
     }
-
-
-    await loadPairs();
-
-    await loadAdminPairs();
 
   };
 
 
-/* =========================================
+/* =====================================================
    CERRAR SESIÓN
-========================================= */
-
+===================================================== */
 
 document
   .getElementById("logoutBtn")
@@ -1940,10 +1567,9 @@ document
   );
 
 
-/* =========================================
+/* =====================================================
    BOTÓN APUNTAR
-========================================= */
-
+===================================================== */
 
 addBtn.addEventListener(
   "click",
@@ -1951,10 +1577,9 @@ addBtn.addEventListener(
 );
 
 
-/* =========================================
+/* =====================================================
    ENTER EN TELÉFONO
-========================================= */
-
+===================================================== */
 
 document
   .getElementById("telefono")
@@ -1963,8 +1588,7 @@ document
     function(event){
 
       if(
-        event.key ===
-        "Enter"
+        event.key === "Enter"
       ){
 
         addPair();
@@ -1975,16 +1599,14 @@ document
   );
 
 
-/* =========================================
+/* =====================================================
    CARGA INICIAL
-========================================= */
-
+===================================================== */
 
 loadPairs();
 
 
 </script>
-
 
 </body>
 
