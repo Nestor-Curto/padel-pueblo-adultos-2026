@@ -475,7 +475,7 @@ footer{
 
 <!-- =====================================================
      CABECERA
-     ===================================================== -->
+===================================================== -->
 
 <section class="hero">
 
@@ -492,7 +492,7 @@ Semana Cultural Jemenuño
 
 <!-- =====================================================
      HORARIOS
-     ===================================================== -->
+===================================================== -->
 
 <div class="times">
 
@@ -522,7 +522,7 @@ Viernes 21
 
 <!-- =====================================================
      INFORMACIÓN
-     ===================================================== -->
+===================================================== -->
 
 <div class="card info">
 
@@ -537,7 +537,7 @@ Viernes 21
 
 <!-- =====================================================
      FORMULARIO
-     ===================================================== -->
+===================================================== -->
 
 <section class="card">
 
@@ -596,7 +596,7 @@ class="status"
 
 <!-- =====================================================
      LISTADO PÚBLICO
-     ===================================================== -->
+===================================================== -->
 
 <section
 class="card"
@@ -637,8 +637,8 @@ Cargando parejas...
 
 
 <!-- =====================================================
-     ACCESO ADMINISTRADOR
-     ===================================================== -->
+     ACCESO ADMIN
+===================================================== -->
 
 <div class="admin">
 
@@ -654,7 +654,7 @@ id="adminLink"
 
 <!-- =====================================================
      PANEL ADMIN
-     ===================================================== -->
+===================================================== -->
 
 <div
 id="adminPanel"
@@ -793,7 +793,7 @@ Semana Cultural Jemenuño
 
 <!-- =====================================================
      SUPABASE
-     ===================================================== -->
+===================================================== -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -803,7 +803,7 @@ Semana Cultural Jemenuño
 
 /* =====================================================
    CONFIGURACIÓN SUPABASE
-   ===================================================== */
+===================================================== */
 
 const SUPABASE_URL =
 "https://novinmgzbqtnpfjfzpqt.supabase.co";
@@ -824,9 +824,10 @@ SUPABASE_KEY
 );
 
 
+
 /* =====================================================
    ELEMENTOS
-   ===================================================== */
+===================================================== */
 
 const countEl =
 document.getElementById("count");
@@ -867,9 +868,10 @@ document.getElementById("adminList");
 let adminRows = [];
 
 
+
 /* =====================================================
    ESCAPAR HTML
-   ===================================================== */
+===================================================== */
 
 function escapeHtml(value){
 
@@ -893,18 +895,25 @@ return {
 }
 
 
+
 /* =====================================================
-   TELÉFONO
-   =====================================================
+   OBTENER TELÉFONO
+=====================================================
+
+   IMPORTANTE:
 
    La columna real de Supabase es:
 
    teléfono
 
-   con tilde.
+   Se accede mediante:
 
-   Trabajamos directamente con ella.
-   ===================================================== */
+   row["teléfono"]
+
+   No usamos .select("teléfono")
+   para evitar el problema que estaba
+   generando PostgREST.
+===================================================== */
 
 function getTelefono(row){
 
@@ -914,7 +923,7 @@ row["teléfono"] !== undefined &&
 row["teléfono"] !== null
 ){
 
-return row["teléfono"];
+return String(row["teléfono"]);
 
 }
 
@@ -923,9 +932,45 @@ return "";
 }
 
 
+
+/* =====================================================
+   ORDENAR
+
+   No dependemos de que exista "creado_en".
+   Si existe, lo usamos.
+   Si no existe, mantenemos el orden recibido.
+===================================================== */
+
+function sortRows(rows){
+
+return [...rows].sort(
+function(a,b){
+
+if(
+a.creado_en &&
+b.creado_en
+){
+
+return (
+new Date(a.creado_en).getTime()
+-
+new Date(b.creado_en).getTime()
+);
+
+}
+
+return 0;
+
+}
+);
+
+}
+
+
+
 /* =====================================================
    CARGAR PAREJAS PÚBLICAS
-   ===================================================== */
+===================================================== */
 
 async function loadPairs(){
 
@@ -936,12 +981,8 @@ data,
 error
 } =
 await supabaseClient
-
 .from(TABLE)
-
-.select(
-'Jugador1,Jugador2'
-);
+.select("*");
 
 
 if(error){
@@ -952,7 +993,7 @@ throw error;
 
 
 const rows =
-data || [];
+sortRows(data || []);
 
 
 countEl.textContent =
@@ -1024,9 +1065,10 @@ escapeHtml(error.message) +
 }
 
 
+
 /* =====================================================
    AÑADIR PAREJA
-   ===================================================== */
+===================================================== */
 
 async function addPair(){
 
@@ -1085,9 +1127,15 @@ try{
 
 
 /*
-   Insertamos directamente utilizando
-   los nombres REALES de las columnas.
+   IMPORTANTE:
+
+   La columna se llama exactamente:
+
+   "teléfono"
+
+   No intentamos descubrirla.
 */
+
 
 const datos = {
 
@@ -1104,13 +1152,16 @@ telefono
 
 
 const {
+data,
 error
 } =
 await supabaseClient
 
 .from(TABLE)
 
-.insert(datos);
+.insert(datos)
+
+.select("*");
 
 
 if(error){
@@ -1120,7 +1171,10 @@ throw error;
 }
 
 
-/* Limpiar formulario */
+/*
+   Si Supabase no devuelve la fila,
+   hacemos igualmente una recarga.
+*/
 
 document
 .getElementById("jugador1")
@@ -1137,8 +1191,6 @@ document
 .value = "";
 
 
-/* Mensaje de éxito */
-
 msgEl.className =
 "status ok";
 
@@ -1146,8 +1198,6 @@ msgEl.className =
 msgEl.textContent =
 "✅ Pareja apuntada correctamente.";
 
-
-/* Recargar listado */
 
 await loadPairs();
 
@@ -1164,17 +1214,10 @@ msgEl.className =
 "status error";
 
 
-msgEl.innerHTML =
-
+msgEl.textContent =
 "No se ha podido apuntar la pareja." +
-
-"<br><br>" +
-
-"<small>" +
-
-escapeHtml(error.message) +
-
-"</small>";
+" " +
+error.message;
 
 }finally{
 
@@ -1190,9 +1233,10 @@ addBtn.textContent =
 }
 
 
+
 /* =====================================================
    ABRIR ADMIN
-   ===================================================== */
+===================================================== */
 
 adminLink.addEventListener(
 "click",
@@ -1224,9 +1268,10 @@ await checkSession();
 );
 
 
+
 /* =====================================================
    CANCELAR LOGIN
-   ===================================================== */
+===================================================== */
 
 document
 .getElementById("cancelLogin")
@@ -1241,9 +1286,10 @@ adminPanel.style.display =
 );
 
 
+
 /* =====================================================
    LOGIN
-   ===================================================== */
+===================================================== */
 
 document
 .getElementById("loginBtn")
@@ -1304,9 +1350,7 @@ const {
 error
 } =
 await supabaseClient
-
 .auth
-
 .signInWithPassword({
 
 email:
@@ -1352,21 +1396,18 @@ loginMsg.textContent =
 }
 
 
+
 /* =====================================================
    COMPROBAR SESIÓN
-   ===================================================== */
+===================================================== */
 
 async function checkSession(){
-
-try{
 
 const {
 data
 } =
 await supabaseClient
-
 .auth
-
 .getSession();
 
 
@@ -1390,21 +1431,13 @@ adminContent.classList.add(
 
 }
 
-}catch(error){
-
-console.error(
-"Error comprobando sesión:",
-error
-);
-
 }
 
-}
 
 
 /* =====================================================
    MOSTRAR ADMIN
-   ===================================================== */
+===================================================== */
 
 async function showAdmin(){
 
@@ -1423,9 +1456,26 @@ await loadAdminPairs();
 }
 
 
+
 /* =====================================================
-   CARGAR ADMINISTRACIÓN
-   ===================================================== */
+   CARGAR ADMIN
+=====================================================
+
+   MUY IMPORTANTE:
+
+   Usamos .select("*")
+
+   No:
+
+   .select("teléfono")
+
+   No:
+
+   .select("identificación")
+
+   Así evitamos todos los errores
+   que hemos tenido.
+===================================================== */
 
 async function loadAdminPairs(){
 
@@ -1435,11 +1485,6 @@ adminList.innerHTML =
 
 try{
 
-/*
-   Aquí pedimos SOLO las tres columnas que
-   sabemos que existen.
-*/
-
 const {
 data,
 error
@@ -1448,9 +1493,7 @@ await supabaseClient
 
 .from(TABLE)
 
-.select(
-'Jugador1,Jugador2,"teléfono"'
-);
+.select("*");
 
 
 if(error){
@@ -1461,7 +1504,7 @@ throw error;
 
 
 adminRows =
-data || [];
+sortRows(data || []);
 
 
 if(!adminRows.length){
@@ -1638,9 +1681,10 @@ escapeHtml(error.message) +
 }
 
 
+
 /* =====================================================
    EDITAR
-   ===================================================== */
+===================================================== */
 
 window.editPair =
 function(index){
@@ -1662,9 +1706,10 @@ box.classList.remove(
 };
 
 
+
 /* =====================================================
    CANCELAR EDICIÓN
-   ===================================================== */
+===================================================== */
 
 window.cancelEdit =
 function(index){
@@ -1686,9 +1731,20 @@ box.classList.add(
 };
 
 
+
 /* =====================================================
    GUARDAR CAMBIOS
-   ===================================================== */
+=====================================================
+
+   Para encontrar la fila usamos los tres datos
+   originales:
+
+   Jugador1
+   Jugador2
+   teléfono
+
+   No utilizamos "identificación".
+===================================================== */
 
 window.savePair =
 async function(index){
@@ -1750,8 +1806,16 @@ return;
 }
 
 
+const telefonoOriginal =
+getTelefono(original);
+
+
 try{
 
+
+/*
+   Datos nuevos
+*/
 
 const cambios = {
 
@@ -1766,6 +1830,13 @@ telefono
 
 };
 
+
+/*
+   Buscamos la fila por sus datos originales.
+
+   NO usamos identificación.
+   NO usamos creado_en.
+*/
 
 const {
 data,
@@ -1787,9 +1858,12 @@ original.Jugador1
 original.Jugador2
 )
 
-.select(
-'Jugador1,Jugador2,"teléfono"'
-);
+.eq(
+"teléfono",
+telefonoOriginal
+)
+
+.select("*");
 
 
 if(error){
@@ -1831,11 +1905,8 @@ error
 
 
 alert(
-
 "No se ha podido corregir la pareja.\n\n" +
-
 error.message
-
 );
 
 }
@@ -1843,9 +1914,10 @@ error.message
 };
 
 
+
 /* =====================================================
    BORRAR
-   ===================================================== */
+===================================================== */
 
 window.deletePair =
 async function(index){
@@ -1886,6 +1958,10 @@ return;
 }
 
 
+const telefonoOriginal =
+getTelefono(original);
+
+
 try{
 
 
@@ -1909,9 +1985,12 @@ original.Jugador1
 original.Jugador2
 )
 
-.select(
-'Jugador1,Jugador2'
-);
+.eq(
+"teléfono",
+telefonoOriginal
+)
+
+.select("*");
 
 
 if(error){
@@ -1953,11 +2032,8 @@ error
 
 
 alert(
-
 "No se ha podido borrar la pareja.\n\n" +
-
 error.message
-
 );
 
 }
@@ -1965,9 +2041,10 @@ error.message
 };
 
 
+
 /* =====================================================
    CERRAR SESIÓN
-   ===================================================== */
+===================================================== */
 
 document
 .getElementById("logoutBtn")
@@ -2003,9 +2080,10 @@ document
 );
 
 
+
 /* =====================================================
    BOTÓN APUNTAR
-   ===================================================== */
+===================================================== */
 
 addBtn.addEventListener(
 "click",
@@ -2013,9 +2091,10 @@ addPair
 );
 
 
+
 /* =====================================================
    ENTER EN TELÉFONO
-   ===================================================== */
+===================================================== */
 
 document
 .getElementById("telefono")
@@ -2036,9 +2115,10 @@ addPair();
 );
 
 
+
 /* =====================================================
    CARGA INICIAL
-   ===================================================== */
+===================================================== */
 
 loadPairs();
 
