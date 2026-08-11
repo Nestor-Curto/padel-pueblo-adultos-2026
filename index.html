@@ -777,6 +777,8 @@ Semana Cultural Jemenuño
 </div>
 
 
+<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -784,7 +786,7 @@ Semana Cultural Jemenuño
 
 
 /* =====================================================
-   SUPABASE
+   CONFIGURACIÓN SUPABASE
    ===================================================== */
 
 
@@ -882,115 +884,7 @@ return {
 
 
 /* =====================================================
-   DETECTAR COLUMNA TELÉFONO
-   =====================================================
-
-   NO damos por hecho que se llame "teléfono".
-   Miramos la propia fila que devuelve Supabase.
-   ===================================================== */
-
-
-function detectarColumnaTelefono(row){
-
-if(!row){
-
-return null;
-
-}
-
-
-const keys =
-Object.keys(row);
-
-
-const exactas = [
-
-"telefono",
-"Telefono",
-"TELÉFONO",
-"Teléfono",
-"teléfono",
-"TELEFONO",
-"Teléfonos",
-"telefonos"
-
-];
-
-
-for(
-const nombre of exactas
-){
-
-if(
-keys.includes(nombre)
-){
-
-return nombre;
-
-}
-
-}
-
-
-/*
-   Si no coincide exactamente,
-   buscamos cualquier columna
-   cuyo nombre contenga "tel".
-*/
-
-const encontrada =
-keys.find(
-function(key){
-
-return key
-.toLowerCase()
-.normalize("NFD")
-.replace(
-/[\u0300-\u036f]/g,
-""
-)
-.includes("tel");
-
-}
-);
-
-
-return encontrada || null;
-
-}
-
-
-
-/* =====================================================
-   OBTENER TELÉFONO
-   ===================================================== */
-
-
-function getTelefono(row){
-
-const columna =
-detectarColumnaTelefono(row);
-
-
-if(
-columna &&
-row[columna] !== undefined &&
-row[columna] !== null
-){
-
-return row[columna];
-
-}
-
-
-return "";
-
-}
-
-
-
-/* =====================================================
-   ORDENAR
+   ORDENAR PAREJAS
    ===================================================== */
 
 
@@ -1021,7 +915,15 @@ return dateA - dateB;
 
 
 /* =====================================================
-   CARGAR PAREJAS
+   CARGAR LISTADO PÚBLICO
+   =====================================================
+
+   IMPORTANTE:
+
+   Aquí NO solicitamos "telefono".
+
+   Por tanto el teléfono no se entrega
+   al navegador de los participantes.
    ===================================================== */
 
 
@@ -1034,8 +936,12 @@ data,
 error
 } =
 await supabaseClient
+
 .from(TABLE)
-.select("*");
+
+.select(
+"Jugador1,Jugador2,creado_en"
+);
 
 
 if(error){
@@ -1166,83 +1072,32 @@ addBtn.textContent =
 
 try{
 
-
 /*
-   Primero obtenemos una fila para descubrir
-   el nombre REAL de la columna del teléfono.
+   AQUÍ USAMOS DIRECTAMENTE
+   LA COLUMNA NUEVA:
+
+   telefono
 */
-
-const {
-data: filas,
-error: errorColumnas
-} =
-await supabaseClient
-.from(TABLE)
-.select("*")
-.limit(1);
-
-
-if(errorColumnas){
-
-throw errorColumnas;
-
-}
-
-
-let columnaTelefono =
-null;
-
-
-if(
-filas &&
-filas.length
-){
-
-columnaTelefono =
-detectarColumnaTelefono(
-filas[0]
-);
-
-}
-
-
-/*
-   Si la tabla está vacía no podemos detectar
-   el nombre desde una fila.
-
-   En ese caso usamos el nombre que sabemos
-   que funcionaba para las inscripciones actuales.
-*/
-
-if(!columnaTelefono){
-
-columnaTelefono =
-"Telefono";
-
-}
-
-
-const datos = {
-
-Jugador1:
-jugador1,
-
-Jugador2:
-jugador2
-
-};
-
-
-datos[columnaTelefono] =
-telefono;
-
 
 const {
 error
 } =
 await supabaseClient
+
 .from(TABLE)
-.insert(datos);
+
+.insert({
+
+Jugador1:
+jugador1,
+
+Jugador2:
+jugador2,
+
+telefono:
+telefono
+
+});
 
 
 if(error){
@@ -1252,19 +1107,19 @@ throw error;
 }
 
 
-document.getElementById(
-"jugador1"
-).value = "";
+document
+.getElementById("jugador1")
+.value = "";
 
 
-document.getElementById(
-"jugador2"
-).value = "";
+document
+.getElementById("jugador2")
+.value = "";
 
 
-document.getElementById(
-"telefono"
-).value = "";
+document
+.getElementById("telefono")
+.value = "";
 
 
 msgEl.className =
@@ -1289,6 +1144,12 @@ error
 msgEl.className =
 "status error";
 
+
+/*
+   Mostramos el error real en consola,
+   pero mantenemos el mensaje limpio
+   para el usuario.
+*/
 
 msgEl.textContent =
 "No se ha podido apuntar la pareja.";
@@ -1475,7 +1336,7 @@ loginMsg.textContent =
 
 
 /* =====================================================
-   SESIÓN
+   COMPROBAR SESIÓN
    ===================================================== */
 
 
@@ -1537,7 +1398,11 @@ await loadAdminPairs();
 
 
 /* =====================================================
-   CARGAR ADMIN
+   CARGAR ADMINISTRACIÓN
+   =====================================================
+
+   Aquí SÍ obtenemos telefono porque
+   el usuario ya está autenticado.
    ===================================================== */
 
 
@@ -1554,8 +1419,12 @@ data,
 error
 } =
 await supabaseClient
+
 .from(TABLE)
-.select("*");
+
+.select(
+'identificación,Jugador1,Jugador2,telefono,creado_en'
+);
 
 
 if(error){
@@ -1584,7 +1453,7 @@ adminRows.map(
 function(row,index){
 
 const telefono =
-getTelefono(row);
+row.telefono || "";
 
 
 return `
@@ -1592,6 +1461,7 @@ return `
 <div
 class="adminpair"
 >
+
 
 <div class="adminnames">
 
@@ -1732,7 +1602,7 @@ adminList.innerHTML =
 
 
 /* =====================================================
-   EDITAR
+   ABRIR EDICIÓN
    ===================================================== */
 
 
@@ -1848,52 +1718,14 @@ return;
 }
 
 
-/*
-   AQUÍ ESTÁ LA CLAVE.
-
-   Averiguamos el nombre REAL de la columna
-   del teléfono a partir de la fila original.
-*/
-
-const columnaTelefono =
-detectarColumnaTelefono(
-original
-);
-
-
-if(!columnaTelefono){
-
-alert(
-"No he podido identificar la columna del teléfono."
-);
-
-return;
-
-}
-
-
 try{
 
-
-const cambios = {
-
-Jugador1:
-jugador1,
-
-Jugador2:
-jugador2
-
-};
-
-
 /*
-   Utilizamos exactamente el nombre real
-   que devuelve Supabase.
+   Usamos la identificación real
+   de la fila.
+
+   Ya NO buscamos por los nombres.
 */
-
-cambios[columnaTelefono] =
-telefono;
-
 
 const {
 data,
@@ -1903,19 +1735,27 @@ await supabaseClient
 
 .from(TABLE)
 
-.update(cambios)
+.update({
+
+Jugador1:
+jugador1,
+
+Jugador2:
+jugador2,
+
+telefono:
+telefono
+
+})
 
 .eq(
-"Jugador1",
-original.Jugador1
+"identificación",
+original["identificación"]
 )
 
-.eq(
-"Jugador2",
-original.Jugador2
-)
-
-.select();
+.select(
+'identificación,Jugador1,Jugador2,telefono,creado_en'
+);
 
 
 if(error){
@@ -1925,12 +1765,6 @@ throw error;
 }
 
 
-/*
-   Si no devuelve ninguna fila significa
-   que RLS/políticas no permiten actualizar
-   o que no encontró la pareja.
-*/
-
 if(
 !data ||
 !data.length
@@ -1938,7 +1772,7 @@ if(
 
 throw new Error(
 "No se ha actualizado ninguna fila. " +
-"Comprueba las políticas UPDATE de Supabase."
+"Comprueba la política UPDATE de Supabase."
 );
 
 }
@@ -1974,7 +1808,7 @@ error.message
 
 
 /* =====================================================
-   BORRAR
+   BORRAR PAREJA
    ===================================================== */
 
 
@@ -2019,6 +1853,10 @@ return;
 
 try{
 
+/*
+   Borramos por identificación,
+   nunca por nombres.
+*/
 
 const {
 data,
@@ -2031,16 +1869,13 @@ await supabaseClient
 .delete()
 
 .eq(
-"Jugador1",
-original.Jugador1
+"identificación",
+original["identificación"]
 )
 
-.eq(
-"Jugador2",
-original.Jugador2
-)
-
-.select();
+.select(
+'identificación'
+);
 
 
 if(error){
@@ -2057,7 +1892,7 @@ if(
 
 throw new Error(
 "No se ha borrado ninguna fila. " +
-"Comprueba las políticas DELETE de Supabase."
+"Comprueba la política DELETE de Supabase."
 );
 
 }
@@ -2145,7 +1980,7 @@ addPair
 
 
 /* =====================================================
-   ENTER
+   ENTER EN TELÉFONO
    ===================================================== */
 
 
