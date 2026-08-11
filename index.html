@@ -290,9 +290,7 @@ footer{
   <b>5 € por persona</b>
 </div>
 
-<!-- ========================= -->
 <!-- FORMULARIO PÚBLICO -->
-<!-- ========================= -->
 
 <section class="card">
 
@@ -340,9 +338,7 @@ footer{
 </section>
 
 
-<!-- ========================= -->
 <!-- LISTADO PÚBLICO -->
-<!-- ========================= -->
 
 <section class="card" style="margin-top:18px">
 
@@ -365,9 +361,7 @@ footer{
 </section>
 
 
-<!-- ========================= -->
 <!-- ADMINISTRADOR -->
-<!-- ========================= -->
 
 <div class="admin">
 
@@ -423,7 +417,7 @@ footer{
   </div>
 
 
-  <!-- PANEL CONECTADO -->
+  <!-- ADMIN CONECTADO -->
 
   <div id="connectedSection" style="display:none">
 
@@ -445,7 +439,8 @@ footer{
       </div>
     </div>
 
-    <!-- EDITAR -->
+
+    <!-- EDICIÓN -->
 
     <div id="editBox" class="edit-box" style="display:none">
 
@@ -497,6 +492,7 @@ footer{
 
     </div>
 
+
     <button id="logoutBtn" class="logout-btn">
       Cerrar sesión
     </button>
@@ -516,7 +512,7 @@ footer{
 <script>
 
 /* ==========================================
-   CONFIGURACIÓN SUPABASE
+   SUPABASE
 ========================================== */
 
 const SUPABASE_URL =
@@ -526,6 +522,21 @@ const SUPABASE_KEY =
   "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
 
 const TABLE = "Parejas";
+
+
+/*
+   MUY IMPORTANTE:
+
+   En tu tabla la columna se llama:
+
+   identificación
+
+   con tilde.
+
+   Por eso usamos exactamente ese nombre.
+*/
+
+const ID_COLUMN = "identificación";
 
 
 /* ==========================================
@@ -558,7 +569,7 @@ const adminList =
 
 
 /* ==========================================
-   SESIÓN ADMINISTRADOR
+   TOKEN ADMIN
 ========================================== */
 
 let adminToken =
@@ -594,27 +605,6 @@ function adminHeaders(extra = {}){
 
 
 /* ==========================================
-   OCULTAR TELÉFONO PARA EL PÚBLICO
-========================================== */
-
-function maskPhone(phone){
-
-  if(!phone){
-    return "";
-  }
-
-  const s = String(phone);
-
-  if(s.length <= 4){
-    return "••••";
-  }
-
-  return "••••••" + s.slice(-4);
-
-}
-
-
-/* ==========================================
    ESCAPAR HTML
 ========================================== */
 
@@ -639,6 +629,27 @@ function escapeHtml(s){
 
 
 /* ==========================================
+   OCULTAR TELÉFONO PÚBLICO
+========================================== */
+
+function maskPhone(phone){
+
+  if(!phone){
+    return "";
+  }
+
+  const s = String(phone);
+
+  if(s.length <= 4){
+    return "••••";
+  }
+
+  return "••••••" + s.slice(-4);
+
+}
+
+
+/* ==========================================
    CARGAR PAREJAS PÚBLICAS
 ========================================== */
 
@@ -646,24 +657,41 @@ async function loadPairs(){
 
   try{
 
+    /*
+      Aquí NO necesitamos el identificador.
+      Así evitamos exponerlo públicamente.
+    */
+
+    const url =
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}` +
+      `?select=Jugador1,Jugador2,telefono` +
+      `&order=creado_en.asc`;
+
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?select=identificacion,Jugador1,Jugador2,telefono&order=creado_en.asc`,
+      url,
       {
         headers: publicHeaders()
       }
     );
 
+
     if(!r.ok){
 
-      const errorText = await r.text();
+      const errorText =
+        await r.text();
 
       throw new Error(errorText);
 
     }
 
-    const rows = await r.json();
 
-    countEl.textContent = rows.length;
+    const rows =
+      await r.json();
+
+
+    countEl.textContent =
+      rows.length;
+
 
     if(!rows.length){
 
@@ -674,29 +702,34 @@ async function loadPairs(){
 
     }
 
-    listEl.innerHTML = rows.map(function(x){
 
-      return `
-        <div class="pair">
+    listEl.innerHTML =
+      rows.map(function(x){
 
-          ${escapeHtml(x.Jugador1)}
-          -
-          ${escapeHtml(x.Jugador2)}
+        return `
+          <div class="pair">
 
-          <span class="phone-public">
-            📞 ${escapeHtml(maskPhone(x.telefono))}
-          </span>
+            ${escapeHtml(x.Jugador1)}
+            -
+            ${escapeHtml(x.Jugador2)}
 
-        </div>
-      `;
+            <span class="phone-public">
+              📞 ${escapeHtml(maskPhone(x.telefono))}
+            </span>
 
-    }).join("");
+          </div>
+        `;
+
+      }).join("");
 
   }
 
   catch(e){
 
-    console.error(e);
+    console.error(
+      "Error cargando parejas:",
+      e
+    );
 
     countEl.textContent = "0";
 
@@ -723,11 +756,14 @@ async function addPair(){
   const telefono =
     document.getElementById("telefono").value.trim();
 
+
   msgEl.textContent = "";
+
 
   if(!j1 || !j2 || !telefono){
 
-    msgEl.className = "status error";
+    msgEl.className =
+      "status error";
 
     msgEl.textContent =
       "Escribe los dos nombres y el teléfono.";
@@ -750,7 +786,7 @@ async function addPair(){
       {
         method:"POST",
 
-        headers: publicHeaders({
+        headers:publicHeaders({
           "Prefer":"return=minimal"
         }),
 
@@ -773,9 +809,14 @@ async function addPair(){
     }
 
 
-    document.getElementById("jugador1").value = "";
-    document.getElementById("jugador2").value = "";
-    document.getElementById("telefono").value = "";
+    document.getElementById("jugador1").value =
+      "";
+
+    document.getElementById("jugador2").value =
+      "";
+
+    document.getElementById("telefono").value =
+      "";
 
 
     msgEl.className =
@@ -827,7 +868,6 @@ async function loginAdmin(){
 
   const loginMsg =
     document.getElementById("loginMsg");
-
 
   if(!email || !password){
 
@@ -898,7 +938,6 @@ async function loginAdmin(){
 
     showAdminConnected();
 
-
   }
 
   catch(e){
@@ -926,7 +965,7 @@ async function loginAdmin(){
 
 
 /* ==========================================
-   MOSTRAR ADMIN CONECTADO
+   ADMIN CONECTADO
 ========================================== */
 
 function showAdminConnected(){
@@ -954,8 +993,26 @@ async function loadAdminPairs(){
 
   try{
 
+    /*
+      Aquí SÍ necesitamos el identificador.
+      Lo pedimos usando el nombre exacto
+      de la columna: identificación.
+    */
+
+    const selectFields =
+      encodeURIComponent(
+        `${ID_COLUMN},Jugador1,Jugador2,telefono,creado_en`
+      );
+
+
+    const url =
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}` +
+      `?select=${selectFields}` +
+      `&order=creado_en.asc`;
+
+
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?select=identificacion,Jugador1,Jugador2,telefono,creado_en&order=creado_en.asc`,
+      url,
       {
         headers:adminHeaders()
       }
@@ -989,6 +1046,10 @@ async function loadAdminPairs(){
     adminList.innerHTML =
       rows.map(function(x){
 
+        const id =
+          x[ID_COLUMN];
+
+
         return `
 
           <div class="admin-row">
@@ -1007,14 +1068,19 @@ async function loadAdminPairs(){
 
               <button
                 class="edit-btn"
-                onclick="editPair(${x.identificacion}, '${escapeHtml(x.Jugador1)}', '${escapeHtml(x.Jugador2)}', '${escapeHtml(x.telefono || "")}')"
+                data-id="${escapeHtml(id)}"
+                data-j1="${escapeHtml(x.Jugador1)}"
+                data-j2="${escapeHtml(x.Jugador2)}"
+                data-phone="${escapeHtml(x.telefono || "")}"
+                onclick="startEditFromButton(this)"
               >
                 ✏️ Editar
               </button>
 
               <button
                 class="delete-btn"
-                onclick="deletePair(${x.identificacion})"
+                data-id="${escapeHtml(id)}"
+                onclick="deletePairFromButton(this)"
               >
                 🗑️ Borrar
               </button>
@@ -1031,7 +1097,10 @@ async function loadAdminPairs(){
 
   catch(e){
 
-    console.error(e);
+    console.error(
+      "Error admin:",
+      e
+    );
 
     adminList.innerHTML =
       '<div class="status error">No se han podido cargar las parejas.</div>';
@@ -1042,27 +1111,35 @@ async function loadAdminPairs(){
 
 
 /* ==========================================
-   EDITAR PAREJA
+   PREPARAR EDICIÓN
 ========================================== */
 
-function editPair(
-  id,
-  jugador1,
-  jugador2,
-  telefono
-){
+function startEditFromButton(button){
+
+  const id =
+    button.dataset.id;
+
+  const j1 =
+    button.dataset.j1;
+
+  const j2 =
+    button.dataset.j2;
+
+  const phone =
+    button.dataset.phone;
+
 
   document.getElementById("editId").value =
     id;
 
   document.getElementById("editJugador1").value =
-    jugador1;
+    j1;
 
   document.getElementById("editJugador2").value =
-    jugador2;
+    j2;
 
   document.getElementById("editTelefono").value =
-    telefono;
+    phone;
 
 
   document.getElementById("editBox").style.display =
@@ -1073,6 +1150,20 @@ function editPair(
     behavior:"smooth",
     block:"center"
   });
+
+}
+
+
+/* ==========================================
+   BORRAR DESDE BOTÓN
+========================================== */
+
+function deletePairFromButton(button){
+
+  const id =
+    button.dataset.id;
+
+  deletePair(id);
 
 }
 
@@ -1123,8 +1214,17 @@ async function saveEdit(){
 
   try{
 
+    /*
+      IMPORTANTE:
+      usamos la columna real "identificación"
+    */
+
+    const filter =
+      `${encodeURIComponent(ID_COLUMN)}=eq.${encodeURIComponent(id)}`;
+
+
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?identificacion=eq.${encodeURIComponent(id)}`,
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?${filter}`,
       {
         method:"PATCH",
 
@@ -1207,17 +1307,20 @@ async function deletePair(id){
       "¿Seguro que quieres borrar esta pareja?\n\nEsta acción no se puede deshacer."
     );
 
+
   if(!confirmar){
-
     return;
-
   }
 
 
   try{
 
+    const filter =
+      `${encodeURIComponent(ID_COLUMN)}=eq.${encodeURIComponent(id)}`;
+
+
     const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?identificacion=eq.${encodeURIComponent(id)}`,
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?${filter}`,
       {
         method:"DELETE",
 
@@ -1282,7 +1385,7 @@ document
   .getElementById("logoutBtn")
   .addEventListener(
     "click",
-    async function(){
+    function(){
 
       adminToken = "";
 
@@ -1307,7 +1410,7 @@ document
 
 
 /* ==========================================
-   ABRIR ADMINISTRACIÓN
+   ABRIR ADMIN
 ========================================== */
 
 document
