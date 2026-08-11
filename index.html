@@ -5,13 +5,10 @@
 
 <meta charset="UTF-8">
 
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1,viewport-fit=cover"
->
+<meta name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover">
 
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
-
 
 <style>
 
@@ -204,13 +201,14 @@ button:disabled{
 }
 
 .adminnames{
-  font-size:19px;
+  font-size:20px;
   font-weight:700;
-  margin-bottom:6px;
+  margin-bottom:8px;
 }
 
 .adminphone{
   color:#4b5563;
+  font-size:18px;
   margin-bottom:12px;
 }
 
@@ -299,8 +297,6 @@ footer{
 <div class="wrap">
 
 
-<!-- CABECERA -->
-
 <section class="hero">
 
   <h1>🎾 Torneo Pádel (Adultos)</h1>
@@ -311,8 +307,6 @@ footer{
 
 </section>
 
-
-<!-- HORARIOS -->
 
 <div class="times">
 
@@ -329,8 +323,6 @@ footer{
 </div>
 
 
-<!-- INFORMACIÓN -->
-
 <div class="card info">
 
   🏆 Premios y sorteos · 💶 Inscripción:
@@ -339,7 +331,7 @@ footer{
 </div>
 
 
-<!-- FORMULARIO PÚBLICO -->
+<!-- FORMULARIO -->
 
 <section class="card">
 
@@ -393,10 +385,7 @@ footer{
 
 <!-- LISTADO PÚBLICO -->
 
-<section
-  class="card"
-  style="margin-top:18px"
->
+<section class="card" style="margin-top:18px">
 
   <div class="count">
 
@@ -404,20 +393,14 @@ footer{
       Parejas apuntadas
     </h2>
 
-    <span
-      id="count"
-      class="badge"
-    >
+    <span id="count" class="badge">
       0
     </span>
 
   </div>
 
 
-  <div
-    id="list"
-    class="list"
-  >
+  <div id="list" class="list">
 
     <div class="status">
       Cargando parejas...
@@ -428,26 +411,18 @@ footer{
 </section>
 
 
-<!-- ACCESO ADMINISTRADOR -->
+<!-- ADMIN -->
 
 <div class="admin">
 
-  <a
-    href="#"
-    id="adminLink"
-  >
+  <a href="#" id="adminLink">
     🔐 Acceso administrador
   </a>
 
 </div>
 
 
-<!-- PANEL ADMINISTRADOR -->
-
-<div
-  id="adminPanel"
-  class="adminpanel card"
->
+<div id="adminPanel" class="adminpanel card">
 
 
   <!-- LOGIN -->
@@ -492,45 +467,36 @@ footer{
     </button>
 
 
-    <button
-      id="cancelLogin"
-      class="cancelbtn"
-    >
+    <button id="cancelLogin" class="cancelbtn">
       Cancelar
     </button>
 
 
-    <div
-      id="loginMsg"
-      class="status"
-    ></div>
+    <div id="loginMsg" class="status"></div>
 
   </div>
 
 
-  <!-- ADMINISTRADOR CONECTADO -->
+  <!-- ADMIN CONECTADO -->
 
-  <div
-    id="adminContent"
-    class="hidden"
-  >
+  <div id="adminContent" class="hidden">
 
     <h2 class="admin-title">
       🔐 Administración
     </h2>
 
 
-    <div
-      style="
-        background:#ecfdf5;
-        color:#166534;
-        padding:14px 16px;
-        border-radius:16px;
-        font-weight:600;
-        margin-bottom:18px;
-      "
-    >
+    <div style="
+      background:#ecfdf5;
+      color:#166534;
+      padding:14px 16px;
+      border-radius:16px;
+      font-weight:600;
+      margin-bottom:18px;
+    ">
+
       ✅ Administrador conectado
+
     </div>
 
 
@@ -539,10 +505,7 @@ footer{
     </h2>
 
 
-    <div
-      id="adminList"
-      class="list"
-    >
+    <div id="adminList" class="list">
 
       <div class="status">
         Cargando parejas...
@@ -551,10 +514,7 @@ footer{
     </div>
 
 
-    <button
-      id="logoutBtn"
-      class="logout"
-    >
+    <button id="logoutBtn" class="logout">
       Cerrar sesión
     </button>
 
@@ -571,8 +531,6 @@ footer{
 </div>
 
 
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -580,7 +538,7 @@ footer{
 
 
 /* =====================================================
-   CONFIGURACIÓN
+   SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -616,9 +574,6 @@ const msgEl =
 const addBtn =
   document.getElementById("add");
 
-const adminLink =
-  document.getElementById("adminLink");
-
 const adminPanel =
   document.getElementById("adminPanel");
 
@@ -633,7 +588,7 @@ const adminList =
 
 
 /* =====================================================
-   ESCAPAR HTML
+   SEGURIDAD HTML
 ===================================================== */
 
 function escapeHtml(value){
@@ -658,6 +613,7 @@ function escapeHtml(value){
 
 /* =====================================================
    CARGAR PAREJAS PÚBLICAS
+   SOLO NOMBRES
 ===================================================== */
 
 async function loadPairs(){
@@ -666,44 +622,31 @@ async function loadPairs(){
 
     const result =
       await supabaseClient
-
         .from(TABLE)
-
-        .select(
-          'Jugador1,Jugador2,"teléfono",creado_en'
-        )
-
-        .order(
-          "creado_en",
-          {
-            ascending:true
-          }
-        );
+        .select("Jugador1,Jugador2");
 
 
-    const data =
-      result.data;
+    if(result.error){
 
-    const error =
-      result.error;
+      console.error(
+        "ERROR REAL AL CARGAR PAREJAS:",
+        result.error
+      );
 
-
-    if(error){
-
-      throw error;
+      throw result.error;
 
     }
 
 
     const rows =
-      data || [];
+      result.data || [];
 
 
     countEl.textContent =
       rows.length;
 
 
-    if(!rows.length){
+    if(rows.length === 0){
 
       listEl.innerHTML =
         '<div class="status">Todavía no hay parejas apuntadas.</div>';
@@ -717,15 +660,11 @@ async function loadPairs(){
       rows.map(function(row){
 
         return `
-
           <div class="pair">
-
             ${escapeHtml(row.Jugador1)}
             -
             ${escapeHtml(row.Jugador2)}
-
           </div>
-
         `;
 
       }).join("");
@@ -737,6 +676,7 @@ async function loadPairs(){
       "Error cargando parejas:",
       error
     );
+
 
     listEl.innerHTML =
       '<div class="status error">No se han podido cargar las parejas.</div>';
@@ -805,9 +745,7 @@ async function addPair(){
 
     const result =
       await supabaseClient
-
         .from(TABLE)
-
         .insert({
 
           Jugador1:
@@ -824,24 +762,19 @@ async function addPair(){
 
     if(result.error){
 
+      console.error(
+        "ERROR REAL AL INSERTAR:",
+        result.error
+      );
+
       throw result.error;
 
     }
 
 
-    document
-      .getElementById("jugador1")
-      .value = "";
-
-
-    document
-      .getElementById("jugador2")
-      .value = "";
-
-
-    document
-      .getElementById("telefono")
-      .value = "";
+    document.getElementById("jugador1").value = "";
+    document.getElementById("jugador2").value = "";
+    document.getElementById("telefono").value = "";
 
 
     msgEl.className =
@@ -855,7 +788,7 @@ async function addPair(){
 
 
     if(
-      adminContent.classList.contains("hidden") === false
+      !adminContent.classList.contains("hidden")
     ){
 
       await loadAdminPairs();
@@ -890,36 +823,38 @@ async function addPair(){
 
 
 /* =====================================================
-   ABRIR ADMINISTRACIÓN
+   ABRIR ADMIN
 ===================================================== */
 
-adminLink.addEventListener(
-  "click",
-  async function(event){
+document
+  .getElementById("adminLink")
+  .addEventListener(
+    "click",
+    async function(event){
 
-    event.preventDefault();
+      event.preventDefault();
 
 
-    if(
-      adminPanel.style.display === "block"
-    ){
+      if(
+        adminPanel.style.display === "block"
+      ){
+
+        adminPanel.style.display =
+          "none";
+
+        return;
+
+      }
+
 
       adminPanel.style.display =
-        "none";
+        "block";
 
-      return;
+
+      await checkSession();
 
     }
-
-
-    adminPanel.style.display =
-      "block";
-
-
-    await checkSession();
-
-  }
-);
+  );
 
 
 /* =====================================================
@@ -1025,7 +960,7 @@ async function login(){
   }catch(error){
 
     console.error(
-      "Error de login:",
+      "Error login:",
       error
     );
 
@@ -1105,7 +1040,8 @@ async function showAdmin(){
 
 
 /* =====================================================
-   CARGAR PAREJAS EN ADMIN
+   CARGAR ADMIN
+   AQUÍ SÍ MOSTRAMOS TELÉFONO
 ===================================================== */
 
 async function loadAdminPairs(){
@@ -1122,36 +1058,27 @@ async function loadAdminPairs(){
         .from(TABLE)
 
         .select(
-          'identificacion,creado_en,Jugador1,Jugador2,"teléfono"'
-        )
-
-        .order(
-          "creado_en",
-          {
-            ascending:true
-          }
+          'identificacion,Jugador1,Jugador2,"teléfono"'
         );
 
 
-    const data =
-      result.data;
+    if(result.error){
 
-    const error =
-      result.error;
+      console.error(
+        "ERROR REAL ADMIN:",
+        result.error
+      );
 
-
-    if(error){
-
-      throw error;
+      throw result.error;
 
     }
 
 
     const rows =
-      data || [];
+      result.data || [];
 
 
-    if(!rows.length){
+    if(rows.length === 0){
 
       adminList.innerHTML =
         '<div class="status">No hay parejas inscritas.</div>';
@@ -1186,8 +1113,7 @@ async function loadAdminPairs(){
 
             <div class="adminphone">
 
-              📞
-              ${escapeHtml(row["teléfono"])}
+              📞 ${escapeHtml(row["teléfono"])}
 
             </div>
 
@@ -1279,6 +1205,7 @@ async function loadAdminPairs(){
       error
     );
 
+
     adminList.innerHTML =
       '<div class="status error">No se han podido cargar las parejas.</div>';
 
@@ -1288,7 +1215,7 @@ async function loadAdminPairs(){
 
 
 /* =====================================================
-   ABRIR EDICIÓN
+   EDITAR
 ===================================================== */
 
 window.editPair =
@@ -1336,55 +1263,37 @@ window.cancelEdit =
 
 
 /* =====================================================
-   GUARDAR CAMBIOS
+   GUARDAR EDICIÓN
 ===================================================== */
 
 window.savePair =
   async function(id){
 
-    const jugador1El =
-      document.getElementById(
-        "edit-j1-" + id
-      );
-
-
-    const jugador2El =
-      document.getElementById(
-        "edit-j2-" + id
-      );
-
-
-    const telefonoEl =
-      document.getElementById(
-        "edit-tel-" + id
-      );
-
-
-    if(
-      !jugador1El ||
-      !jugador2El ||
-      !telefonoEl
-    ){
-
-      alert(
-        "No se han encontrado los campos de edición."
-      );
-
-      return;
-
-    }
-
-
     const jugador1 =
-      jugador1El.value.trim();
+      document
+        .getElementById(
+          "edit-j1-" + id
+        )
+        .value
+        .trim();
 
 
     const jugador2 =
-      jugador2El.value.trim();
+      document
+        .getElementById(
+          "edit-j2-" + id
+        )
+        .value
+        .trim();
 
 
     const telefono =
-      telefonoEl.value.trim();
+      document
+        .getElementById(
+          "edit-tel-" + id
+        )
+        .value
+        .trim();
 
 
     if(
@@ -1430,6 +1339,11 @@ window.savePair =
 
       if(result.error){
 
+        console.error(
+          "ERROR REAL ACTUALIZANDO:",
+          result.error
+        );
+
         throw result.error;
 
       }
@@ -1448,7 +1362,7 @@ window.savePair =
     }catch(error){
 
       console.error(
-        "Error actualizando pareja:",
+        "Error actualizando:",
         error
       );
 
@@ -1463,19 +1377,17 @@ window.savePair =
 
 
 /* =====================================================
-   BORRAR PAREJA
+   BORRAR
 ===================================================== */
 
 window.deletePair =
   async function(id){
 
-    const confirmar =
-      confirm(
+    if(
+      !confirm(
         "¿Seguro que quieres borrar esta pareja?"
-      );
-
-
-    if(!confirmar){
+      )
+    ){
 
       return;
 
@@ -1499,6 +1411,11 @@ window.deletePair =
 
       if(result.error){
 
+        console.error(
+          "ERROR REAL BORRANDO:",
+          result.error
+        );
+
         throw result.error;
 
       }
@@ -1517,7 +1434,7 @@ window.deletePair =
     }catch(error){
 
       console.error(
-        "Error borrando pareja:",
+        "Error borrando:",
         error
       );
 
@@ -1532,7 +1449,7 @@ window.deletePair =
 
 
 /* =====================================================
-   CERRAR SESIÓN
+   LOGOUT
 ===================================================== */
 
 document
@@ -1548,20 +1465,13 @@ document
         "hidden"
       );
 
-
       loginBox.classList.remove(
         "hidden"
       );
 
 
-      document
-        .getElementById("email")
-        .value = "";
-
-
-      document
-        .getElementById("password")
-        .value = "";
+      document.getElementById("email").value = "";
+      document.getElementById("password").value = "";
 
     }
   );
@@ -1578,33 +1488,10 @@ addBtn.addEventListener(
 
 
 /* =====================================================
-   ENTER EN TELÉFONO
-===================================================== */
-
-document
-  .getElementById("telefono")
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key === "Enter"
-      ){
-
-        addPair();
-
-      }
-
-    }
-  );
-
-
-/* =====================================================
    CARGA INICIAL
 ===================================================== */
 
 loadPairs();
-
 
 </script>
 
