@@ -12,7 +12,6 @@
 
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
-
 <style>
 
 *{
@@ -165,6 +164,17 @@ button:disabled{
   color:#b91c1c;
 }
 
+.error-detail{
+  margin-top:8px;
+  padding:10px;
+  background:#fff1f2;
+  border-radius:12px;
+  font-size:13px;
+  color:#991b1b;
+  text-align:left;
+  word-break:break-word;
+}
+
 .admin{
   margin-top:24px;
   text-align:center;
@@ -277,17 +287,6 @@ footer{
   background:#6b7280;
 }
 
-.error-detail{
-  margin-top:8px;
-  padding:10px;
-  background:#fff1f2;
-  border-radius:12px;
-  font-size:13px;
-  color:#991b1b;
-  text-align:left;
-  word-break:break-word;
-}
-
 @media(max-width:500px){
 
   h1{
@@ -315,6 +314,10 @@ footer{
 <div class="wrap">
 
 
+<!-- =====================================================
+     CABECERA
+     ===================================================== -->
+
 <section class="hero">
 
 <h1>
@@ -327,6 +330,10 @@ Semana Cultural Jemenuño
 
 </section>
 
+
+<!-- =====================================================
+     HORARIOS
+     ===================================================== -->
 
 <div class="times">
 
@@ -354,6 +361,10 @@ Viernes 21
 </div>
 
 
+<!-- =====================================================
+     INFORMACIÓN
+     ===================================================== -->
+
 <div class="card info">
 
 🏆 Premios y sorteos · 💶 Inscripción:
@@ -364,6 +375,10 @@ Viernes 21
 
 </div>
 
+
+<!-- =====================================================
+     FORMULARIO
+     ===================================================== -->
 
 <section class="card">
 
@@ -420,16 +435,22 @@ class="status"
 </section>
 
 
+<!-- =====================================================
+     LISTADO PÚBLICO
+     ===================================================== -->
+
 <section
 class="card"
 style="margin-top:18px"
 >
+
 
 <div class="count">
 
 <h2 style="margin:0">
 Parejas apuntadas
 </h2>
+
 
 <span
 id="count"
@@ -452,8 +473,13 @@ Cargando parejas...
 
 </div>
 
+
 </section>
 
+
+<!-- =====================================================
+     ACCESO ADMIN
+     ===================================================== -->
 
 <div class="admin">
 
@@ -467,11 +493,17 @@ id="adminLink"
 </div>
 
 
+<!-- =====================================================
+     PANEL ADMIN
+     ===================================================== -->
+
 <div
 id="adminPanel"
 class="adminpanel card"
 >
 
+
+<!-- LOGIN -->
 
 <div id="loginBox">
 
@@ -531,6 +563,8 @@ class="status"
 
 </div>
 
+
+<!-- ADMIN CONECTADO -->
 
 <div
 id="adminContent"
@@ -598,6 +632,10 @@ Semana Cultural Jemenuño
 </div>
 
 
+<!-- =====================================================
+     SUPABASE
+     ===================================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 
@@ -605,14 +643,16 @@ Semana Cultural Jemenuño
 
 
 /* =====================================================
-   SUPABASE
+   CONFIGURACIÓN SUPABASE
    ===================================================== */
 
 const SUPABASE_URL =
 "https://novinmgzbqtnpfjfzpqt.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
+
 
 const TABLE =
 "Parejas";
@@ -687,7 +727,7 @@ function escapeHtml(value){
 
 
 /* =====================================================
-   ERROR LEGIBLE
+   MENSAJE DE ERROR
    ===================================================== */
 
 function obtenerMensajeError(error){
@@ -708,7 +748,172 @@ function obtenerMensajeError(error){
 
 
 /* =====================================================
-   ORDENAR
+   DETECTAR COLUMNA DE TELÉFONO
+   ===================================================== */
+
+function detectarColumnaTelefono(row){
+
+  if(!row){
+    return null;
+  }
+
+
+  const keys =
+    Object.keys(row);
+
+
+  /* Primero buscamos los nombres exactos
+     que puede tener la tabla */
+
+  const exactas = [
+
+    "teléfono",
+    "Telefono",
+    "telefono",
+    "Teléfono",
+    "TELÉFONO",
+    "TELEFONO",
+    "telefonos",
+    "Teléfonos"
+
+  ];
+
+
+  for(
+    const nombre of exactas
+  ){
+
+    if(
+      keys.includes(nombre)
+    ){
+
+      return nombre;
+
+    }
+
+  }
+
+
+  /* Si no coincide exactamente,
+     buscamos cualquier columna
+     relacionada con teléfono */
+
+  const encontrada =
+    keys.find(
+      function(key){
+
+        return key
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .includes("tel");
+
+      }
+    );
+
+
+  return encontrada || null;
+
+}
+
+
+/* =====================================================
+   DETECTAR COLUMNA IDENTIFICACIÓN
+   ===================================================== */
+
+function detectarColumnaId(row){
+
+  if(!row){
+    return null;
+  }
+
+
+  const keys =
+    Object.keys(row);
+
+
+  const exactas = [
+
+    "identificación",
+    "identificacion",
+    "id",
+    "ID"
+
+  ];
+
+
+  for(
+    const nombre of exactas
+  ){
+
+    if(
+      keys.includes(nombre)
+    ){
+
+      return nombre;
+
+    }
+
+  }
+
+
+  /* Si no la encontramos por nombre,
+     buscamos una columna cuyo nombre
+     contenga id */
+
+  const encontrada =
+    keys.find(
+      function(key){
+
+        return key
+          .toLowerCase()
+          .normalize("NFD")
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .includes("identific");
+
+      }
+    );
+
+
+  return encontrada || null;
+
+}
+
+
+/* =====================================================
+   OBTENER TELÉFONO
+   ===================================================== */
+
+function getTelefono(row){
+
+  const columna =
+    detectarColumnaTelefono(row);
+
+
+  if(
+    columna &&
+    row[columna] !== undefined &&
+    row[columna] !== null
+  ){
+
+    return row[columna];
+
+  }
+
+
+  return "";
+
+}
+
+
+/* =====================================================
+   ORDENAR FILAS
    ===================================================== */
 
 function sortRows(rows){
@@ -721,10 +926,12 @@ function sortRows(rows){
           a.creado_en || 0
         ).getTime();
 
+
       const dateB =
         new Date(
           b.creado_en || 0
         ).getTime();
+
 
       return dateA - dateB;
 
@@ -735,37 +942,61 @@ function sortRows(rows){
 
 
 /* =====================================================
-   CARGAR PAREJAS
+   OBTENER TODAS LAS FILAS
+   =====================================================
+
+   IMPORTANTE:
+
+   Aquí usamos SELECT *
+   deliberadamente.
+
+   No escribimos:
+   teléfono
+   identificación
+   creado_en
+
+   porque Supabase está dando problemas
+   con la caché del esquema cuando
+   se escriben directamente esos nombres.
+
+   SELECT * ya hemos comprobado que funciona.
+   ===================================================== */
+
+async function obtenerFilas(){
+
+  const {
+    data,
+    error
+  } =
+  await supabaseClient
+    .from(TABLE)
+    .select("*");
+
+
+  if(error){
+    throw error;
+  }
+
+
+  return data || [];
+
+}
+
+
+/* =====================================================
+   CARGAR PAREJAS PÚBLICAS
    ===================================================== */
 
 async function loadPairs(){
 
   try{
 
-    const {
-      data,
-      error
-    } =
-    await supabaseClient
-      .from(TABLE)
-      .select(
-        'identificación, creado_en, "Jugador1", "Jugador2"'
-      )
-      .order(
-        "creado_en",
-        {
-          ascending:true
-        }
-      );
-
-
-    if(error){
-      throw error;
-    }
+    const filas =
+      await obtenerFilas();
 
 
     const rows =
-      sortRows(data || []);
+      sortRows(filas);
 
 
     countEl.textContent =
@@ -792,11 +1023,15 @@ async function loadPairs(){
 
             <div class="pair">
 
-              ${escapeHtml(row.Jugador1)}
+              ${escapeHtml(
+                row["Jugador1"]
+              )}
 
               -
 
-              ${escapeHtml(row.Jugador2)}
+              ${escapeHtml(
+                row["Jugador2"]
+              )}
 
             </div>
 
@@ -866,7 +1101,8 @@ async function addPair(){
       .trim();
 
 
-  msgEl.innerHTML = "";
+  msgEl.innerHTML =
+    "";
 
 
   if(
@@ -878,8 +1114,10 @@ async function addPair(){
     msgEl.className =
       "status error";
 
+
     msgEl.textContent =
       "Escribe los dos nombres y el teléfono.";
+
 
     return;
 
@@ -889,24 +1127,85 @@ async function addPair(){
   addBtn.disabled =
     true;
 
+
   addBtn.textContent =
     "Apuntando...";
 
 
   try{
 
+    /*
+       PRIMERO obtenemos las columnas reales
+       mediante SELECT *.
+    */
+
+    const filas =
+      await obtenerFilas();
+
+
+    /*
+       Como ahora mismo ya tenemos una pareja
+       en la tabla, podemos detectar directamente
+       el nombre real de la columna teléfono.
+    */
+
+    let columnaTelefono =
+      null;
+
+
+    if(
+      filas.length > 0
+    ){
+
+      columnaTelefono =
+        detectarColumnaTelefono(
+          filas[0]
+        );
+
+    }
+
+
+    /*
+       Si no hubiera filas, usamos el nombre
+       que sabemos que tiene la tabla.
+       Pero normalmente aquí habrá filas.
+    */
+
+    if(!columnaTelefono){
+
+      columnaTelefono =
+        "teléfono";
+
+    }
+
+
+    /*
+       Creamos el objeto SIN escribir
+       teléfono directamente en la consulta.
+
+       JavaScript utilizará el nombre real
+       detectado anteriormente.
+    */
+
     const datos = {
 
-      "Jugador1":
+      Jugador1:
         jugador1,
 
-      "Jugador2":
-        jugador2,
-
-      "teléfono":
-        telefono
+      Jugador2:
+        jugador2
 
     };
+
+
+    datos[columnaTelefono] =
+      telefono;
+
+
+    console.log(
+      "Insertando con columna teléfono:",
+      columnaTelefono
+    );
 
 
     const {
@@ -916,17 +1215,10 @@ async function addPair(){
     await supabaseClient
       .from(TABLE)
       .insert(datos)
-      .select(
-        'identificación, creado_en, "Jugador1", "Jugador2", "teléfono"'
-      );
+      .select("*");
 
 
     if(error){
-
-      console.error(
-        "Error al insertar pareja:",
-        error
-      );
 
       throw error;
 
@@ -934,10 +1226,14 @@ async function addPair(){
 
 
     console.log(
-      "Pareja registrada:",
+      "Pareja insertada:",
       data
     );
 
+
+    /*
+       Limpiamos formulario
+    */
 
     document
       .getElementById("jugador1")
@@ -961,6 +1257,10 @@ async function addPair(){
     msgEl.textContent =
       "✅ Pareja apuntada correctamente.";
 
+
+    /*
+       Volvemos a cargar el listado
+    */
 
     await loadPairs();
 
@@ -989,10 +1289,12 @@ async function addPair(){
 
       '</div>';
 
+
   }finally{
 
     addBtn.disabled =
       false;
+
 
     addBtn.textContent =
       "Apuntar pareja";
@@ -1105,6 +1407,7 @@ async function login(){
     loginMsg.textContent =
       "Introduce email y contraseña.";
 
+
     return;
 
   }
@@ -1161,7 +1464,7 @@ async function login(){
 
 
 /* =====================================================
-   SESIÓN
+   COMPROBAR SESIÓN
    ===================================================== */
 
 async function checkSession(){
@@ -1187,6 +1490,7 @@ async function checkSession(){
       "hidden"
     );
 
+
     adminContent.classList.add(
       "hidden"
     );
@@ -1205,6 +1509,7 @@ async function showAdmin(){
   loginBox.classList.add(
     "hidden"
   );
+
 
   adminContent.classList.remove(
     "hidden"
@@ -1230,30 +1535,18 @@ async function loadAdminPairs(){
 
   try{
 
-    const {
-      data,
-      error
-    } =
-    await supabaseClient
-      .from(TABLE)
-      .select("*")
-      .order(
-        "creado_en",
-        {
-          ascending:true
-        }
-      );
+    /*
+       IMPORTANTE:
+       SELECT *
+       y nada más.
+    */
 
-
-    if(error){
-      throw error;
-    }
+    const filas =
+      await obtenerFilas();
 
 
     adminRows =
-      sortRows(
-        data || []
-      );
+      sortRows(filas);
 
 
     if(!adminRows.length){
@@ -1262,6 +1555,7 @@ async function loadAdminPairs(){
         '<div class="status">' +
         'No hay parejas inscritas.' +
         '</div>';
+
 
       return;
 
@@ -1273,8 +1567,7 @@ async function loadAdminPairs(){
         function(row,index){
 
           const telefono =
-            row["teléfono"] ??
-            "";
+            getTelefono(row);
 
 
           return `
@@ -1285,11 +1578,15 @@ async function loadAdminPairs(){
 
               <div class="adminnames">
 
-                ${escapeHtml(row.Jugador1)}
+                ${escapeHtml(
+                  row["Jugador1"]
+                )}
 
                 -
 
-                ${escapeHtml(row.Jugador2)}
+                ${escapeHtml(
+                  row["Jugador2"]
+                )}
 
               </div>
 
@@ -1308,6 +1605,7 @@ async function loadAdminPairs(){
 
 
               <div class="adminactions">
+
 
                 <button
                   class="editbtn"
@@ -1328,6 +1626,7 @@ async function loadAdminPairs(){
 
                 </button>
 
+
               </div>
 
 
@@ -1344,7 +1643,9 @@ async function loadAdminPairs(){
 
                 <input
                   id="edit-j1-${index}"
-                  value="${escapeHtml(row.Jugador1)}"
+                  value="${escapeHtml(
+                    row["Jugador1"]
+                  )}"
                 >
 
 
@@ -1355,7 +1656,9 @@ async function loadAdminPairs(){
 
                 <input
                   id="edit-j2-${index}"
-                  value="${escapeHtml(row.Jugador2)}"
+                  value="${escapeHtml(
+                    row["Jugador2"]
+                  )}"
                 >
 
 
@@ -1367,7 +1670,9 @@ async function loadAdminPairs(){
                 <input
                   id="edit-tel-${index}"
                   type="tel"
-                  value="${escapeHtml(telefono)}"
+                  value="${escapeHtml(
+                    telefono
+                  )}"
                 >
 
 
@@ -1495,6 +1800,7 @@ async function(index){
       "No se ha encontrado la pareja."
     );
 
+
     return;
 
   }
@@ -1537,25 +1843,66 @@ async function(index){
       "Los tres campos son obligatorios."
     );
 
+
     return;
 
   }
 
 
-  const identificacion =
-    original["identificación"];
+  /*
+     Detectamos los nombres reales
+     desde la propia fila.
+  */
+
+  const columnaTelefono =
+    detectarColumnaTelefono(
+      original
+    );
+
+
+  const columnaId =
+    detectarColumnaId(
+      original
+    );
+
+
+  if(!columnaTelefono){
+
+    alert(
+      "No se ha podido identificar la columna del teléfono."
+    );
+
+
+    return;
+
+  }
+
+
+  if(!columnaId){
+
+    alert(
+      "No se ha podido identificar la columna identificadora."
+    );
+
+
+    return;
+
+  }
+
+
+  const valorId =
+    original[columnaId];
 
 
   if(
-    identificacion ===
-    undefined ||
-    identificacion ===
-    null
+    valorId === undefined ||
+    valorId === null
   ){
 
     alert(
-      "No se ha encontrado la identificación de la pareja."
+      "La identificación de la pareja no tiene valor."
     );
+
 
     return;
 
@@ -1566,16 +1913,17 @@ async function(index){
 
     const cambios = {
 
-      "Jugador1":
+      Jugador1:
         jugador1,
 
-      "Jugador2":
-        jugador2,
-
-      "teléfono":
-        telefono
+      Jugador2:
+        jugador2
 
     };
+
+
+    cambios[columnaTelefono] =
+      telefono;
 
 
     const {
@@ -1586,14 +1934,16 @@ async function(index){
       .from(TABLE)
       .update(cambios)
       .eq(
-        "identificación",
-        identificacion
+        columnaId,
+        valorId
       )
       .select("*");
 
 
     if(error){
+
       throw error;
+
     }
 
 
@@ -1658,6 +2008,7 @@ async function(index){
       "No se ha encontrado la pareja."
     );
 
+
     return;
 
   }
@@ -1668,11 +2019,11 @@ async function(index){
 
       "¿Seguro que quieres borrar esta pareja?\n\n" +
 
-      original.Jugador1 +
+      original["Jugador1"] +
 
       " - " +
 
-      original.Jugador2
+      original["Jugador2"]
 
     );
 
@@ -1684,20 +2035,42 @@ async function(index){
   }
 
 
-  const identificacion =
-    original["identificación"];
+  /*
+     Detectamos automáticamente
+     la columna identificadora.
+  */
+
+  const columnaId =
+    detectarColumnaId(
+      original
+    );
+
+
+  if(!columnaId){
+
+    alert(
+      "No se ha podido identificar la columna de identificación."
+    );
+
+
+    return;
+
+  }
+
+
+  const valorId =
+    original[columnaId];
 
 
   if(
-    identificacion ===
-    undefined ||
-    identificacion ===
-    null
+    valorId === undefined ||
+    valorId === null
   ){
 
     alert(
-      "No se ha encontrado la identificación de la pareja."
+      "La identificación de la pareja no tiene valor."
     );
+
 
     return;
 
@@ -1714,14 +2087,16 @@ async function(index){
       .from(TABLE)
       .delete()
       .eq(
-        "identificación",
-        identificacion
+        columnaId,
+        valorId
       )
       .select("*");
 
 
     if(error){
+
       throw error;
+
     }
 
 
@@ -1818,7 +2193,7 @@ addBtn.addEventListener(
 
 
 /* =====================================================
-   ENTER
+   ENTER EN TELÉFONO
    ===================================================== */
 
 document
@@ -1845,6 +2220,7 @@ document
    ===================================================== */
 
 loadPairs();
+
 
 </script>
 
