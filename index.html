@@ -3,198 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
-margin:0;
-font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-background:#f7f7f8;
-color:#111827;
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#f7f7f8;
+  color:#111827;
 }
 
 .wrap{
-max-width:760px;
-margin:auto;
-padding:18px 16px 40px;
+  max-width:760px;
+  margin:auto;
+  padding:18px 16px 40px;
 }
 
 .hero{
-background:#111827;
-color:white;
-border-radius:0 0 28px 28px;
-padding:28px 22px 30px;
-margin:-18px -16px 22px;
+  background:#111827;
+  color:white;
+  border-radius:0 0 28px 28px;
+  padding:28px 22px 30px;
+  margin:-18px -16px 22px;
 }
 
 h1{
-font-size:30px;
-margin:0 0 6px;
+  font-size:30px;
+  margin:0 0 6px;
 }
 
 .sub{
-font-size:19px;
-color:#d1d5db;
+  font-size:19px;
+  color:#d1d5db;
 }
 
 .times{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin:14px 0;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:14px 0;
 }
 
 .box,.card{
-background:white;
-border:1px solid #e5e7eb;
-border-radius:22px;
-padding:20px;
-box-shadow:0 2px 10px #00000008;
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:22px;
+  padding:20px;
+  box-shadow:0 2px 10px #00000008;
 }
 
 .box{
-text-align:center;
-font-size:18px;
+  text-align:center;
+  font-size:18px;
 }
 
 .box b{
-display:block;
-font-size:23px;
-margin-bottom:3px;
+  display:block;
+  font-size:23px;
+  margin-bottom:3px;
 }
 
 .info{
-text-align:center;
-font-size:17px;
-margin:12px 0 18px;
+  text-align:center;
+  font-size:17px;
+  margin:12px 0 18px;
 }
 
 label{
-display:block;
-font-weight:700;
-margin:16px 0 8px;
-font-size:17px;
+  display:block;
+  font-weight:700;
+  margin:16px 0 8px;
+  font-size:17px;
 }
 
 input{
-width:100%;
-padding:16px;
-border:2px solid #d1d5db;
-border-radius:16px;
-font-size:18px;
-outline:none;
+  width:100%;
+  padding:16px;
+  border:2px solid #d1d5db;
+  border-radius:16px;
+  font-size:18px;
+  outline:none;
 }
 
 input:focus{
-border-color:#111827;
+  border-color:#111827;
 }
 
 button{
-width:100%;
-border:0;
-border-radius:16px;
-padding:16px;
-font-size:18px;
-font-weight:700;
-background:#111827;
-color:#fff;
-margin-top:18px;
+  width:100%;
+  border:0;
+  border-radius:16px;
+  padding:16px;
+  font-size:18px;
+  font-weight:700;
+  background:#111827;
+  color:#fff;
+  margin-top:18px;
 }
 
 button:disabled{
-opacity:.55;
+  opacity:.55;
 }
 
 .count{
-display:flex;
-justify-content:space-between;
-align-items:center;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .badge{
-background:#eef0f3;
-border-radius:999px;
-padding:8px 14px;
-font-weight:800;
-font-size:18px;
+  background:#eef0f3;
+  border-radius:999px;
+  padding:8px 14px;
+  font-weight:800;
+  font-size:18px;
 }
 
 .list{
-margin-top:14px;
+  margin-top:14px;
 }
 
 .pair{
-padding:13px 0;
-border-bottom:1px solid #eee;
-font-size:19px;
+  padding:13px 0;
+  border-bottom:1px solid #eee;
+  font-size:19px;
+}
+
+.pair:last-child{
+  border-bottom:0;
+}
+
+.phone-public{
+  display:block;
+  color:#9ca3af;
+  font-size:14px;
+  margin-top:3px;
 }
 
 .status{
-text-align:center;
-color:#6b7280;
-padding:16px;
+  text-align:center;
+  color:#6b7280;
+  padding:16px;
 }
 
 .ok{
-color:#166534;
+  color:#166534;
 }
 
 .error{
-color:#b91c1c;
+  color:#b91c1c;
 }
 
 .admin{
-margin-top:24px;
-text-align:center;
+  margin-top:24px;
+  text-align:center;
 }
 
 .admin a{
-color:#6b7280;
-text-decoration:none;
-font-weight:700;
+  color:#6b7280;
+  text-decoration:none;
+  font-weight:700;
+  font-size:18px;
 }
 
 .adminpanel{
-display:none;
-margin-top:14px;
+  display:none;
+  margin-top:14px;
 }
 
-.adminPair{
-border:1px solid #e5e7eb;
-border-radius:18px;
-padding:16px;
-margin-top:14px;
-background:#fafafa;
+.admin-row{
+  border-bottom:1px solid #e5e7eb;
+  padding:18px 0;
 }
 
-.adminButtons{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
+.admin-row:last-child{
+  border-bottom:0;
 }
 
-.saveBtn{
-background:#166534;
+.admin-names{
+  font-size:19px;
+  font-weight:700;
+  margin-bottom:6px;
 }
 
-.deleteBtn{
-background:#b91c1c;
+.admin-phone{
+  color:#4b5563;
+  font-size:16px;
+  margin-bottom:12px;
 }
 
-.logoutBtn{
-background:#6b7280;
+.admin-actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
 
-.hidden{
-display:none;
+.admin-actions button{
+  margin-top:0;
+  padding:12px;
+  font-size:16px;
+}
+
+.edit-btn{
+  background:#374151;
+}
+
+.delete-btn{
+  background:#b91c1c;
+}
+
+.cancel-btn{
+  background:#6b7280;
+}
+
+.logout-btn{
+  background:#6b7280;
+}
+
+.login-box{
+  margin-top:14px;
+}
+
+.login-box button{
+  margin-top:12px;
+}
+
+.admin-title{
+  font-size:27px;
+  margin:0 0 15px;
+}
+
+.admin-connected{
+  background:#ecfdf5;
+  color:#166534;
+  border-radius:16px;
+  padding:14px;
+  font-weight:700;
+  margin-bottom:15px;
+}
+
+.edit-box{
+  background:#f3f4f6;
+  border-radius:18px;
+  padding:16px;
+  margin-top:14px;
+}
+
+.edit-box h3{
+  margin:0 0 10px;
 }
 
 footer{
-text-align:center;
-color:#9ca3af;
-margin-top:30px;
+  text-align:center;
+  color:#9ca3af;
+  margin-top:30px;
 }
 </style>
 </head>
@@ -204,181 +269,245 @@ margin-top:30px;
 <div class="wrap">
 
 <section class="hero">
-<h1>🎾 Torneo Pádel (Adultos)</h1>
-<div class="sub">Semana Cultural Jemenuño</div>
+  <h1>🎾 Torneo Pádel (Adultos)</h1>
+  <div class="sub">Semana Cultural Jemenuño</div>
 </section>
 
 <div class="times">
+  <div class="box">
+    <b>Jueves</b>
+    11:00 h
+  </div>
 
-<div class="box">
-<b>Jueves 19</b>
-11:00 h
-</div>
-
-<div class="box">
-<b>Viernes 20 </b>
-10:00 h
-</div>
-
+  <div class="box">
+    <b>Viernes</b>
+    10:00 h
+  </div>
 </div>
 
 <div class="card info">
-🏆 Premios y sorteos · 💶 Inscripción:
-<b>5 € por persona</b>
+  🏆 Premios y sorteos · 💶 Inscripción:
+  <b>5 € por persona</b>
 </div>
 
-
-<!-- INSCRIPCIÓN -->
+<!-- ========================= -->
+<!-- FORMULARIO PÚBLICO -->
+<!-- ========================= -->
 
 <section class="card">
 
-<label for="jugador1">
-Nombre jugador/a 1
-</label>
+  <label for="jugador1">
+    Nombre jugador/a 1
+  </label>
 
-<input
-id="jugador1"
-type="text"
-maxlength="40"
-placeholder="Nombre"
->
+  <input
+    id="jugador1"
+    type="text"
+    maxlength="40"
+    placeholder="Nombre"
+    autocomplete="name"
+  >
 
-<label for="jugador2">
-Nombre jugador/a 2
-</label>
+  <label for="jugador2">
+    Nombre jugador/a 2
+  </label>
 
-<input
-id="jugador2"
-type="text"
-maxlength="40"
-placeholder="Nombre"
->
+  <input
+    id="jugador2"
+    type="text"
+    maxlength="40"
+    placeholder="Nombre"
+  >
 
-<button id="add">
-Apuntar pareja
-</button>
+  <label for="telefono">
+    Teléfono de contacto
+  </label>
 
-<div id="msg" class="status"></div>
+  <input
+    id="telefono"
+    type="tel"
+    maxlength="20"
+    placeholder="Teléfono"
+    autocomplete="tel"
+  >
+
+  <button id="add">
+    Apuntar pareja
+  </button>
+
+  <div id="msg" class="status"></div>
 
 </section>
 
 
-<!-- PAREJAS -->
+<!-- ========================= -->
+<!-- LISTADO PÚBLICO -->
+<!-- ========================= -->
 
 <section class="card" style="margin-top:18px">
 
-<div class="count">
+  <div class="count">
+    <h2 style="margin:0">
+      Parejas apuntadas
+    </h2>
 
-<h2 style="margin:0">
-Parejas apuntadas
-</h2>
+    <span id="count" class="badge">
+      0
+    </span>
+  </div>
 
-<span id="count" class="badge">
-0
-</span>
-
-</div>
-
-<div id="list" class="list">
-<div class="status">
-Cargando parejas...
-</div>
-</div>
+  <div id="list" class="list">
+    <div class="status">
+      Cargando parejas...
+    </div>
+  </div>
 
 </section>
 
 
-<!-- ADMIN -->
+<!-- ========================= -->
+<!-- ADMINISTRADOR -->
+<!-- ========================= -->
 
 <div class="admin">
 
-<a href="#" id="adminLink">
-🔐 Acceso administrador
-</a>
+  <a href="#" id="adminLink">
+    🔐 Acceso administrador
+  </a>
 
 </div>
 
 
 <div id="adminPanel" class="adminpanel card">
 
-<h2>
-🔐 Administración
-</h2>
+  <!-- LOGIN -->
+
+  <div id="loginSection">
+
+    <h2 class="admin-title">
+      🔐 Administración
+    </h2>
+
+    <div class="login-box">
+
+      <label for="adminEmail">
+        Email
+      </label>
+
+      <input
+        id="adminEmail"
+        type="email"
+        placeholder="Email del administrador"
+        autocomplete="username"
+      >
+
+      <label for="adminPassword">
+        Contraseña
+      </label>
+
+      <input
+        id="adminPassword"
+        type="password"
+        placeholder="Contraseña"
+        autocomplete="current-password"
+      >
+
+      <button id="loginBtn">
+        Entrar
+      </button>
+
+      <div id="loginMsg" class="status"></div>
+
+    </div>
+
+  </div>
 
 
-<!-- LOGIN -->
+  <!-- PANEL CONECTADO -->
 
-<div id="loginBox">
+  <div id="connectedSection" style="display:none">
 
-<label>
-Email
-</label>
+    <h2 class="admin-title">
+      🔐 Administración
+    </h2>
 
-<input
-id="adminEmail"
-type="email"
-placeholder="Email administrador"
->
+    <div class="admin-connected">
+      ✅ Administrador conectado
+    </div>
 
-<label>
-Contraseña
-</label>
+    <h2>
+      Parejas inscritas
+    </h2>
 
-<input
-id="adminPassword"
-type="password"
-placeholder="Contraseña"
->
+    <div id="adminList">
+      <div class="status">
+        Cargando...
+      </div>
+    </div>
 
-<button id="loginBtn">
-Entrar
-</button>
+    <!-- EDITAR -->
 
-<div id="loginMsg" class="status"></div>
+    <div id="editBox" class="edit-box" style="display:none">
 
-</div>
+      <h3>
+        ✏️ Editar pareja
+      </h3>
 
+      <input type="hidden" id="editId">
 
-<!-- ADMIN LOGUEADO -->
+      <label for="editJugador1">
+        Jugador/a 1
+      </label>
 
-<div id="loggedPanel" class="hidden">
+      <input
+        id="editJugador1"
+        type="text"
+        maxlength="40"
+      >
 
-<div
-style="
-background:#f0fdf4;
-color:#166534;
-padding:14px;
-border-radius:14px;
-font-weight:700;
-"
->
-✅ Administrador conectado
-</div>
+      <label for="editJugador2">
+        Jugador/a 2
+      </label>
 
-<h3>
-Parejas inscritas
-</h3>
+      <input
+        id="editJugador2"
+        type="text"
+        maxlength="40"
+      >
 
-<div id="adminList">
-<div class="status">
-Cargando...
-</div>
-</div>
+      <label for="editTelefono">
+        Teléfono
+      </label>
 
-<button
-id="logoutBtn"
-class="logoutBtn"
->
-Cerrar sesión
-</button>
+      <input
+        id="editTelefono"
+        type="tel"
+        maxlength="20"
+      >
 
-</div>
+      <button id="saveEditBtn">
+        Guardar cambios
+      </button>
+
+      <button id="cancelEditBtn" class="cancel-btn">
+        Cancelar
+      </button>
+
+      <div id="editMsg" class="status"></div>
+
+    </div>
+
+    <button id="logoutBtn" class="logout-btn">
+      Cerrar sesión
+    </button>
+
+  </div>
 
 </div>
 
 
 <footer>
-Semana Cultural Jemenuño
+  Semana Cultural Jemenuño
 </footer>
 
 </div>
@@ -386,825 +515,865 @@ Semana Cultural Jemenuño
 
 <script>
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+/* ==========================================
+   CONFIGURACIÓN SUPABASE
+========================================== */
 
 const SUPABASE_URL =
-"https://novinmgzbqtnpfjfzpqt.supabase.co";
+  "https://novinmgzbqtnpfjfzpqt.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
+  "sb_publishable_i5KBl115MyAdjplY_R6qlg_FPqFurJC";
 
-const TABLE="Parejas";
+const TABLE = "Parejas";
 
 
-/* =====================================================
+/* ==========================================
    ELEMENTOS
-===================================================== */
+========================================== */
 
-const countEl=
-document.getElementById("count");
+const countEl =
+  document.getElementById("count");
 
-const listEl=
-document.getElementById("list");
+const listEl =
+  document.getElementById("list");
 
-const msgEl=
-document.getElementById("msg");
+const msgEl =
+  document.getElementById("msg");
 
-const addBtn=
-document.getElementById("add");
+const addBtn =
+  document.getElementById("add");
 
-const adminLink=
-document.getElementById("adminLink");
+const adminPanel =
+  document.getElementById("adminPanel");
 
-const adminPanel=
-document.getElementById("adminPanel");
+const loginSection =
+  document.getElementById("loginSection");
 
-const loginBox=
-document.getElementById("loginBox");
+const connectedSection =
+  document.getElementById("connectedSection");
 
-const loggedPanel=
-document.getElementById("loggedPanel");
-
-const loginBtn=
-document.getElementById("loginBtn");
-
-const loginMsg=
-document.getElementById("loginMsg");
-
-const adminList=
-document.getElementById("adminList");
-
-const logoutBtn=
-document.getElementById("logoutBtn");
+const adminList =
+  document.getElementById("adminList");
 
 
-let adminToken=
-sessionStorage.getItem("padel_admin_token") || null;
+/* ==========================================
+   SESIÓN ADMINISTRADOR
+========================================== */
+
+let adminToken =
+  localStorage.getItem("padel_admin_token") || "";
 
 
-/* =====================================================
+/* ==========================================
    CABECERAS
-===================================================== */
+========================================== */
 
-function publicHeaders(){
+function publicHeaders(extra = {}){
 
-return{
-"apikey":SUPABASE_KEY,
-"Authorization":"Bearer "+SUPABASE_KEY
-};
-
-}
-
-function adminHeaders(){
-
-return{
-"apikey":SUPABASE_KEY,
-"Authorization":"Bearer "+adminToken,
-"Content-Type":"application/json"
-};
+  return {
+    "apikey": SUPABASE_KEY,
+    "Authorization": "Bearer " + SUPABASE_KEY,
+    "Content-Type": "application/json",
+    ...extra
+  };
 
 }
 
 
-/* =====================================================
-   SEGURIDAD HTML
-===================================================== */
+function adminHeaders(extra = {}){
 
-function escapeHtml(text){
-
-return String(text).replace(
-/[&<>"']/g,
-function(m){
-
-return{
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-}[m];
-
-});
+  return {
+    "apikey": SUPABASE_KEY,
+    "Authorization": "Bearer " + adminToken,
+    "Content-Type": "application/json",
+    ...extra
+  };
 
 }
 
 
-/* =====================================================
-   CARGAR PAREJAS
-===================================================== */
+/* ==========================================
+   OCULTAR TELÉFONO PARA EL PÚBLICO
+========================================== */
+
+function maskPhone(phone){
+
+  if(!phone){
+    return "";
+  }
+
+  const s = String(phone);
+
+  if(s.length <= 4){
+    return "••••";
+  }
+
+  return "••••••" + s.slice(-4);
+
+}
+
+
+/* ==========================================
+   ESCAPAR HTML
+========================================== */
+
+function escapeHtml(s){
+
+  return String(s ?? "").replace(
+    /[&<>"']/g,
+    function(m){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m];
+
+    }
+  );
+
+}
+
+
+/* ==========================================
+   CARGAR PAREJAS PÚBLICAS
+========================================== */
 
 async function loadPairs(){
 
-try{
+  try{
 
-/*
- IMPORTANTE:
- Aquí NO usamos creado_en.
- Solo pedimos las dos columnas que sabemos
- que existen.
-*/
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?select=identificacion,Jugador1,Jugador2,telefono&order=creado_en.asc`,
+      {
+        headers: publicHeaders()
+      }
+    );
 
-const url=
-SUPABASE_URL+
-"/rest/v1/"+
-encodeURIComponent(TABLE)+
-"?select=Jugador1,Jugador2";
+    if(!r.ok){
 
-const r=
-await fetch(
-url,
-{
-headers:publicHeaders()
-}
-);
+      const errorText = await r.text();
 
-if(!r.ok){
+      throw new Error(errorText);
 
-const errorText=
-await r.text();
+    }
 
-console.error(
-"ERROR SUPABASE:",
-errorText
-);
+    const rows = await r.json();
 
-throw new Error(errorText);
+    countEl.textContent = rows.length;
 
-}
+    if(!rows.length){
 
-const rows=
-await r.json();
+      listEl.innerHTML =
+        '<div class="status">Todavía no hay parejas apuntadas.</div>';
 
+      return;
 
-countEl.textContent=
-rows.length;
+    }
 
+    listEl.innerHTML = rows.map(function(x){
 
-if(rows.length===0){
+      return `
+        <div class="pair">
 
-listEl.innerHTML=
-'<div class="status">Todavía no hay parejas apuntadas.</div>';
+          ${escapeHtml(x.Jugador1)}
+          -
+          ${escapeHtml(x.Jugador2)}
 
-return;
+          <span class="phone-public">
+            📞 ${escapeHtml(maskPhone(x.telefono))}
+          </span>
 
-}
+        </div>
+      `;
 
+    }).join("");
 
-listEl.innerHTML=
-rows.map(
-x=>`
-<div class="pair">
-${escapeHtml(x.Jugador1)}
--
-${escapeHtml(x.Jugador2)}
-</div>
-`
-).join("");
+  }
 
+  catch(e){
 
-}catch(error){
+    console.error(e);
 
-console.error(error);
+    countEl.textContent = "0";
 
-listEl.innerHTML=
-'<div class="status error">No se han podido cargar las parejas.</div>';
+    listEl.innerHTML =
+      '<div class="status error">No se han podido cargar las parejas.</div>';
 
-}
+  }
 
 }
 
 
-/* =====================================================
-   AÑADIR PAREJA
-===================================================== */
+/* ==========================================
+   APUNTAR PAREJA
+========================================== */
 
 async function addPair(){
 
-const j1=
-document.getElementById("jugador1")
-.value.trim();
+  const j1 =
+    document.getElementById("jugador1").value.trim();
 
-const j2=
-document.getElementById("jugador2")
-.value.trim();
+  const j2 =
+    document.getElementById("jugador2").value.trim();
 
+  const telefono =
+    document.getElementById("telefono").value.trim();
 
-msgEl.textContent="";
+  msgEl.textContent = "";
 
+  if(!j1 || !j2 || !telefono){
 
-if(!j1||!j2){
+    msgEl.className = "status error";
 
-msgEl.className=
-"status error";
+    msgEl.textContent =
+      "Escribe los dos nombres y el teléfono.";
 
-msgEl.textContent=
-"Escribe los dos nombres.";
+    return;
 
-return;
-
-}
+  }
 
 
-addBtn.disabled=true;
+  addBtn.disabled = true;
 
-addBtn.textContent=
-"Apuntando...";
-
-
-try{
-
-const r=
-await fetch(
-SUPABASE_URL+
-"/rest/v1/"+
-encodeURIComponent(TABLE),
-{
-method:"POST",
-
-headers:{
-...publicHeaders(),
-"Content-Type":"application/json",
-"Prefer":"return=minimal"
-},
-
-body:JSON.stringify({
-Jugador1:j1,
-Jugador2:j2
-})
-}
-);
+  addBtn.textContent =
+    "Apuntando...";
 
 
-if(!r.ok){
+  try{
 
-const errorText=
-await r.text();
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}`,
+      {
+        method:"POST",
 
-console.error(
-"ERROR AL INSERTAR:",
-errorText
-);
+        headers: publicHeaders({
+          "Prefer":"return=minimal"
+        }),
 
-throw new Error(errorText);
-
-}
-
-
-document.getElementById("jugador1")
-.value="";
-
-document.getElementById("jugador2")
-.value="";
+        body:JSON.stringify({
+          Jugador1:j1,
+          Jugador2:j2,
+          telefono:telefono
+        })
+      }
+    );
 
 
-msgEl.className=
-"status ok";
+    if(!r.ok){
 
-msgEl.textContent=
-"✅ Pareja apuntada correctamente.";
+      const errorText =
+        await r.text();
 
+      throw new Error(errorText);
 
-await loadPairs();
-
-
-}catch(error){
-
-console.error(error);
-
-msgEl.className=
-"status error";
-
-msgEl.textContent=
-"No se ha podido apuntar la pareja.";
-
-}
+    }
 
 
-addBtn.disabled=false;
+    document.getElementById("jugador1").value = "";
+    document.getElementById("jugador2").value = "";
+    document.getElementById("telefono").value = "";
 
-addBtn.textContent=
-"Apuntar pareja";
+
+    msgEl.className =
+      "status ok";
+
+    msgEl.textContent =
+      "✅ Pareja apuntada correctamente.";
+
+
+    await loadPairs();
+
+  }
+
+  catch(e){
+
+    console.error(e);
+
+    msgEl.className =
+      "status error";
+
+    msgEl.textContent =
+      "No se ha podido apuntar la pareja.";
+
+  }
+
+  finally{
+
+    addBtn.disabled = false;
+
+    addBtn.textContent =
+      "Apuntar pareja";
+
+  }
 
 }
 
 
-/* =====================================================
+/* ==========================================
    LOGIN ADMIN
-===================================================== */
+========================================== */
 
 async function loginAdmin(){
 
-const email=
-document.getElementById("adminEmail")
-.value.trim();
+  const email =
+    document.getElementById("adminEmail").value.trim();
 
-const password=
-document.getElementById("adminPassword")
-.value;
+  const password =
+    document.getElementById("adminPassword").value;
+
+  const loginMsg =
+    document.getElementById("loginMsg");
 
 
-if(!email||!password){
+  if(!email || !password){
 
-loginMsg.className=
-"status error";
+    loginMsg.className =
+      "status error";
 
-loginMsg.textContent=
-"Introduce email y contraseña.";
+    loginMsg.textContent =
+      "Introduce email y contraseña.";
 
-return;
+    return;
+
+  }
+
+
+  const loginBtn =
+    document.getElementById("loginBtn");
+
+  loginBtn.disabled = true;
+
+  loginBtn.textContent =
+    "Entrando...";
+
+
+  try{
+
+    const r = await fetch(
+      `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
+      {
+        method:"POST",
+
+        headers:{
+          "apikey":SUPABASE_KEY,
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+          email:email,
+          password:password
+        })
+      }
+    );
+
+
+    const data =
+      await r.json();
+
+
+    if(!r.ok){
+
+      throw new Error(
+        data.error_description ||
+        data.msg ||
+        "Error de acceso"
+      );
+
+    }
+
+
+    adminToken =
+      data.access_token;
+
+
+    localStorage.setItem(
+      "padel_admin_token",
+      adminToken
+    );
+
+
+    showAdminConnected();
+
+
+  }
+
+  catch(e){
+
+    console.error(e);
+
+    loginMsg.className =
+      "status error";
+
+    loginMsg.textContent =
+      "❌ Email o contraseña incorrectos.";
+
+  }
+
+  finally{
+
+    loginBtn.disabled = false;
+
+    loginBtn.textContent =
+      "Entrar";
+
+  }
 
 }
 
 
-loginBtn.disabled=true;
+/* ==========================================
+   MOSTRAR ADMIN CONECTADO
+========================================== */
 
-loginBtn.textContent=
-"Entrando...";
+function showAdminConnected(){
 
+  loginSection.style.display =
+    "none";
 
-try{
+  connectedSection.style.display =
+    "block";
 
-const r=
-await fetch(
-SUPABASE_URL+
-"/auth/v1/token?grant_type=password",
-{
-method:"POST",
-
-headers:{
-"apikey":SUPABASE_KEY,
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-email:email,
-password:password
-})
-}
-);
-
-
-const data=
-await r.json();
-
-
-if(!r.ok){
-
-throw new Error(
-data.message ||
-"Error de acceso"
-);
+  loadAdminPairs();
 
 }
 
 
-adminToken=
-data.access_token;
-
-
-sessionStorage.setItem(
-"padel_admin_token",
-adminToken
-);
-
-
-loginBox.classList.add(
-"hidden"
-);
-
-loggedPanel.classList.remove(
-"hidden"
-);
-
-
-await loadAdminPairs();
-
-
-}catch(error){
-
-console.error(error);
-
-loginMsg.className=
-"status error";
-
-loginMsg.textContent=
-"Email o contraseña incorrectos.";
-
-}
-
-
-loginBtn.disabled=false;
-
-loginBtn.textContent=
-"Entrar";
-
-}
-
-
-/* =====================================================
-   CARGAR ADMIN
-===================================================== */
+/* ==========================================
+   CARGAR PAREJAS ADMIN
+========================================== */
 
 async function loadAdminPairs(){
 
-try{
-
-/*
- Para leer usamos exactamente las mismas
- columnas que funcionan en la página pública.
-*/
-
-const url=
-SUPABASE_URL+
-"/rest/v1/"+
-encodeURIComponent(TABLE)+
-"?select=Jugador1,Jugador2";
+  adminList.innerHTML =
+    '<div class="status">Cargando parejas...</div>';
 
 
-const r=
-await fetch(
-url,
-{
-headers:adminHeaders()
-}
-);
+  try{
+
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?select=identificacion,Jugador1,Jugador2,telefono,creado_en&order=creado_en.asc`,
+      {
+        headers:adminHeaders()
+      }
+    );
 
 
-if(!r.ok){
+    if(!r.ok){
 
-const errorText=
-await r.text();
+      const errorText =
+        await r.text();
 
-console.error(
-"ERROR ADMIN:",
-errorText
-);
+      throw new Error(errorText);
 
-throw new Error(errorText);
-
-}
+    }
 
 
-const rows=
-await r.json();
+    const rows =
+      await r.json();
 
 
-if(rows.length===0){
+    if(!rows.length){
 
-adminList.innerHTML=
-'<div class="status">No hay parejas inscritas.</div>';
+      adminList.innerHTML =
+        '<div class="status">No hay parejas inscritas.</div>';
 
-return;
+      return;
 
-}
-
-
-adminList.innerHTML=
-rows.map(
-(x,index)=>`
-
-<div class="adminPair">
-
-<strong>
-Pareja ${index+1}
-</strong>
-
-<label>
-Jugador/a 1
-</label>
-
-<input
-id="adminJ1_${index}"
-value="${escapeHtml(x.Jugador1)}"
->
-
-<label>
-Jugador/a 2
-</label>
-
-<input
-id="adminJ2_${index}"
-value="${escapeHtml(x.Jugador2)}"
->
-
-<div class="adminButtons">
-
-<button
-class="saveBtn"
-onclick="editPair(
-'${encodeURIComponent(x.Jugador1)}',
-'${encodeURIComponent(x.Jugador2)}',
-${index}
-)"
->
-Guardar
-</button>
-
-<button
-class="deleteBtn"
-onclick="deletePair(
-'${encodeURIComponent(x.Jugador1)}',
-'${encodeURIComponent(x.Jugador2)}'
-)"
->
-Borrar
-</button>
-
-</div>
-
-</div>
-
-`
-).join("");
+    }
 
 
-}catch(error){
+    adminList.innerHTML =
+      rows.map(function(x){
 
-console.error(error);
+        return `
 
-adminList.innerHTML=
-'<div class="status error">No se han podido cargar las parejas.</div>';
+          <div class="admin-row">
 
-}
+            <div class="admin-names">
+              ${escapeHtml(x.Jugador1)}
+              -
+              ${escapeHtml(x.Jugador2)}
+            </div>
+
+            <div class="admin-phone">
+              📞 ${escapeHtml(x.telefono || "Sin teléfono")}
+            </div>
+
+            <div class="admin-actions">
+
+              <button
+                class="edit-btn"
+                onclick="editPair(${x.identificacion}, '${escapeHtml(x.Jugador1)}', '${escapeHtml(x.Jugador2)}', '${escapeHtml(x.telefono || "")}')"
+              >
+                ✏️ Editar
+              </button>
+
+              <button
+                class="delete-btn"
+                onclick="deletePair(${x.identificacion})"
+              >
+                🗑️ Borrar
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+
+  }
+
+  catch(e){
+
+    console.error(e);
+
+    adminList.innerHTML =
+      '<div class="status error">No se han podido cargar las parejas.</div>';
+
+  }
 
 }
 
 
-/* =====================================================
-   EDITAR
-===================================================== */
+/* ==========================================
+   EDITAR PAREJA
+========================================== */
 
-async function editPair(
-oldJ1,
-oldJ2,
-index
+function editPair(
+  id,
+  jugador1,
+  jugador2,
+  telefono
 ){
 
-const newJ1=
-document.getElementById(
-"adminJ1_"+index
-).value.trim();
+  document.getElementById("editId").value =
+    id;
 
-const newJ2=
-document.getElementById(
-"adminJ2_"+index
-).value.trim();
+  document.getElementById("editJugador1").value =
+    jugador1;
 
+  document.getElementById("editJugador2").value =
+    jugador2;
 
-if(!newJ1||!newJ2){
-
-alert(
-"Los dos nombres son obligatorios."
-);
-
-return;
-
-}
+  document.getElementById("editTelefono").value =
+    telefono;
 
 
-try{
-
-const url=
-SUPABASE_URL+
-"/rest/v1/"+
-encodeURIComponent(TABLE)+
-"?Jugador1=eq."+
-oldJ1+
-"&Jugador2=eq."+
-oldJ2;
+  document.getElementById("editBox").style.display =
+    "block";
 
 
-const r=
-await fetch(
-url,
-{
-method:"PATCH",
-
-headers:{
-...adminHeaders(),
-"Prefer":"return=minimal"
-},
-
-body:JSON.stringify({
-Jugador1:newJ1,
-Jugador2:newJ2
-})
-}
-);
-
-
-if(!r.ok){
-
-throw new Error(
-await r.text()
-);
+  document.getElementById("editBox").scrollIntoView({
+    behavior:"smooth",
+    block:"center"
+  });
 
 }
 
 
-alert(
-"✅ Pareja modificada."
-);
+/* ==========================================
+   GUARDAR EDICIÓN
+========================================== */
+
+async function saveEdit(){
+
+  const id =
+    document.getElementById("editId").value;
+
+  const jugador1 =
+    document.getElementById("editJugador1").value.trim();
+
+  const jugador2 =
+    document.getElementById("editJugador2").value.trim();
+
+  const telefono =
+    document.getElementById("editTelefono").value.trim();
+
+  const editMsg =
+    document.getElementById("editMsg");
 
 
-await loadPairs();
+  if(!jugador1 || !jugador2 || !telefono){
 
-await loadAdminPairs();
+    editMsg.className =
+      "status error";
+
+    editMsg.textContent =
+      "Todos los campos son obligatorios.";
+
+    return;
+
+  }
 
 
-}catch(error){
+  const saveBtn =
+    document.getElementById("saveEditBtn");
 
-console.error(error);
+  saveBtn.disabled = true;
 
-alert(
-"❌ No se ha podido modificar."
-);
+  saveBtn.textContent =
+    "Guardando...";
+
+
+  try{
+
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?identificacion=eq.${encodeURIComponent(id)}`,
+      {
+        method:"PATCH",
+
+        headers:adminHeaders({
+          "Prefer":"return=minimal"
+        }),
+
+        body:JSON.stringify({
+          Jugador1:jugador1,
+          Jugador2:jugador2,
+          telefono:telefono
+        })
+      }
+    );
+
+
+    if(!r.ok){
+
+      const errorText =
+        await r.text();
+
+      throw new Error(errorText);
+
+    }
+
+
+    editMsg.className =
+      "status ok";
+
+    editMsg.textContent =
+      "✅ Cambios guardados.";
+
+
+    await loadAdminPairs();
+
+    await loadPairs();
+
+
+    setTimeout(function(){
+
+      document.getElementById("editBox").style.display =
+        "none";
+
+    },700);
+
+  }
+
+  catch(e){
+
+    console.error(e);
+
+    editMsg.className =
+      "status error";
+
+    editMsg.textContent =
+      "❌ No se han podido guardar los cambios.";
+
+  }
+
+  finally{
+
+    saveBtn.disabled = false;
+
+    saveBtn.textContent =
+      "Guardar cambios";
+
+  }
 
 }
 
-}
+
+/* ==========================================
+   BORRAR PAREJA
+========================================== */
+
+async function deletePair(id){
+
+  const confirmar =
+    confirm(
+      "¿Seguro que quieres borrar esta pareja?\n\nEsta acción no se puede deshacer."
+    );
+
+  if(!confirmar){
+
+    return;
+
+  }
 
 
-/* =====================================================
-   BORRAR
-===================================================== */
+  try{
 
-async function deletePair(
-oldJ1,
-oldJ2
-){
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?identificacion=eq.${encodeURIComponent(id)}`,
+      {
+        method:"DELETE",
 
-const j1=
-decodeURIComponent(oldJ1);
-
-const j2=
-decodeURIComponent(oldJ2);
+        headers:adminHeaders({
+          "Prefer":"return=minimal"
+        })
+      }
+    );
 
 
-if(
-!confirm(
-`¿Quieres borrar la pareja "${j1} - ${j2}"?`
-)
-){
+    if(!r.ok){
 
-return;
+      const errorText =
+        await r.text();
 
-}
+      throw new Error(errorText);
 
-
-try{
-
-const url=
-SUPABASE_URL+
-"/rest/v1/"+
-encodeURIComponent(TABLE)+
-"?Jugador1=eq."+
-oldJ1+
-"&Jugador2=eq."+
-oldJ2;
+    }
 
 
-const r=
-await fetch(
-url,
-{
-method:"DELETE",
+    await loadAdminPairs();
 
-headers:{
-...adminHeaders(),
-"Prefer":"return=minimal"
-}
-}
-);
+    await loadPairs();
 
+  }
 
-if(!r.ok){
+  catch(e){
 
-throw new Error(
-await r.text()
-);
+    console.error(e);
+
+    alert(
+      "No se ha podido borrar la pareja."
+    );
+
+  }
 
 }
 
 
-alert(
-"✅ Pareja borrada."
-);
+/* ==========================================
+   CANCELAR EDICIÓN
+========================================== */
+
+document
+  .getElementById("cancelEditBtn")
+  .addEventListener(
+    "click",
+    function(){
+
+      document.getElementById("editBox").style.display =
+        "none";
+
+    }
+  );
 
 
-await loadPairs();
-
-await loadAdminPairs();
-
-
-}catch(error){
-
-console.error(error);
-
-alert(
-"❌ No se ha podido borrar."
-);
-
-}
-
-}
-
-
-/* =====================================================
+/* ==========================================
    CERRAR SESIÓN
-===================================================== */
+========================================== */
 
-function logoutAdmin(){
+document
+  .getElementById("logoutBtn")
+  .addEventListener(
+    "click",
+    async function(){
 
-adminToken=null;
+      adminToken = "";
 
-sessionStorage.removeItem(
-"padel_admin_token"
+      localStorage.removeItem(
+        "padel_admin_token"
+      );
+
+      loginSection.style.display =
+        "block";
+
+      connectedSection.style.display =
+        "none";
+
+      document.getElementById("adminEmail").value =
+        "";
+
+      document.getElementById("adminPassword").value =
+        "";
+
+    }
+  );
+
+
+/* ==========================================
+   ABRIR ADMINISTRACIÓN
+========================================== */
+
+document
+  .getElementById("adminLink")
+  .addEventListener(
+    "click",
+    function(e){
+
+      e.preventDefault();
+
+      const visible =
+        adminPanel.style.display === "block";
+
+
+      adminPanel.style.display =
+        visible ? "none" : "block";
+
+
+      if(!visible && adminToken){
+
+        showAdminConnected();
+
+      }
+
+    }
+  );
+
+
+/* ==========================================
+   EVENTOS
+========================================== */
+
+addBtn.addEventListener(
+  "click",
+  addPair
 );
 
-loginBox.classList.remove(
-"hidden"
-);
 
-loggedPanel.classList.add(
-"hidden"
-);
-
-}
+document
+  .getElementById("loginBtn")
+  .addEventListener(
+    "click",
+    loginAdmin
+  );
 
 
-/* =====================================================
-   ABRIR ADMIN
-===================================================== */
-
-adminLink.addEventListener(
-"click",
-function(e){
-
-e.preventDefault();
+document
+  .getElementById("saveEditBtn")
+  .addEventListener(
+    "click",
+    saveEdit
+  );
 
 
-if(
-adminPanel.style.display===
-"block"
-){
+/* ==========================================
+   ARRANQUE
+========================================== */
 
-adminPanel.style.display=
-"none";
-
-return;
-
-}
-
-
-adminPanel.style.display=
-"block";
+loadPairs();
 
 
 if(adminToken){
 
-loginBox.classList.add(
-"hidden"
-);
-
-loggedPanel.classList.remove(
-"hidden"
-);
-
-loadAdminPairs();
+  showAdminConnected();
 
 }
-
-});
-
-
-/* =====================================================
-   EVENTOS
-===================================================== */
-
-addBtn.addEventListener(
-"click",
-addPair
-);
-
-loginBtn.addEventListener(
-"click",
-loginAdmin
-);
-
-logoutBtn.addEventListener(
-"click",
-logoutAdmin
-);
-
-
-/* =====================================================
-   INICIO
-===================================================== */
-
-loadPairs();
 
 </script>
 
