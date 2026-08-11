@@ -825,19 +825,11 @@ SUPABASE_KEY
 
 
 /* =====================================================
-   NOMBRES EXACTOS DE LAS COLUMNAS
-   =====================================================
-
-   Confirmados en Supabase:
-
-   identificación
-   creado_en
-   Jugador1
-   Jugador2
-   teléfono
-
-   NO intentamos detectar ni renombrar columnas.
+   COLUMNAS REALES DE SUPABASE
    ===================================================== */
+
+const COL_ID =
+"identificación";
 
 const COL_J1 =
 "Jugador1";
@@ -846,7 +838,7 @@ const COL_J2 =
 "Jugador2";
 
 const COL_TEL =
-"teléfono";
+"num";
 
 
 /* =====================================================
@@ -928,7 +920,7 @@ escapeHtml(texto) +
 
 
 /* =====================================================
-   CARGAR PAREJAS
+   CARGAR PAREJAS PÚBLICAS
    ===================================================== */
 
 async function loadPairs(){
@@ -1073,22 +1065,15 @@ addBtn.textContent =
 try{
 
 
-/*
-   IMPORTANTE:
-
-   Usamos exactamente los nombres reales
-   de las columnas de Supabase.
-*/
-
 const datos = {
 
-Jugador1:
+[COL_J1]:
 jugador1,
 
-Jugador2:
+[COL_J2]:
 jugador2,
 
-"teléfono":
+[COL_TEL]:
 telefono
 
 };
@@ -1109,10 +1094,7 @@ throw error;
 }
 
 
-/*
-   Limpiar formulario solamente después
-   de confirmar que la inserción ha sido correcta.
-*/
+/* Limpiar formulario */
 
 document.getElementById(
 "jugador1"
@@ -1135,6 +1117,8 @@ msgEl.className =
 msgEl.textContent =
 "✅ Pareja apuntada correctamente.";
 
+
+/* Actualizar listado */
 
 await loadPairs();
 
@@ -1325,7 +1309,7 @@ loginMsg.textContent =
 
 
 /* =====================================================
-   SESIÓN
+   COMPROBAR SESIÓN
    ===================================================== */
 
 async function checkSession(){
@@ -1381,7 +1365,7 @@ await loadAdminPairs();
 
 
 /* =====================================================
-   CARGAR ADMIN
+   CARGAR PAREJAS ADMIN
    ===================================================== */
 
 async function loadAdminPairs(){
@@ -1579,7 +1563,7 @@ error.message || String(error)
 
 
 /* =====================================================
-   EDITAR
+   ABRIR EDICIÓN
    ===================================================== */
 
 window.editPair =
@@ -1695,42 +1679,35 @@ try{
 
 const cambios = {
 
-Jugador1:
+[COL_J1]:
 jugador1,
 
-Jugador2:
+[COL_J2]:
 jugador2,
 
-"teléfono":
+[COL_TEL]:
 telefono
 
 };
 
 
 /*
-   IMPORTANTE:
-
-   No utilizamos identificación.
-   No utilizamos creado_en.
-   No utilizamos .select() después del UPDATE.
-
-   Localizamos la pareja por sus dos nombres,
-   que ya sabemos que funcionan correctamente.
+   Usamos el identificador real de la fila.
+   Así no dependemos de que los nombres sean únicos.
 */
 
 const {
 error
 } =
 await supabaseClient
+
 .from(TABLE)
+
 .update(cambios)
+
 .eq(
-COL_J1,
-original[COL_J1]
-)
-.eq(
-COL_J2,
-original[COL_J2]
+COL_ID,
+original[COL_ID]
 );
 
 
@@ -1770,7 +1747,7 @@ alert(
 
 
 /* =====================================================
-   BORRAR
+   BORRAR PAREJA
    ===================================================== */
 
 window.deletePair =
@@ -1816,24 +1793,21 @@ try{
 
 
 /*
-   No utilizamos identificación.
-   No utilizamos creado_en.
-   No utilizamos .select().
+   Usamos el identificador real de la fila.
 */
 
 const {
 error
 } =
 await supabaseClient
+
 .from(TABLE)
+
 .delete()
+
 .eq(
-COL_J1,
-original[COL_J1]
-)
-.eq(
-COL_J2,
-original[COL_J2]
+COL_ID,
+original[COL_ID]
 );
 
 
@@ -1921,7 +1895,7 @@ addPair
 
 
 /* =====================================================
-   ENTER
+   ENTER EN TELÉFONO
    ===================================================== */
 
 document
