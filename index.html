@@ -12,6 +12,7 @@
 
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
+
 <style>
 
 *{
@@ -19,275 +20,444 @@
 }
 
 body{
+
   margin:0;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+
   background:#f7f7f8;
+
   color:#111827;
+
 }
 
 .wrap{
+
   max-width:760px;
+
   margin:auto;
+
   padding:18px 16px 40px;
+
 }
 
 .hero{
+
   background:#111827;
+
   color:white;
+
   border-radius:0 0 28px 28px;
+
   padding:28px 22px 30px;
+
   margin:-18px -16px 22px;
+
 }
 
 h1{
+
   font-size:30px;
+
   margin:0 0 6px;
+
 }
 
 .sub{
+
   font-size:19px;
+
   color:#d1d5db;
+
 }
 
 .times{
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:12px;
+
   margin:14px 0;
+
 }
 
 .box,
 .card{
+
   background:white;
+
   border:1px solid #e5e7eb;
+
   border-radius:22px;
+
   padding:20px;
+
   box-shadow:0 2px 10px #00000008;
+
 }
 
 .box{
+
   text-align:center;
+
   font-size:18px;
+
 }
 
 .box b{
+
   display:block;
+
   font-size:23px;
+
   margin-bottom:3px;
+
 }
 
 .info{
+
   text-align:center;
+
   font-size:17px;
+
   margin:12px 0 18px;
+
 }
 
 label{
+
   display:block;
+
   font-weight:700;
+
   margin:16px 0 8px;
+
   font-size:17px;
+
 }
 
 input{
+
   width:100%;
+
   padding:16px;
+
   border:2px solid #d1d5db;
+
   border-radius:16px;
+
   font-size:18px;
+
   outline:none;
+
 }
 
 input:focus{
+
   border-color:#111827;
+
 }
 
 button{
+
   width:100%;
+
   border:0;
+
   border-radius:16px;
+
   padding:16px;
+
   font-size:18px;
+
   font-weight:700;
+
   background:#111827;
+
   color:#fff;
+
   margin-top:18px;
+
 }
 
 button:disabled{
+
   opacity:.55;
+
 }
 
 .count{
+
   display:flex;
+
   justify-content:space-between;
+
   align-items:center;
+
 }
 
 .badge{
+
   background:#eef0f3;
+
   border-radius:999px;
+
   padding:8px 14px;
+
   font-weight:800;
+
   font-size:18px;
+
 }
 
 .list{
+
   margin-top:14px;
+
 }
 
 .pair{
+
   padding:13px 0;
+
   border-bottom:1px solid #eee;
+
   font-size:19px;
+
 }
 
 .pair:last-child{
+
   border-bottom:0;
+
 }
 
 .status{
+
   text-align:center;
+
   color:#6b7280;
+
   padding:16px;
+
 }
 
 .ok{
+
   color:#166534;
+
 }
 
 .error{
+
   color:#b91c1c;
+
 }
 
 .admin{
+
   margin-top:24px;
+
   text-align:center;
+
 }
 
 .admin a{
+
   color:#6b7280;
+
   text-decoration:none;
+
   font-weight:700;
+
   font-size:18px;
+
 }
 
 .adminpanel{
+
   display:none;
+
   margin-top:14px;
+
 }
 
 .adminpair{
+
   border-bottom:1px solid #e5e7eb;
+
   padding:18px 0;
+
 }
 
 .adminpair:last-child{
+
   border-bottom:0;
+
 }
 
 .adminnames{
+
   font-size:19px;
+
   font-weight:700;
+
   margin-bottom:6px;
+
 }
 
 .adminphone{
+
   color:#4b5563;
+
   font-size:18px;
+
   margin-bottom:12px;
+
 }
 
 .adminactions{
+
   display:grid;
+
   grid-template-columns:1fr 1fr;
+
   gap:10px;
+
 }
 
 .adminactions button{
+
   margin-top:0;
+
   font-size:16px;
+
   padding:13px;
+
 }
 
 .editbtn{
+
   background:#374151;
+
 }
 
 .deletebtn{
+
   background:#b91c1c;
+
 }
 
 .logout{
+
   background:#6b7280;
+
 }
 
 footer{
+
   text-align:center;
+
   color:#9ca3af;
+
   margin-top:30px;
+
 }
 
 .hidden{
+
   display:none;
+
 }
 
 .admin-title{
+
   font-size:28px;
+
   margin:0 0 16px;
+
 }
 
 .login-title{
+
   font-size:23px;
+
   margin:0 0 5px;
+
 }
 
 .small{
+
   color:#6b7280;
+
   font-size:15px;
+
   margin-top:5px;
+
 }
 
 .cancelbtn{
+
   background:#e5e7eb;
+
   color:#111827;
+
 }
 
 .editbox{
+
   margin-top:12px;
+
   padding:16px;
+
   background:#f9fafb;
+
   border-radius:16px;
+
 }
 
 .editbox input{
+
   background:white;
+
 }
 
 .savebtn{
+
   background:#166534;
+
 }
 
 .editcancel{
+
   background:#6b7280;
+
 }
 
 @media(max-width:500px){
 
   h1{
+
     font-size:27px;
+
   }
 
   .times{
+
     gap:8px;
+
   }
 
   .box{
+
     padding:17px 10px;
+
   }
 
 }
@@ -483,7 +653,7 @@ id="adminLink"
 
 
 <!-- =====================================================
-     PANEL ADMINISTRADOR
+     PANEL ADMIN
      ===================================================== -->
 
 <div
@@ -632,7 +802,7 @@ Semana Cultural Jemenuño
 
 
 /* =====================================================
-   CONFIGURACIÓN
+   CONFIGURACIÓN SUPABASE
    ===================================================== */
 
 const SUPABASE_URL =
@@ -661,26 +831,34 @@ SUPABASE_KEY
 const countEl =
 document.getElementById("count");
 
+
 const listEl =
 document.getElementById("list");
+
 
 const msgEl =
 document.getElementById("msg");
 
+
 const addBtn =
 document.getElementById("add");
+
 
 const adminLink =
 document.getElementById("adminLink");
 
+
 const adminPanel =
 document.getElementById("adminPanel");
+
 
 const loginBox =
 document.getElementById("loginBox");
 
+
 const adminContent =
 document.getElementById("adminContent");
+
 
 const adminList =
 document.getElementById("adminList");
@@ -716,99 +894,29 @@ return {
 
 
 /* =====================================================
-   ID DE LA PAREJA
-   ===================================================== */
-
-function getId(row){
-
-if(
-row &&
-row["identificación"] !== undefined &&
-row["identificación"] !== null
-){
-
-return row["identificación"];
-
-}
-
-return null;
-
-}
-
-
-/* =====================================================
    TELÉFONO
    =====================================================
 
    La columna real de Supabase es:
 
-   "teléfono"
+   teléfono
 
-   Esta función además permite detectar el campo
-   aunque Supabase lo devuelva con alguna variación.
+   con tilde.
+
+   Trabajamos directamente con ella.
    ===================================================== */
 
 function getTelefono(row){
 
-if(!row){
-  return "";
-}
-
-
-/* Primero buscamos el nombre exacto */
-
 if(
+row &&
 row["teléfono"] !== undefined &&
 row["teléfono"] !== null
 ){
 
-return String(
-row["teléfono"]
-);
+return row["teléfono"];
 
 }
-
-
-/* Como respaldo, buscamos cualquier columna
-   cuyo nombre normalizado sea "telefono" */
-
-const keys =
-Object.keys(row);
-
-
-for(
-const key of keys
-){
-
-const normalizada =
-key
-.toLowerCase()
-.normalize("NFD")
-.replace(
-/[\u0300-\u036f]/g,
-""
-);
-
-
-if(
-normalizada === "telefono"
-){
-
-if(
-row[key] !== undefined &&
-row[key] !== null
-){
-
-return String(
-row[key]
-);
-
-}
-
-}
-
-}
-
 
 return "";
 
@@ -816,47 +924,7 @@ return "";
 
 
 /* =====================================================
-   ORDENAR PAREJAS
-   =====================================================
-
-   No utilizamos creado_en porque NO existe
-   en la tabla.
-
-   Ordenamos por identificación.
-   ===================================================== */
-
-function sortRows(rows){
-
-return [...rows].sort(
-function(a,b){
-
-const idA =
-Number(
-a["identificación"] || 0
-);
-
-const idB =
-Number(
-b["identificación"] || 0
-);
-
-return idA - idB;
-
-}
-);
-
-}
-
-
-/* =====================================================
-   CARGAR LISTADO PÚBLICO
-   =====================================================
-
-   IMPORTANTE:
-
-   Solo pedimos Jugador1 y Jugador2.
-
-   El teléfono nunca se muestra al público.
+   CARGAR PAREJAS PÚBLICAS
    ===================================================== */
 
 async function loadPairs(){
@@ -872,7 +940,7 @@ await supabaseClient
 .from(TABLE)
 
 .select(
-"Jugador1,Jugador2"
+'Jugador1,Jugador2'
 );
 
 
@@ -945,9 +1013,7 @@ listEl.innerHTML =
 
 '<small>' +
 
-escapeHtml(
-error.message
-) +
+escapeHtml(error.message) +
 
 '</small>' +
 
@@ -1017,6 +1083,12 @@ addBtn.textContent =
 
 try{
 
+
+/*
+   Insertamos directamente utilizando
+   los nombres REALES de las columnas.
+*/
+
 const datos = {
 
 "Jugador1":
@@ -1048,7 +1120,7 @@ throw error;
 }
 
 
-/* Limpiar */
+/* Limpiar formulario */
 
 document
 .getElementById("jugador1")
@@ -1065,7 +1137,7 @@ document
 .value = "";
 
 
-/* Confirmación */
+/* Mensaje de éxito */
 
 msgEl.className =
 "status ok";
@@ -1075,7 +1147,7 @@ msgEl.textContent =
 "✅ Pareja apuntada correctamente.";
 
 
-/* Actualizar listado */
+/* Recargar listado */
 
 await loadPairs();
 
@@ -1092,8 +1164,17 @@ msgEl.className =
 "status error";
 
 
-msgEl.textContent =
-"No se ha podido apuntar la pareja.";
+msgEl.innerHTML =
+
+"No se ha podido apuntar la pareja." +
+
+"<br><br>" +
+
+"<small>" +
+
+escapeHtml(error.message) +
+
+"</small>";
 
 }finally{
 
@@ -1223,7 +1304,9 @@ const {
 error
 } =
 await supabaseClient
+
 .auth
+
 .signInWithPassword({
 
 email:
@@ -1275,11 +1358,15 @@ loginMsg.textContent =
 
 async function checkSession(){
 
+try{
+
 const {
 data
 } =
 await supabaseClient
+
 .auth
+
 .getSession();
 
 
@@ -1299,6 +1386,15 @@ loginBox.classList.remove(
 
 adminContent.classList.add(
 "hidden"
+);
+
+}
+
+}catch(error){
+
+console.error(
+"Error comprobando sesión:",
+error
 );
 
 }
@@ -1329,17 +1425,6 @@ await loadAdminPairs();
 
 /* =====================================================
    CARGAR ADMINISTRACIÓN
-   =====================================================
-
-   AQUÍ SÍ pedimos explícitamente:
-
-   identificación
-   Jugador1
-   Jugador2
-   teléfono
-
-   Esto permite mostrar el teléfono solamente
-   dentro del panel de administrador.
    ===================================================== */
 
 async function loadAdminPairs(){
@@ -1350,6 +1435,11 @@ adminList.innerHTML =
 
 try{
 
+/*
+   Aquí pedimos SOLO las tres columnas que
+   sabemos que existen.
+*/
+
 const {
 data,
 error
@@ -1359,7 +1449,7 @@ await supabaseClient
 .from(TABLE)
 
 .select(
-'identificación,Jugador1,Jugador2,"teléfono"'
+'Jugador1,Jugador2,"teléfono"'
 );
 
 
@@ -1371,15 +1461,7 @@ throw error;
 
 
 adminRows =
-sortRows(
-data || []
-);
-
-
-console.log(
-"Parejas administrador:",
-adminRows
-);
+data || [];
 
 
 if(!adminRows.length){
@@ -1402,8 +1484,9 @@ getTelefono(row);
 
 return `
 
-<div class="adminpair">
-
+<div
+class="adminpair"
+>
 
 <div class="adminnames">
 
@@ -1544,9 +1627,7 @@ adminList.innerHTML =
 
 '<small>' +
 
-escapeHtml(
-error.message
-) +
+escapeHtml(error.message) +
 
 '</small>' +
 
@@ -1627,21 +1708,6 @@ return;
 }
 
 
-const id =
-getId(original);
-
-
-if(id === null){
-
-alert(
-"No se ha encontrado la identificación de la pareja."
-);
-
-return;
-
-}
-
-
 const jugador1 =
 document
 .getElementById(
@@ -1686,6 +1752,7 @@ return;
 
 try{
 
+
 const cambios = {
 
 "Jugador1":
@@ -1711,12 +1778,17 @@ await supabaseClient
 .update(cambios)
 
 .eq(
-"identificación",
-id
+"Jugador1",
+original.Jugador1
+)
+
+.eq(
+"Jugador2",
+original.Jugador2
 )
 
 .select(
-'identificación,Jugador1,Jugador2,"teléfono"'
+'Jugador1,Jugador2,"teléfono"'
 );
 
 
@@ -1733,7 +1805,8 @@ if(
 ){
 
 throw new Error(
-"No se ha actualizado ninguna fila."
+"No se ha actualizado ninguna fila. " +
+"Comprueba las políticas UPDATE de Supabase."
 );
 
 }
@@ -1792,21 +1865,6 @@ return;
 }
 
 
-const id =
-getId(original);
-
-
-if(id === null){
-
-alert(
-"No se ha encontrado la identificación de la pareja."
-);
-
-return;
-
-}
-
-
 const confirmar =
 confirm(
 
@@ -1830,6 +1888,7 @@ return;
 
 try{
 
+
 const {
 data,
 error
@@ -1841,12 +1900,17 @@ await supabaseClient
 .delete()
 
 .eq(
-"identificación",
-id
+"Jugador1",
+original.Jugador1
+)
+
+.eq(
+"Jugador2",
+original.Jugador2
 )
 
 .select(
-'identificación'
+'Jugador1,Jugador2'
 );
 
 
@@ -1863,7 +1927,8 @@ if(
 ){
 
 throw new Error(
-"No se ha borrado ninguna fila."
+"No se ha borrado ninguna fila. " +
+"Comprueba las políticas DELETE de Supabase."
 );
 
 }
