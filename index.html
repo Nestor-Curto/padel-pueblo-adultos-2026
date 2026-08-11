@@ -7,7 +7,9 @@
 <title>Torneo Pádel (Adultos) - Jemenuño</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -47,7 +49,8 @@ h1{
   margin:14px 0;
 }
 
-.box,.card{
+.box,
+.card{
   background:white;
   border:1px solid #e5e7eb;
   border-radius:22px;
@@ -136,13 +139,6 @@ button:disabled{
   border-bottom:0;
 }
 
-.phone-public{
-  display:block;
-  color:#9ca3af;
-  font-size:14px;
-  margin-top:3px;
-}
-
 .status{
   text-align:center;
   color:#6b7280;
@@ -175,8 +171,8 @@ button:disabled{
 }
 
 .admin-row{
+  padding:15px 0;
   border-bottom:1px solid #e5e7eb;
-  padding:18px 0;
 }
 
 .admin-row:last-child{
@@ -186,19 +182,18 @@ button:disabled{
 .admin-names{
   font-size:19px;
   font-weight:700;
-  margin-bottom:6px;
 }
 
 .admin-phone{
+  margin-top:5px;
   color:#4b5563;
   font-size:16px;
-  margin-bottom:12px;
 }
 
 .admin-actions{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+  display:flex;
   gap:10px;
+  margin-top:12px;
 }
 
 .admin-actions button{
@@ -215,51 +210,26 @@ button:disabled{
   background:#b91c1c;
 }
 
+.save-btn{
+  background:#166534;
+}
+
 .cancel-btn{
   background:#6b7280;
 }
 
-.logout-btn{
-  background:#6b7280;
-}
-
-.login-box{
-  margin-top:14px;
-}
-
-.login-box button{
+.admin-login button{
   margin-top:12px;
-}
-
-.admin-title{
-  font-size:27px;
-  margin:0 0 15px;
-}
-
-.admin-connected{
-  background:#ecfdf5;
-  color:#166534;
-  border-radius:16px;
-  padding:14px;
-  font-weight:700;
-  margin-bottom:15px;
-}
-
-.edit-box{
-  background:#f3f4f6;
-  border-radius:18px;
-  padding:16px;
-  margin-top:14px;
-}
-
-.edit-box h3{
-  margin:0 0 10px;
 }
 
 footer{
   text-align:center;
   color:#9ca3af;
   margin-top:30px;
+}
+
+.hidden{
+  display:none;
 }
 </style>
 </head>
@@ -268,132 +238,152 @@ footer{
 
 <div class="wrap">
 
-<section class="hero">
-  <h1>🎾 Torneo Pádel (Adultos)</h1>
-  <div class="sub">Semana Cultural Jemenuño</div>
-</section>
+  <section class="hero">
+    <h1>🎾 Torneo Pádel (Adultos)</h1>
+    <div class="sub">Semana Cultural Jemenuño</div>
+  </section>
 
-<div class="times">
-  <div class="box">
-    <b>Jueves</b>
-    11:00 h
-  </div>
+  <div class="times">
 
-  <div class="box">
-    <b>Viernes</b>
-    10:00 h
-  </div>
-</div>
-
-<div class="card info">
-  🏆 Premios y sorteos · 💶 Inscripción:
-  <b>5 € por persona</b>
-</div>
-
-<!-- FORMULARIO PÚBLICO -->
-
-<section class="card">
-
-  <label for="jugador1">
-    Nombre jugador/a 1
-  </label>
-
-  <input
-    id="jugador1"
-    type="text"
-    maxlength="40"
-    placeholder="Nombre"
-    autocomplete="name"
-  >
-
-  <label for="jugador2">
-    Nombre jugador/a 2
-  </label>
-
-  <input
-    id="jugador2"
-    type="text"
-    maxlength="40"
-    placeholder="Nombre"
-  >
-
-  <label for="telefono">
-    Teléfono de contacto
-  </label>
-
-  <input
-    id="telefono"
-    type="tel"
-    maxlength="20"
-    placeholder="Teléfono"
-    autocomplete="tel"
-  >
-
-  <button id="add">
-    Apuntar pareja
-  </button>
-
-  <div id="msg" class="status"></div>
-
-</section>
-
-
-<!-- LISTADO PÚBLICO -->
-
-<section class="card" style="margin-top:18px">
-
-  <div class="count">
-    <h2 style="margin:0">
-      Parejas apuntadas
-    </h2>
-
-    <span id="count" class="badge">
-      0
-    </span>
-  </div>
-
-  <div id="list" class="list">
-    <div class="status">
-      Cargando parejas...
+    <div class="box">
+      <b>Jueves</b>
+      11:00 h
     </div>
+
+    <div class="box">
+      <b>Viernes</b>
+      10:00 h
+    </div>
+
   </div>
 
-</section>
+  <div class="card info">
+    🏆 Premios y sorteos · 💶 Inscripción:
+    <b>5 € por persona</b>
+  </div>
 
 
-<!-- ADMINISTRADOR -->
+  <!-- FORMULARIO DE INSCRIPCIÓN -->
 
-<div class="admin">
+  <section class="card">
 
-  <a href="#" id="adminLink">
-    🔐 Acceso administrador
-  </a>
+    <label for="jugador1">
+      Nombre jugador/a 1
+    </label>
 
-</div>
+    <input
+      id="jugador1"
+      type="text"
+      maxlength="40"
+      placeholder="Nombre"
+      autocomplete="name"
+    >
 
 
-<div id="adminPanel" class="adminpanel card">
+    <label for="jugador2">
+      Nombre jugador/a 2
+    </label>
 
-  <!-- LOGIN -->
+    <input
+      id="jugador2"
+      type="text"
+      maxlength="40"
+      placeholder="Nombre"
+    >
 
-  <div id="loginSection">
 
-    <h2 class="admin-title">
+    <label for="telefono">
+      Teléfono de contacto
+    </label>
+
+    <input
+      id="telefono"
+      type="tel"
+      maxlength="20"
+      placeholder="Teléfono"
+      autocomplete="tel"
+    >
+
+
+    <button id="add">
+      Apuntar pareja
+    </button>
+
+    <div id="msg" class="status"></div>
+
+  </section>
+
+
+  <!-- LISTADO PÚBLICO -->
+
+  <section class="card" style="margin-top:18px">
+
+    <div class="count">
+
+      <h2 style="margin:0">
+        Parejas apuntadas
+      </h2>
+
+      <span id="count" class="badge">
+        0
+      </span>
+
+    </div>
+
+    <div id="list" class="list">
+
+      <div class="status">
+        Cargando parejas...
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ADMINISTRADOR -->
+
+  <div class="admin">
+
+    <a href="#" id="adminLink">
+      🔐 Acceso administrador
+    </a>
+
+  </div>
+
+
+  <div
+    id="adminPanel"
+    class="adminpanel card"
+  >
+
+    <h2 style="margin-top:0">
       🔐 Administración
     </h2>
 
-    <div class="login-box">
+
+    <!-- LOGIN -->
+
+    <div
+      id="loginBox"
+      class="admin-login"
+    >
+
+      <div class="status">
+        Introduce tus datos de administrador.
+      </div>
 
       <label for="adminEmail">
-        Email
+        Correo electrónico
       </label>
 
       <input
         id="adminEmail"
         type="email"
-        placeholder="Email del administrador"
+        placeholder="Correo electrónico"
         autocomplete="username"
       >
+
 
       <label for="adminPassword">
         Contraseña
@@ -406,114 +396,78 @@ footer{
         autocomplete="current-password"
       >
 
+
       <button id="loginBtn">
-        Entrar
+        Acceder
       </button>
 
-      <div id="loginMsg" class="status"></div>
+      <div
+        id="loginMsg"
+        class="status"
+      ></div>
 
     </div>
 
-  </div>
 
+    <!-- ADMIN CONECTADO -->
 
-  <!-- ADMIN CONECTADO -->
+    <div
+      id="adminConnected"
+      class="hidden"
+    >
 
-  <div id="connectedSection" style="display:none">
-
-    <h2 class="admin-title">
-      🔐 Administración
-    </h2>
-
-    <div class="admin-connected">
-      ✅ Administrador conectado
-    </div>
-
-    <h2>
-      Parejas inscritas
-    </h2>
-
-    <div id="adminList">
-      <div class="status">
-        Cargando...
+      <div
+        style="
+          background:#ecfdf5;
+          color:#166534;
+          padding:14px;
+          border-radius:16px;
+          font-weight:700;
+          margin-bottom:18px;
+        "
+      >
+        ✅ Administrador conectado
       </div>
-    </div>
 
-
-    <!-- EDICIÓN -->
-
-    <div id="editBox" class="edit-box" style="display:none">
 
       <h3>
-        ✏️ Editar pareja
+        Parejas inscritas
       </h3>
 
-      <input type="hidden" id="editId">
 
-      <label for="editJugador1">
-        Jugador/a 1
-      </label>
+      <div id="adminList">
 
-      <input
-        id="editJugador1"
-        type="text"
-        maxlength="40"
+        <div class="status">
+          Cargando parejas...
+        </div>
+
+      </div>
+
+
+      <button
+        id="logoutBtn"
+        style="background:#6b7280"
       >
-
-      <label for="editJugador2">
-        Jugador/a 2
-      </label>
-
-      <input
-        id="editJugador2"
-        type="text"
-        maxlength="40"
-      >
-
-      <label for="editTelefono">
-        Teléfono
-      </label>
-
-      <input
-        id="editTelefono"
-        type="tel"
-        maxlength="20"
-      >
-
-      <button id="saveEditBtn">
-        Guardar cambios
+        Cerrar sesión
       </button>
-
-      <button id="cancelEditBtn" class="cancel-btn">
-        Cancelar
-      </button>
-
-      <div id="editMsg" class="status"></div>
 
     </div>
 
-
-    <button id="logoutBtn" class="logout-btn">
-      Cerrar sesión
-    </button>
-
   </div>
 
-</div>
 
-
-<footer>
-  Semana Cultural Jemenuño
-</footer>
+  <footer>
+    Semana Cultural Jemenuño
+  </footer>
 
 </div>
 
 
 <script>
 
-/* ==========================================
-   SUPABASE
-========================================== */
+/* =========================================================
+   CONFIGURACIÓN SUPABASE
+   ========================================================= */
 
 const SUPABASE_URL =
   "https://novinmgzbqtnpfjfzpqt.supabase.co";
@@ -524,24 +478,9 @@ const SUPABASE_KEY =
 const TABLE = "Parejas";
 
 
-/*
-   MUY IMPORTANTE:
-
-   En tu tabla la columna se llama:
-
-   identificación
-
-   con tilde.
-
-   Por eso usamos exactamente ese nombre.
-*/
-
-const ID_COLUMN = "identificación";
-
-
-/* ==========================================
+/* =========================================================
    ELEMENTOS
-========================================== */
+   ========================================================= */
 
 const countEl =
   document.getElementById("count");
@@ -558,135 +497,147 @@ const addBtn =
 const adminPanel =
   document.getElementById("adminPanel");
 
-const loginSection =
-  document.getElementById("loginSection");
+const loginBox =
+  document.getElementById("loginBox");
 
-const connectedSection =
-  document.getElementById("connectedSection");
+const adminConnected =
+  document.getElementById("adminConnected");
 
 const adminList =
   document.getElementById("adminList");
 
 
-/* ==========================================
-   TOKEN ADMIN
-========================================== */
-
-let adminToken =
-  localStorage.getItem("padel_admin_token") || "";
-
-
-/* ==========================================
+/* =========================================================
    CABECERAS
-========================================== */
+   ========================================================= */
 
-function publicHeaders(extra = {}){
+function publicHeaders(){
 
   return {
     "apikey": SUPABASE_KEY,
-    "Authorization": "Bearer " + SUPABASE_KEY,
-    "Content-Type": "application/json",
-    ...extra
+    "Authorization":
+      "Bearer " + SUPABASE_KEY,
+    "Content-Type":
+      "application/json"
   };
 
 }
 
 
-function adminHeaders(extra = {}){
+async function authenticatedHeaders(){
+
+  const session =
+    await getSession();
+
+  if(!session){
+    throw new Error(
+      "No hay sesión de administrador."
+    );
+  }
 
   return {
     "apikey": SUPABASE_KEY,
-    "Authorization": "Bearer " + adminToken,
-    "Content-Type": "application/json",
-    ...extra
+    "Authorization":
+      "Bearer " + session.access_token,
+    "Content-Type":
+      "application/json"
   };
 
 }
 
 
-/* ==========================================
-   ESCAPAR HTML
-========================================== */
+/* =========================================================
+   SESIÓN SUPABASE
+   ========================================================= */
 
-function escapeHtml(s){
+async function getSession(){
 
-  return String(s ?? "").replace(
-    /[&<>"']/g,
-    function(m){
+  try{
 
-      return {
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[m];
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/session",
+        {
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+          }
+        }
+      );
 
+    if(!response.ok){
+      return null;
     }
-  );
+
+    const data =
+      await response.json();
+
+    if(!data.access_token){
+      return null;
+    }
+
+    return data;
+
+  }catch(error){
+
+    console.error(error);
+
+    return null;
+
+  }
 
 }
 
 
-/* ==========================================
-   OCULTAR TELÉFONO PÚBLICO
-========================================== */
-
-function maskPhone(phone){
-
-  if(!phone){
-    return "";
-  }
-
-  const s = String(phone);
-
-  if(s.length <= 4){
-    return "••••";
-  }
-
-  return "••••••" + s.slice(-4);
-
-}
-
-
-/* ==========================================
+/* =========================================================
    CARGAR PAREJAS PÚBLICAS
-========================================== */
+   ========================================================= */
 
 async function loadPairs(){
 
   try{
 
     /*
-      Aquí NO necesitamos el identificador.
-      Así evitamos exponerlo públicamente.
+      IMPORTANTE:
+      Aquí NO pedimos identificación,
+      creado_en ni teléfono.
+
+      El público solo recibe los nombres.
     */
 
     const url =
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}` +
-      `?select=Jugador1,Jugador2,telefono` +
-      `&order=creado_en.asc`;
-
-    const r = await fetch(
-      url,
-      {
-        headers: publicHeaders()
-      }
-    );
+      SUPABASE_URL +
+      "/rest/v1/" +
+      encodeURIComponent(TABLE) +
+      "?select=Jugador1,Jugador2&order=creado_en.asc";
 
 
-    if(!r.ok){
+    const response =
+      await fetch(
+        url,
+        {
+          headers:
+            publicHeaders()
+        }
+      );
 
-      const errorText =
-        await r.text();
 
-      throw new Error(errorText);
+    if(!response.ok){
+
+      const text =
+        await response.text();
+
+      throw new Error(text);
 
     }
 
 
     const rows =
-      await r.json();
+      await response.json();
 
 
     countEl.textContent =
@@ -696,7 +647,9 @@ async function loadPairs(){
     if(!rows.length){
 
       listEl.innerHTML =
-        '<div class="status">Todavía no hay parejas apuntadas.</div>';
+        '<div class="status">' +
+        'Todavía no hay parejas apuntadas.' +
+        '</div>';
 
       return;
 
@@ -704,63 +657,73 @@ async function loadPairs(){
 
 
     listEl.innerHTML =
-      rows.map(function(x){
+      rows
+        .map(row => {
 
-        return `
-          <div class="pair">
+          return `
+            <div class="pair">
+              ${escapeHtml(row.Jugador1)}
+              -
+              ${escapeHtml(row.Jugador2)}
+            </div>
+          `;
 
-            ${escapeHtml(x.Jugador1)}
-            -
-            ${escapeHtml(x.Jugador2)}
+        })
+        .join("");
 
-            <span class="phone-public">
-              📞 ${escapeHtml(maskPhone(x.telefono))}
-            </span>
 
-          </div>
-        `;
-
-      }).join("");
-
-  }
-
-  catch(e){
+  }catch(error){
 
     console.error(
       "Error cargando parejas:",
-      e
+      error
     );
 
     countEl.textContent = "0";
 
     listEl.innerHTML =
-      '<div class="status error">No se han podido cargar las parejas.</div>';
+      '<div class="status error">' +
+      'No se han podido cargar las parejas.' +
+      '</div>';
 
   }
 
 }
 
 
-/* ==========================================
-   APUNTAR PAREJA
-========================================== */
+/* =========================================================
+   AÑADIR PAREJA
+   ========================================================= */
 
 async function addPair(){
 
-  const j1 =
-    document.getElementById("jugador1").value.trim();
+  const jugador1 =
+    document
+      .getElementById("jugador1")
+      .value
+      .trim();
 
-  const j2 =
-    document.getElementById("jugador2").value.trim();
+  const jugador2 =
+    document
+      .getElementById("jugador2")
+      .value
+      .trim();
 
   const telefono =
-    document.getElementById("telefono").value.trim();
+    document
+      .getElementById("telefono")
+      .value
+      .trim();
 
 
   msgEl.textContent = "";
 
 
-  if(!j1 || !j2 || !telefono){
+  if(
+    !jugador1 ||
+    !jugador2 ||
+    !telefono
+  ){
 
     msgEl.className =
       "status error";
@@ -781,42 +744,61 @@ async function addPair(){
 
   try{
 
-    const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}`,
-      {
-        method:"POST",
+    /*
+      NO enviamos identificación.
+      Supabase la genera automáticamente.
+    */
 
-        headers:publicHeaders({
-          "Prefer":"return=minimal"
-        }),
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/" +
+        encodeURIComponent(TABLE),
+        {
+          method:"POST",
 
-        body:JSON.stringify({
-          Jugador1:j1,
-          Jugador2:j2,
-          telefono:telefono
-        })
-      }
-    );
+          headers:{
+            ...publicHeaders(),
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify({
+              Jugador1:
+                jugador1,
+
+              Jugador2:
+                jugador2,
+
+              teléfono:
+                telefono
+            })
+        }
+      );
 
 
-    if(!r.ok){
+    if(!response.ok){
 
-      const errorText =
-        await r.text();
+      const text =
+        await response.text();
 
-      throw new Error(errorText);
+      throw new Error(text);
 
     }
 
 
-    document.getElementById("jugador1").value =
-      "";
+    document
+      .getElementById("jugador1")
+      .value = "";
 
-    document.getElementById("jugador2").value =
-      "";
+    document
+      .getElementById("jugador2")
+      .value = "";
 
-    document.getElementById("telefono").value =
-      "";
+    document
+      .getElementById("telefono")
+      .value = "";
 
 
     msgEl.className =
@@ -826,13 +808,20 @@ async function addPair(){
       "✅ Pareja apuntada correctamente.";
 
 
+    /*
+      Esperamos un poco y volvemos
+      a cargar el listado.
+    */
+
     await loadPairs();
 
-  }
 
-  catch(e){
+  }catch(error){
 
-    console.error(e);
+    console.error(
+      "Error insertando pareja:",
+      error
+    );
 
     msgEl.className =
       "status error";
@@ -840,9 +829,7 @@ async function addPair(){
     msgEl.textContent =
       "No se ha podido apuntar la pareja.";
 
-  }
-
-  finally{
+  }finally{
 
     addBtn.disabled = false;
 
@@ -854,20 +841,29 @@ async function addPair(){
 }
 
 
-/* ==========================================
-   LOGIN ADMIN
-========================================== */
+/* =========================================================
+   LOGIN ADMINISTRADOR
+   ========================================================= */
 
 async function loginAdmin(){
 
   const email =
-    document.getElementById("adminEmail").value.trim();
+    document
+      .getElementById("adminEmail")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("adminPassword").value;
+    document
+      .getElementById("adminPassword")
+      .value;
+
 
   const loginMsg =
-    document.getElementById("loginMsg");
+    document.getElementById(
+      "loginMsg"
+    );
+
 
   if(!email || !password){
 
@@ -875,7 +871,7 @@ async function loginAdmin(){
       "status error";
 
     loginMsg.textContent =
-      "Introduce email y contraseña.";
+      "Introduce correo y contraseña.";
 
     return;
 
@@ -883,160 +879,281 @@ async function loginAdmin(){
 
 
   const loginBtn =
-    document.getElementById("loginBtn");
+    document.getElementById(
+      "loginBtn"
+    );
+
 
   loginBtn.disabled = true;
 
   loginBtn.textContent =
-    "Entrando...";
+    "Accediendo...";
 
 
   try{
 
-    const r = await fetch(
-      `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
-      {
-        method:"POST",
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
 
-        headers:{
-          "apikey":SUPABASE_KEY,
-          "Content-Type":"application/json"
-        },
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
 
-        body:JSON.stringify({
-          email:email,
-          password:password
-        })
-      }
-    );
+            "Content-Type":
+              "application/json"
+          },
 
+          body:
+            JSON.stringify({
+              email:
+                email,
 
-    const data =
-      await r.json();
-
-
-    if(!r.ok){
-
-      throw new Error(
-        data.error_description ||
-        data.msg ||
-        "Error de acceso"
+              password:
+                password
+            })
+        }
       );
+
+
+    if(!response.ok){
+
+      const text =
+        await response.text();
+
+      throw new Error(text);
 
     }
 
 
-    adminToken =
-      data.access_token;
+    const session =
+      await response.json();
 
+
+    /*
+      Guardamos la sesión para poder
+      hacer UPDATE y DELETE.
+    */
 
     localStorage.setItem(
-      "padel_admin_token",
-      adminToken
+      "padel_admin_session",
+      JSON.stringify(session)
     );
 
 
-    showAdminConnected();
+    loginMsg.className =
+      "status ok";
 
-  }
+    loginMsg.textContent =
+      "✅ Acceso correcto.";
 
-  catch(e){
 
-    console.error(e);
+    await showAdmin();
+
+
+  }catch(error){
+
+    console.error(error);
 
     loginMsg.className =
       "status error";
 
     loginMsg.textContent =
-      "❌ Email o contraseña incorrectos.";
+      "No se ha podido iniciar sesión. Comprueba los datos.";
 
-  }
-
-  finally{
+  }finally{
 
     loginBtn.disabled = false;
 
     loginBtn.textContent =
-      "Entrar";
+      "Acceder";
 
   }
 
 }
 
 
-/* ==========================================
-   ADMIN CONECTADO
-========================================== */
+/* =========================================================
+   SESIÓN GUARDADA
+   ========================================================= */
 
-function showAdminConnected(){
+async function getStoredSession(){
 
-  loginSection.style.display =
-    "none";
+  try{
 
-  connectedSection.style.display =
-    "block";
+    const stored =
+      localStorage.getItem(
+        "padel_admin_session"
+      );
 
-  loadAdminPairs();
+
+    if(!stored){
+      return null;
+    }
+
+
+    const session =
+      JSON.parse(stored);
+
+
+    if(
+      !session ||
+      !session.access_token
+    ){
+
+      return null;
+
+    }
+
+
+    /*
+      Comprobamos que el token sigue
+      funcionando.
+    */
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/user",
+        {
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              session.access_token
+          }
+        }
+      );
+
+
+    if(!response.ok){
+
+      localStorage.removeItem(
+        "padel_admin_session"
+      );
+
+      return null;
+
+    }
+
+
+    return session;
+
+
+  }catch(error){
+
+    console.error(error);
+
+    return null;
+
+  }
 
 }
 
 
-/* ==========================================
+/* =========================================================
+   MOSTRAR ADMIN
+   ========================================================= */
+
+async function showAdmin(){
+
+  const session =
+    await getStoredSession();
+
+
+  if(!session){
+
+    loginBox.classList.remove(
+      "hidden"
+    );
+
+    adminConnected.classList.add(
+      "hidden"
+    );
+
+    return;
+
+  }
+
+
+  loginBox.classList.add(
+    "hidden"
+  );
+
+  adminConnected.classList.remove(
+    "hidden"
+  );
+
+
+  await loadAdminPairs();
+
+}
+
+
+/* =========================================================
    CARGAR PAREJAS ADMIN
-========================================== */
+   ========================================================= */
 
 async function loadAdminPairs(){
 
   adminList.innerHTML =
-    '<div class="status">Cargando parejas...</div>';
+    '<div class="status">' +
+    'Cargando parejas...' +
+    '</div>';
 
 
   try{
 
+    const headers =
+      await authenticatedHeaders();
+
+
     /*
-      Aquí SÍ necesitamos el identificador.
-      Lo pedimos usando el nombre exacto
-      de la columna: identificación.
+      El administrador sí recibe
+      identificación y teléfono.
     */
 
-    const selectFields =
-      encodeURIComponent(
-        `${ID_COLUMN},Jugador1,Jugador2,telefono,creado_en`
+    const url =
+      SUPABASE_URL +
+      "/rest/v1/" +
+      encodeURIComponent(TABLE) +
+      "?select=identificación,creado_en,Jugador1,Jugador2,teléfono&order=creado_en.asc";
+
+
+    const response =
+      await fetch(
+        url,
+        {
+          headers
+        }
       );
 
 
-    const url =
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}` +
-      `?select=${selectFields}` +
-      `&order=creado_en.asc`;
+    if(!response.ok){
 
+      const text =
+        await response.text();
 
-    const r = await fetch(
-      url,
-      {
-        headers:adminHeaders()
-      }
-    );
-
-
-    if(!r.ok){
-
-      const errorText =
-        await r.text();
-
-      throw new Error(errorText);
+      throw new Error(text);
 
     }
 
 
     const rows =
-      await r.json();
+      await response.json();
 
 
     if(!rows.length){
 
       adminList.innerHTML =
-        '<div class="status">No hay parejas inscritas.</div>';
+        '<div class="status">' +
+        'No hay parejas inscritas.' +
+        '</div>';
 
       return;
 
@@ -1044,218 +1161,231 @@ async function loadAdminPairs(){
 
 
     adminList.innerHTML =
-      rows.map(function(x){
+      rows
+        .map(row => {
 
-        const id =
-          x[ID_COLUMN];
+          const id =
+            row["identificación"];
+
+          return `
+
+            <div
+              class="admin-row"
+              id="admin-row-${id}"
+            >
+
+              <div class="admin-names">
+                ${escapeHtml(row.Jugador1)}
+                -
+                ${escapeHtml(row.Jugador2)}
+              </div>
+
+              <div class="admin-phone">
+                📱 ${escapeHtml(row["teléfono"] || "Sin teléfono")}
+              </div>
 
 
-        return `
+              <div class="admin-actions">
 
-          <div class="admin-row">
+                <button
+                  class="edit-btn"
+                  onclick="editPair('${id}')"
+                >
+                  ✏️ Editar
+                </button>
 
-            <div class="admin-names">
-              ${escapeHtml(x.Jugador1)}
-              -
-              ${escapeHtml(x.Jugador2)}
+                <button
+                  class="delete-btn"
+                  onclick="deletePair('${id}')"
+                >
+                  🗑️ Borrar
+                </button>
+
+              </div>
+
             </div>
 
-            <div class="admin-phone">
-              📞 ${escapeHtml(x.telefono || "Sin teléfono")}
-            </div>
+          `;
 
-            <div class="admin-actions">
+        })
+        .join("");
 
-              <button
-                class="edit-btn"
-                data-id="${escapeHtml(id)}"
-                data-j1="${escapeHtml(x.Jugador1)}"
-                data-j2="${escapeHtml(x.Jugador2)}"
-                data-phone="${escapeHtml(x.telefono || "")}"
-                onclick="startEditFromButton(this)"
-              >
-                ✏️ Editar
-              </button>
 
-              <button
-                class="delete-btn"
-                data-id="${escapeHtml(id)}"
-                onclick="deletePairFromButton(this)"
-              >
-                🗑️ Borrar
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }
-
-  catch(e){
+  }catch(error){
 
     console.error(
-      "Error admin:",
-      e
+      "Error cargando administración:",
+      error
     );
 
     adminList.innerHTML =
-      '<div class="status error">No se han podido cargar las parejas.</div>';
+      '<div class="status error">' +
+      'No se han podido cargar las parejas.' +
+      '</div>';
 
   }
 
 }
 
 
-/* ==========================================
-   PREPARAR EDICIÓN
-========================================== */
+/* =========================================================
+   EDITAR PAREJA
+   ========================================================= */
 
-function startEditFromButton(button){
-
-  const id =
-    button.dataset.id;
-
-  const j1 =
-    button.dataset.j1;
-
-  const j2 =
-    button.dataset.j2;
-
-  const phone =
-    button.dataset.phone;
-
-
-  document.getElementById("editId").value =
-    id;
-
-  document.getElementById("editJugador1").value =
-    j1;
-
-  document.getElementById("editJugador2").value =
-    j2;
-
-  document.getElementById("editTelefono").value =
-    phone;
-
-
-  document.getElementById("editBox").style.display =
-    "block";
-
-
-  document.getElementById("editBox").scrollIntoView({
-    behavior:"smooth",
-    block:"center"
-  });
-
-}
-
-
-/* ==========================================
-   BORRAR DESDE BOTÓN
-========================================== */
-
-function deletePairFromButton(button){
-
-  const id =
-    button.dataset.id;
-
-  deletePair(id);
-
-}
-
-
-/* ==========================================
-   GUARDAR EDICIÓN
-========================================== */
-
-async function saveEdit(){
-
-  const id =
-    document.getElementById("editId").value;
-
-  const jugador1 =
-    document.getElementById("editJugador1").value.trim();
-
-  const jugador2 =
-    document.getElementById("editJugador2").value.trim();
-
-  const telefono =
-    document.getElementById("editTelefono").value.trim();
-
-  const editMsg =
-    document.getElementById("editMsg");
-
-
-  if(!jugador1 || !jugador2 || !telefono){
-
-    editMsg.className =
-      "status error";
-
-    editMsg.textContent =
-      "Todos los campos son obligatorios.";
-
-    return;
-
-  }
-
-
-  const saveBtn =
-    document.getElementById("saveEditBtn");
-
-  saveBtn.disabled = true;
-
-  saveBtn.textContent =
-    "Guardando...";
-
+async function editPair(id){
 
   try{
 
-    /*
-      IMPORTANTE:
-      usamos la columna real "identificación"
-    */
-
-    const filter =
-      `${encodeURIComponent(ID_COLUMN)}=eq.${encodeURIComponent(id)}`;
+    const headers =
+      await authenticatedHeaders();
 
 
-    const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?${filter}`,
-      {
-        method:"PATCH",
-
-        headers:adminHeaders({
-          "Prefer":"return=minimal"
-        }),
-
-        body:JSON.stringify({
-          Jugador1:jugador1,
-          Jugador2:jugador2,
-          telefono:telefono
-        })
-      }
-    );
+    const url =
+      SUPABASE_URL +
+      "/rest/v1/" +
+      encodeURIComponent(TABLE) +
+      "?identificación=eq." +
+      encodeURIComponent(id) +
+      "&select=identificación,Jugador1,Jugador2,teléfono";
 
 
-    if(!r.ok){
+    const response =
+      await fetch(
+        url,
+        {
+          headers
+        }
+      );
 
-      const errorText =
-        await r.text();
 
-      throw new Error(errorText);
+    if(!response.ok){
+
+      const text =
+        await response.text();
+
+      throw new Error(text);
 
     }
 
 
-    editMsg.className =
-      "status ok";
+    const rows =
+      await response.json();
 
-    editMsg.textContent =
-      "✅ Cambios guardados.";
+
+    if(!rows.length){
+
+      alert(
+        "No se ha encontrado la pareja."
+      );
+
+      return;
+
+    }
+
+
+    const row =
+      rows[0];
+
+
+    const nuevoJugador1 =
+      prompt(
+        "Nombre jugador/a 1:",
+        row.Jugador1
+      );
+
+
+    if(nuevoJugador1 === null){
+      return;
+    }
+
+
+    const nuevoJugador2 =
+      prompt(
+        "Nombre jugador/a 2:",
+        row.Jugador2
+      );
+
+
+    if(nuevoJugador2 === null){
+      return;
+    }
+
+
+    const nuevoTelefono =
+      prompt(
+        "Teléfono de contacto:",
+        row["teléfono"] || ""
+      );
+
+
+    if(nuevoTelefono === null){
+      return;
+    }
+
+
+    if(
+      !nuevoJugador1.trim() ||
+      !nuevoJugador2.trim() ||
+      !nuevoTelefono.trim()
+    ){
+
+      alert(
+        "Los tres campos son obligatorios."
+      );
+
+      return;
+
+    }
+
+
+    const updateUrl =
+      SUPABASE_URL +
+      "/rest/v1/" +
+      encodeURIComponent(TABLE) +
+      "?identificación=eq." +
+      encodeURIComponent(id);
+
+
+    const updateResponse =
+      await fetch(
+        updateUrl,
+        {
+          method:"PATCH",
+
+          headers:{
+            ...headers,
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify({
+              Jugador1:
+                nuevoJugador1.trim(),
+
+              Jugador2:
+                nuevoJugador2.trim(),
+
+              teléfono:
+                nuevoTelefono.trim()
+            })
+        }
+      );
+
+
+    if(!updateResponse.ok){
+
+      const text =
+        await updateResponse.text();
+
+      throw new Error(text);
+
+    }
+
+
+    alert(
+      "✅ Pareja modificada correctamente."
+    );
 
 
     await loadAdminPairs();
@@ -1263,48 +1393,29 @@ async function saveEdit(){
     await loadPairs();
 
 
-    setTimeout(function(){
+  }catch(error){
 
-      document.getElementById("editBox").style.display =
-        "none";
+    console.error(error);
 
-    },700);
-
-  }
-
-  catch(e){
-
-    console.error(e);
-
-    editMsg.className =
-      "status error";
-
-    editMsg.textContent =
-      "❌ No se han podido guardar los cambios.";
-
-  }
-
-  finally{
-
-    saveBtn.disabled = false;
-
-    saveBtn.textContent =
-      "Guardar cambios";
+    alert(
+      "No se ha podido modificar la pareja."
+    );
 
   }
 
 }
 
 
-/* ==========================================
+/* =========================================================
    BORRAR PAREJA
-========================================== */
+   ========================================================= */
 
 async function deletePair(id){
 
   const confirmar =
     confirm(
-      "¿Seguro que quieres borrar esta pareja?\n\nEsta acción no se puede deshacer."
+      "¿Seguro que quieres borrar esta pareja?\n\n" +
+      "Esta acción no se puede deshacer."
     );
 
 
@@ -1315,41 +1426,56 @@ async function deletePair(id){
 
   try{
 
-    const filter =
-      `${encodeURIComponent(ID_COLUMN)}=eq.${encodeURIComponent(id)}`;
+    const headers =
+      await authenticatedHeaders();
 
 
-    const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/${encodeURIComponent(TABLE)}?${filter}`,
-      {
-        method:"DELETE",
-
-        headers:adminHeaders({
-          "Prefer":"return=minimal"
-        })
-      }
-    );
+    const url =
+      SUPABASE_URL +
+      "/rest/v1/" +
+      encodeURIComponent(TABLE) +
+      "?identificación=eq." +
+      encodeURIComponent(id);
 
 
-    if(!r.ok){
+    const response =
+      await fetch(
+        url,
+        {
+          method:"DELETE",
 
-      const errorText =
-        await r.text();
+          headers:{
+            ...headers,
+            "Prefer":
+              "return=minimal"
+          }
+        }
+      );
 
-      throw new Error(errorText);
+
+    if(!response.ok){
+
+      const text =
+        await response.text();
+
+      throw new Error(text);
 
     }
+
+
+    alert(
+      "✅ Pareja borrada correctamente."
+    );
 
 
     await loadAdminPairs();
 
     await loadPairs();
 
-  }
 
-  catch(e){
+  }catch(error){
 
-    console.error(e);
+    console.error(error);
 
     alert(
       "No se ha podido borrar la pareja."
@@ -1360,88 +1486,99 @@ async function deletePair(id){
 }
 
 
-/* ==========================================
-   CANCELAR EDICIÓN
-========================================== */
-
-document
-  .getElementById("cancelEditBtn")
-  .addEventListener(
-    "click",
-    function(){
-
-      document.getElementById("editBox").style.display =
-        "none";
-
-    }
-  );
-
-
-/* ==========================================
+/* =========================================================
    CERRAR SESIÓN
-========================================== */
+   ========================================================= */
 
-document
-  .getElementById("logoutBtn")
-  .addEventListener(
-    "click",
-    function(){
+async function logout(){
 
-      adminToken = "";
+  try{
 
-      localStorage.removeItem(
-        "padel_admin_token"
+    const session =
+      await getStoredSession();
+
+
+    if(session){
+
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/logout",
+        {
+          method:"POST",
+
+          headers:{
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              session.access_token
+          }
+        }
       );
 
-      loginSection.style.display =
-        "block";
-
-      connectedSection.style.display =
-        "none";
-
-      document.getElementById("adminEmail").value =
-        "";
-
-      document.getElementById("adminPassword").value =
-        "";
-
     }
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+
+  localStorage.removeItem(
+    "padel_admin_session"
   );
 
 
-/* ==========================================
-   ABRIR ADMIN
-========================================== */
+  adminConnected.classList.add(
+    "hidden"
+  );
 
-document
-  .getElementById("adminLink")
-  .addEventListener(
-    "click",
-    function(e){
-
-      e.preventDefault();
-
-      const visible =
-        adminPanel.style.display === "block";
+  loginBox.classList.remove(
+    "hidden"
+  );
 
 
-      adminPanel.style.display =
-        visible ? "none" : "block";
+  document
+    .getElementById("adminEmail")
+    .value = "";
+
+  document
+    .getElementById("adminPassword")
+    .value = "";
+
+}
 
 
-      if(!visible && adminToken){
+/* =========================================================
+   SEGURIDAD HTML
+   ========================================================= */
 
-        showAdminConnected();
+function escapeHtml(value){
+
+  return String(value ?? "")
+    .replace(
+      /[&<>"']/g,
+      function(match){
+
+        return {
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
+        }[match];
 
       }
+    );
 
-    }
-  );
+}
 
 
-/* ==========================================
+/* =========================================================
    EVENTOS
-========================================== */
+   ========================================================= */
 
 addBtn.addEventListener(
   "click",
@@ -1458,25 +1595,49 @@ document
 
 
 document
-  .getElementById("saveEditBtn")
+  .getElementById("logoutBtn")
   .addEventListener(
     "click",
-    saveEdit
+    logout
+);
+
+
+document
+  .getElementById("adminLink")
+  .addEventListener(
+    "click",
+    async function(event){
+
+      event.preventDefault();
+
+      if(
+        adminPanel.style.display ===
+        "block"
+      ){
+
+        adminPanel.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      adminPanel.style.display =
+        "block";
+
+
+      await showAdmin();
+
+    }
   );
 
 
-/* ==========================================
-   ARRANQUE
-========================================== */
+/* =========================================================
+   INICIO
+   ========================================================= */
 
 loadPairs();
-
-
-if(adminToken){
-
-  showAdminConnected();
-
-}
 
 </script>
 
