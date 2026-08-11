@@ -20,444 +20,286 @@
 }
 
 body{
-
   margin:0;
-
   font-family:
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-
   background:#f7f7f8;
-
   color:#111827;
-
 }
 
 .wrap{
-
   max-width:760px;
-
   margin:auto;
-
   padding:18px 16px 40px;
-
 }
 
 .hero{
-
   background:#111827;
-
   color:white;
-
   border-radius:0 0 28px 28px;
-
   padding:28px 22px 30px;
-
   margin:-18px -16px 22px;
-
 }
 
 h1{
-
   font-size:30px;
-
   margin:0 0 6px;
-
 }
 
 .sub{
-
   font-size:19px;
-
   color:#d1d5db;
-
 }
 
 .times{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:12px;
-
   margin:14px 0;
-
 }
 
 .box,
 .card{
-
   background:white;
-
   border:1px solid #e5e7eb;
-
   border-radius:22px;
-
   padding:20px;
-
   box-shadow:0 2px 10px #00000008;
-
 }
 
 .box{
-
   text-align:center;
-
   font-size:18px;
-
 }
 
 .box b{
-
   display:block;
-
   font-size:23px;
-
   margin-bottom:3px;
-
 }
 
 .info{
-
   text-align:center;
-
   font-size:17px;
-
   margin:12px 0 18px;
-
 }
 
 label{
-
   display:block;
-
   font-weight:700;
-
   margin:16px 0 8px;
-
   font-size:17px;
-
 }
 
 input{
-
   width:100%;
-
   padding:16px;
-
   border:2px solid #d1d5db;
-
   border-radius:16px;
-
   font-size:18px;
-
   outline:none;
-
 }
 
 input:focus{
-
   border-color:#111827;
-
 }
 
 button{
-
   width:100%;
-
   border:0;
-
   border-radius:16px;
-
   padding:16px;
-
   font-size:18px;
-
   font-weight:700;
-
   background:#111827;
-
   color:#fff;
-
   margin-top:18px;
-
 }
 
 button:disabled{
-
   opacity:.55;
-
 }
 
 .count{
-
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
-
 }
 
 .badge{
-
   background:#eef0f3;
-
   border-radius:999px;
-
   padding:8px 14px;
-
   font-weight:800;
-
   font-size:18px;
-
 }
 
 .list{
-
   margin-top:14px;
-
 }
 
 .pair{
-
   padding:13px 0;
-
   border-bottom:1px solid #eee;
-
   font-size:19px;
-
 }
 
 .pair:last-child{
-
   border-bottom:0;
-
 }
 
 .status{
-
   text-align:center;
-
   color:#6b7280;
-
   padding:16px;
-
 }
 
 .ok{
-
   color:#166534;
-
 }
 
 .error{
-
   color:#b91c1c;
-
 }
 
 .admin{
-
   margin-top:24px;
-
   text-align:center;
-
 }
 
 .admin a{
-
   color:#6b7280;
-
   text-decoration:none;
-
   font-weight:700;
-
   font-size:18px;
-
 }
 
 .adminpanel{
-
   display:none;
-
   margin-top:14px;
-
 }
 
 .adminpair{
-
   border-bottom:1px solid #e5e7eb;
-
   padding:18px 0;
-
 }
 
 .adminpair:last-child{
-
   border-bottom:0;
-
 }
 
 .adminnames{
-
   font-size:19px;
-
   font-weight:700;
-
   margin-bottom:6px;
-
 }
 
 .adminphone{
-
   color:#4b5563;
-
   font-size:18px;
-
   margin-bottom:12px;
-
 }
 
 .adminactions{
-
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   gap:10px;
-
 }
 
 .adminactions button{
-
   margin-top:0;
-
   font-size:16px;
-
   padding:13px;
-
 }
 
 .editbtn{
-
   background:#374151;
-
 }
 
 .deletebtn{
-
   background:#b91c1c;
-
 }
 
 .logout{
-
   background:#6b7280;
-
 }
 
 footer{
-
   text-align:center;
-
   color:#9ca3af;
-
   margin-top:30px;
-
 }
 
 .hidden{
-
   display:none;
-
 }
 
 .admin-title{
-
   font-size:28px;
-
   margin:0 0 16px;
-
 }
 
 .login-title{
-
   font-size:23px;
-
   margin:0 0 5px;
-
 }
 
 .small{
-
   color:#6b7280;
-
   font-size:15px;
-
   margin-top:5px;
-
 }
 
 .cancelbtn{
-
   background:#e5e7eb;
-
   color:#111827;
-
 }
 
 .editbox{
-
   margin-top:12px;
-
   padding:16px;
-
   background:#f9fafb;
-
   border-radius:16px;
-
 }
 
 .editbox input{
-
   background:white;
-
 }
 
 .savebtn{
-
   background:#166534;
-
 }
 
 .editcancel{
-
   background:#6b7280;
+}
 
+.error-detail{
+  margin-top:8px;
+  padding:10px;
+  background:#fff1f2;
+  border-radius:12px;
+  font-size:13px;
+  color:#991b1b;
+  text-align:left;
+  word-break:break-word;
 }
 
 @media(max-width:500px){
 
   h1{
-
     font-size:27px;
-
   }
 
   .times{
-
     gap:8px;
-
   }
 
   .box{
-
     padding:17px 10px;
-
   }
 
 }
@@ -583,13 +425,11 @@ class="card"
 style="margin-top:18px"
 >
 
-
 <div class="count">
 
 <h2 style="margin:0">
 Parejas apuntadas
 </h2>
-
 
 <span
 id="count"
@@ -611,7 +451,6 @@ Cargando parejas...
 </div>
 
 </div>
-
 
 </section>
 
@@ -767,7 +606,7 @@ Semana Cultural Jemenuño
 
 /* =====================================================
    SUPABASE
-===================================================== */
+   ===================================================== */
 
 const SUPABASE_URL =
 "https://novinmgzbqtnpfjfzpqt.supabase.co";
@@ -778,6 +617,7 @@ const SUPABASE_KEY =
 const TABLE =
 "Parejas";
 
+
 const supabaseClient =
 window.supabase.createClient(
   SUPABASE_URL,
@@ -787,7 +627,7 @@ window.supabase.createClient(
 
 /* =====================================================
    ELEMENTOS
-===================================================== */
+   ===================================================== */
 
 const countEl =
 document.getElementById("count");
@@ -816,12 +656,13 @@ document.getElementById("adminContent");
 const adminList =
 document.getElementById("adminList");
 
+
 let adminRows = [];
 
 
 /* =====================================================
    ESCAPAR HTML
-===================================================== */
+   ===================================================== */
 
 function escapeHtml(value){
 
@@ -846,116 +687,46 @@ function escapeHtml(value){
 
 
 /* =====================================================
-   NORMALIZAR NOMBRE DE COLUMNA
-===================================================== */
+   ERROR LEGIBLE
+   ===================================================== */
 
-function normalizarNombreColumna(nombre){
+function obtenerMensajeError(error){
 
-  return String(nombre || "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"");
-
-}
-
-
-/* =====================================================
-   ENCONTRAR COLUMNA TELÉFONO
-=====================================================
-
-   No asumimos que Javascript reciba exactamente
-   "teléfono".
-
-   Buscamos:
-
-   teléfono
-   telefono
-   Teléfono
-   TELEFONO
-   etc.
-
-   Esto evita el problema que estamos viendo.
-===================================================== */
-
-function encontrarColumnaTelefono(row){
-
-  if(!row){
-    return null;
+  if(!error){
+    return "Error desconocido.";
   }
 
-  const keys =
-    Object.keys(row);
-
-  for(
-    const key of keys
-  ){
-
-    const normalizada =
-      normalizarNombreColumna(key);
-
-    if(
-      normalizada === "telefono"
-    ){
-
-      return key;
-
-    }
-
-  }
-
-  return null;
-
-}
-
-
-/* =====================================================
-   OBTENER TELÉFONO
-===================================================== */
-
-function getTelefono(row){
-
-  const columna =
-    encontrarColumnaTelefono(row);
-
-  if(
-    columna &&
-    row[columna] !== undefined &&
-    row[columna] !== null
-  ){
-
-    return String(row[columna]);
-
-  }
-
-  return "";
+  return (
+    error.message ||
+    error.details ||
+    error.hint ||
+    error.code ||
+    "Error desconocido."
+  );
 
 }
 
 
 /* =====================================================
    ORDENAR
-===================================================== */
+   ===================================================== */
 
 function sortRows(rows){
 
   return [...rows].sort(
     function(a,b){
 
-      if(
-        a.creado_en &&
-        b.creado_en
-      ){
+      const dateA =
+        new Date(
+          a.creado_en || 0
+        ).getTime();
 
-        return (
-          new Date(a.creado_en).getTime()
-          -
-          new Date(b.creado_en).getTime()
-        );
+      const dateB =
+        new Date(
+          b.creado_en || 0
+        ).getTime();
 
-      }
-
-      return 0;
+      return dateA - dateB;
 
     }
   );
@@ -964,8 +735,8 @@ function sortRows(rows){
 
 
 /* =====================================================
-   CARGAR PAREJAS PÚBLICAS
-===================================================== */
+   CARGAR PAREJAS
+   ===================================================== */
 
 async function loadPairs(){
 
@@ -977,19 +748,29 @@ async function loadPairs(){
     } =
     await supabaseClient
       .from(TABLE)
-      .select("*");
+      .select(
+        'identificación, creado_en, "Jugador1", "Jugador2"'
+      )
+      .order(
+        "creado_en",
+        {
+          ascending:true
+        }
+      );
+
 
     if(error){
-
       throw error;
-
     }
+
 
     const rows =
       sortRows(data || []);
 
+
     countEl.textContent =
       rows.length;
+
 
     if(!rows.length){
 
@@ -1001,6 +782,7 @@ async function loadPairs(){
       return;
 
     }
+
 
     listEl.innerHTML =
       rows.map(
@@ -1031,8 +813,10 @@ async function loadPairs(){
       error
     );
 
+
     countEl.textContent =
       "0";
+
 
     listEl.innerHTML =
 
@@ -1040,13 +824,13 @@ async function loadPairs(){
 
       'No se han podido cargar las parejas.' +
 
-      '<br><br>' +
+      '<div class="error-detail">' +
 
-      '<small>' +
+      escapeHtml(
+        obtenerMensajeError(error)
+      ) +
 
-      escapeHtml(error.message) +
-
-      '</small>' +
+      '</div>' +
 
       '</div>';
 
@@ -1057,7 +841,7 @@ async function loadPairs(){
 
 /* =====================================================
    AÑADIR PAREJA
-===================================================== */
+   ===================================================== */
 
 async function addPair(){
 
@@ -1067,11 +851,13 @@ async function addPair(){
       .value
       .trim();
 
+
   const jugador2 =
     document
       .getElementById("jugador2")
       .value
       .trim();
+
 
   const telefono =
     document
@@ -1079,8 +865,9 @@ async function addPair(){
       .value
       .trim();
 
-  msgEl.textContent =
-    "";
+
+  msgEl.innerHTML = "";
+
 
   if(
     !jugador1 ||
@@ -1098,20 +885,22 @@ async function addPair(){
 
   }
 
+
   addBtn.disabled =
     true;
 
   addBtn.textContent =
     "Apuntando...";
 
+
   try{
 
     const datos = {
 
-      Jugador1:
+      "Jugador1":
         jugador1,
 
-      Jugador2:
+      "Jugador2":
         jugador2,
 
       "teléfono":
@@ -1119,38 +908,62 @@ async function addPair(){
 
     };
 
+
     const {
+      data,
       error
     } =
     await supabaseClient
       .from(TABLE)
-      .insert(datos);
+      .insert(datos)
+      .select(
+        'identificación, creado_en, "Jugador1", "Jugador2", "teléfono"'
+      );
+
 
     if(error){
+
+      console.error(
+        "Error al insertar pareja:",
+        error
+      );
 
       throw error;
 
     }
 
+
+    console.log(
+      "Pareja registrada:",
+      data
+    );
+
+
     document
       .getElementById("jugador1")
       .value = "";
+
 
     document
       .getElementById("jugador2")
       .value = "";
 
+
     document
       .getElementById("telefono")
       .value = "";
 
+
     msgEl.className =
       "status ok";
+
 
     msgEl.textContent =
       "✅ Pareja apuntada correctamente.";
 
+
     await loadPairs();
+
 
   }catch(error){
 
@@ -1159,11 +972,22 @@ async function addPair(){
       error
     );
 
+
     msgEl.className =
       "status error";
 
-    msgEl.textContent =
-      "No se ha podido apuntar la pareja.";
+
+    msgEl.innerHTML =
+
+      "No se ha podido apuntar la pareja." +
+
+      '<div class="error-detail">' +
+
+      escapeHtml(
+        obtenerMensajeError(error)
+      ) +
+
+      '</div>';
 
   }finally{
 
@@ -1180,13 +1004,14 @@ async function addPair(){
 
 /* =====================================================
    ABRIR ADMIN
-===================================================== */
+   ===================================================== */
 
 adminLink.addEventListener(
   "click",
   async function(event){
 
     event.preventDefault();
+
 
     if(
       adminPanel.style.display ===
@@ -1200,8 +1025,10 @@ adminLink.addEventListener(
 
     }
 
+
     adminPanel.style.display =
       "block";
+
 
     await checkSession();
 
@@ -1211,7 +1038,7 @@ adminLink.addEventListener(
 
 /* =====================================================
    CANCELAR LOGIN
-===================================================== */
+   ===================================================== */
 
 document
   .getElementById("cancelLogin")
@@ -1228,7 +1055,7 @@ document
 
 /* =====================================================
    LOGIN
-===================================================== */
+   ===================================================== */
 
 document
   .getElementById("loginBtn")
@@ -1246,20 +1073,25 @@ async function login(){
       .value
       .trim();
 
+
   const password =
     document
       .getElementById("password")
       .value;
 
+
   const loginMsg =
     document
       .getElementById("loginMsg");
 
+
   loginMsg.className =
     "status";
 
+
   loginMsg.textContent =
     "Entrando...";
+
 
   if(
     !email ||
@@ -1269,12 +1101,14 @@ async function login(){
     loginMsg.className =
       "status error";
 
+
     loginMsg.textContent =
       "Introduce email y contraseña.";
 
     return;
 
   }
+
 
   try{
 
@@ -1293,16 +1127,18 @@ async function login(){
 
       });
 
+
     if(error){
-
       throw error;
-
     }
+
 
     loginMsg.textContent =
       "";
 
+
     await showAdmin();
+
 
   }catch(error){
 
@@ -1311,8 +1147,10 @@ async function login(){
       error
     );
 
+
     loginMsg.className =
       "status error";
+
 
     loginMsg.textContent =
       "Email o contraseña incorrectos.";
@@ -1324,7 +1162,7 @@ async function login(){
 
 /* =====================================================
    SESIÓN
-===================================================== */
+   ===================================================== */
 
 async function checkSession(){
 
@@ -1334,6 +1172,7 @@ async function checkSession(){
   await supabaseClient
     .auth
     .getSession();
+
 
   if(
     data &&
@@ -1359,7 +1198,7 @@ async function checkSession(){
 
 /* =====================================================
    MOSTRAR ADMIN
-===================================================== */
+   ===================================================== */
 
 async function showAdmin(){
 
@@ -1371,6 +1210,7 @@ async function showAdmin(){
     "hidden"
   );
 
+
   await loadAdminPairs();
 
 }
@@ -1378,12 +1218,15 @@ async function showAdmin(){
 
 /* =====================================================
    CARGAR ADMIN
-===================================================== */
+   ===================================================== */
 
 async function loadAdminPairs(){
 
   adminList.innerHTML =
-    '<div class="status">Cargando parejas...</div>';
+    '<div class="status">' +
+    'Cargando parejas...' +
+    '</div>';
+
 
   try{
 
@@ -1393,16 +1236,25 @@ async function loadAdminPairs(){
     } =
     await supabaseClient
       .from(TABLE)
-      .select("*");
+      .select("*")
+      .order(
+        "creado_en",
+        {
+          ascending:true
+        }
+      );
+
 
     if(error){
-
       throw error;
-
     }
 
+
     adminRows =
-      sortRows(data || []);
+      sortRows(
+        data || []
+      );
+
 
     if(!adminRows.length){
 
@@ -1415,17 +1267,15 @@ async function loadAdminPairs(){
 
     }
 
+
     adminList.innerHTML =
       adminRows.map(
         function(row,index){
 
-          /*
-             AQUÍ recuperamos el teléfono
-             de forma robusta.
-          */
-
           const telefono =
-            getTelefono(row);
+            row["teléfono"] ??
+            "";
+
 
           return `
 
@@ -1486,14 +1336,14 @@ async function loadAdminPairs(){
                 class="editbox hidden"
               >
 
+
                 <label>
                   Jugador/a 1
                 </label>
 
+
                 <input
                   id="edit-j1-${index}"
-                  type="text"
-                  maxlength="40"
                   value="${escapeHtml(row.Jugador1)}"
                 >
 
@@ -1502,10 +1352,9 @@ async function loadAdminPairs(){
                   Jugador/a 2
                 </label>
 
+
                 <input
                   id="edit-j2-${index}"
-                  type="text"
-                  maxlength="40"
                   value="${escapeHtml(row.Jugador2)}"
                 >
 
@@ -1514,10 +1363,10 @@ async function loadAdminPairs(){
                   Teléfono
                 </label>
 
+
                 <input
                   id="edit-tel-${index}"
                   type="tel"
-                  maxlength="20"
                   value="${escapeHtml(telefono)}"
                 >
 
@@ -1541,6 +1390,7 @@ async function loadAdminPairs(){
 
                 </button>
 
+
               </div>
 
             </div>
@@ -1558,19 +1408,20 @@ async function loadAdminPairs(){
       error
     );
 
+
     adminList.innerHTML =
 
       '<div class="status error">' +
 
       'No se han podido cargar las parejas.' +
 
-      '<br><br>' +
+      '<div class="error-detail">' +
 
-      '<small>' +
+      escapeHtml(
+        obtenerMensajeError(error)
+      ) +
 
-      escapeHtml(error.message) +
-
-      '</small>' +
+      '</div>' +
 
       '</div>';
 
@@ -1581,7 +1432,7 @@ async function loadAdminPairs(){
 
 /* =====================================================
    EDITAR
-===================================================== */
+   ===================================================== */
 
 window.editPair =
 function(index){
@@ -1590,6 +1441,7 @@ function(index){
     document.getElementById(
       "edit-" + index
     );
+
 
   if(box){
 
@@ -1604,7 +1456,7 @@ function(index){
 
 /* =====================================================
    CANCELAR EDICIÓN
-===================================================== */
+   ===================================================== */
 
 window.cancelEdit =
 function(index){
@@ -1613,6 +1465,7 @@ function(index){
     document.getElementById(
       "edit-" + index
     );
+
 
   if(box){
 
@@ -1627,13 +1480,14 @@ function(index){
 
 /* =====================================================
    GUARDAR CAMBIOS
-===================================================== */
+   ===================================================== */
 
 window.savePair =
 async function(index){
 
   const original =
     adminRows[index];
+
 
   if(!original){
 
@@ -1688,21 +1542,19 @@ async function(index){
   }
 
 
-  /*
-     Detectamos el nombre REAL de la columna
-     teléfono en la fila original.
-  */
-
-  const columnaTelefono =
-    encontrarColumnaTelefono(
-      original
-    );
+  const identificacion =
+    original["identificación"];
 
 
-  if(!columnaTelefono){
+  if(
+    identificacion ===
+    undefined ||
+    identificacion ===
+    null
+  ){
 
     alert(
-      "No se ha encontrado la columna del teléfono."
+      "No se ha encontrado la identificación de la pareja."
     );
 
     return;
@@ -1714,62 +1566,34 @@ async function(index){
 
     const cambios = {
 
-      Jugador1:
+      "Jugador1":
         jugador1,
 
-      Jugador2:
-        jugador2
+      "Jugador2":
+        jugador2,
+
+      "teléfono":
+        telefono
 
     };
-
-
-    /*
-       Usamos exactamente la clave que
-       Supabase devolvió.
-    */
-
-    cambios[columnaTelefono] =
-      telefono;
-
-
-    /*
-       IMPORTANTE:
-
-       No usamos identificación.
-
-       Buscamos la pareja por sus dos nombres
-       originales.
-
-       Esto evita el error anterior con
-       identificación.
-    */
-
-    let consulta =
-      supabaseClient
-        .from(TABLE)
-        .update(cambios)
-        .eq(
-          "Jugador1",
-          original.Jugador1
-        )
-        .eq(
-          "Jugador2",
-          original.Jugador2
-        );
 
 
     const {
       data,
       error
     } =
-    await consulta
+    await supabaseClient
+      .from(TABLE)
+      .update(cambios)
+      .eq(
+        "identificación",
+        identificacion
+      )
       .select("*");
 
 
     if(error){
-
       throw error;
-
     }
 
 
@@ -1779,9 +1603,8 @@ async function(index){
     ){
 
       throw new Error(
-        "Supabase no ha actualizado ninguna fila. " +
-        "La pareja puede no coincidir exactamente " +
-        "o la política UPDATE puede no permitirlo."
+        "No se ha actualizado ninguna fila. " +
+        "Comprueba las políticas UPDATE de Supabase."
       );
 
     }
@@ -1806,8 +1629,11 @@ async function(index){
 
 
     alert(
+
       "No se ha podido corregir la pareja.\n\n" +
-      error.message
+
+      obtenerMensajeError(error)
+
     );
 
   }
@@ -1817,13 +1643,14 @@ async function(index){
 
 /* =====================================================
    BORRAR
-===================================================== */
+   ===================================================== */
 
 window.deletePair =
 async function(index){
 
   const original =
     adminRows[index];
+
 
   if(!original){
 
@@ -1857,14 +1684,27 @@ async function(index){
   }
 
 
+  const identificacion =
+    original["identificación"];
+
+
+  if(
+    identificacion ===
+    undefined ||
+    identificacion ===
+    null
+  ){
+
+    alert(
+      "No se ha encontrado la identificación de la pareja."
+    );
+
+    return;
+
+  }
+
+
   try{
-
-    /*
-       No usamos identificación.
-       No usamos teléfono para localizarla.
-
-       Usamos los dos nombres originales.
-    */
 
     const {
       data,
@@ -1874,20 +1714,14 @@ async function(index){
       .from(TABLE)
       .delete()
       .eq(
-        "Jugador1",
-        original.Jugador1
-      )
-      .eq(
-        "Jugador2",
-        original.Jugador2
+        "identificación",
+        identificacion
       )
       .select("*");
 
 
     if(error){
-
       throw error;
-
     }
 
 
@@ -1898,7 +1732,7 @@ async function(index){
 
       throw new Error(
         "No se ha borrado ninguna fila. " +
-        "Comprueba la política DELETE de Supabase."
+        "Comprueba las políticas DELETE de Supabase."
       );
 
     }
@@ -1923,8 +1757,11 @@ async function(index){
 
 
     alert(
+
       "No se ha podido borrar la pareja.\n\n" +
-      error.message
+
+      obtenerMensajeError(error)
+
     );
 
   }
@@ -1934,7 +1771,7 @@ async function(index){
 
 /* =====================================================
    CERRAR SESIÓN
-===================================================== */
+   ===================================================== */
 
 document
   .getElementById("logoutBtn")
@@ -1946,17 +1783,21 @@ document
         .auth
         .signOut();
 
+
       adminContent.classList.add(
         "hidden"
       );
+
 
       loginBox.classList.remove(
         "hidden"
       );
 
+
       document
         .getElementById("email")
         .value = "";
+
 
       document
         .getElementById("password")
@@ -1968,7 +1809,7 @@ document
 
 /* =====================================================
    BOTÓN APUNTAR
-===================================================== */
+   ===================================================== */
 
 addBtn.addEventListener(
   "click",
@@ -1978,7 +1819,7 @@ addBtn.addEventListener(
 
 /* =====================================================
    ENTER
-===================================================== */
+   ===================================================== */
 
 document
   .getElementById("telefono")
@@ -1987,7 +1828,8 @@ document
     function(event){
 
       if(
-        event.key === "Enter"
+        event.key ===
+        "Enter"
       ){
 
         addPair();
@@ -2000,7 +1842,7 @@ document
 
 /* =====================================================
    CARGA INICIAL
-===================================================== */
+   ===================================================== */
 
 loadPairs();
 
